@@ -257,6 +257,58 @@ h1 {
   font-size: 17px;
   line-height: 1.7;
 }
+.hero-update {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  margin-top: 24px;
+  padding: 9px 12px 9px 9px;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--line));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--primary) 5%, var(--surface));
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+.hero-update:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.hero-update-mark {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+}
+.hero-update-mark svg,
+.hero-update-arrow {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+.hero-update strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text);
+  font-size: 13px;
+}
+.hero-update-arrow {
+  flex: 0 0 auto;
+  margin-left: 4px;
+  color: var(--primary);
+}
 .hero-orbit {
   position: absolute;
   right: 32px;

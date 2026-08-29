@@ -27,6 +27,8 @@ const messages = {
       eyebrow: '快速 · 私密 · 免费开始',
       title: '让图片变轻，\n让隐私留在本地。',
       description: '在浏览器中压缩、转换和调整图片。无需注册，文件不上传到服务器。',
+      update: '新增使用指南',
+      updateText: '查看 PDF、Word、PPT 和图片处理技巧',
     },
     upload: {
       title: '拖拽图片到这里',
@@ -157,6 +159,8 @@ const messages = {
       eyebrow: 'Fast · Private · Free to start',
       title: 'Make images lighter,\nkeep privacy local.',
       description: 'Compress, convert, and resize images in your browser. No sign-up and no server upload.',
+      update: 'New practical guides',
+      updateText: 'Learn PDF, Word, PPT, and image workflows',
     },
     upload: {
       title: 'Drop images here',

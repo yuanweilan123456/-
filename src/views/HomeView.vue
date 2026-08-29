@@ -212,6 +212,16 @@ onBeforeUnmount(clearImages)
         <p class="eyebrow"><span class="eyebrow-dot"></span>{{ t('hero.eyebrow') }}</p>
         <h1 id="hero-title">{{ t('hero.title') }}</h1>
         <p class="hero-description">{{ t('hero.description') }}</p>
+        <RouterLink class="hero-update" to="/guides">
+          <span class="hero-update-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" /></svg>
+          </span>
+          <span
+            ><strong>{{ t('hero.update') }}</strong
+            >{{ t('hero.updateText') }}</span
+          >
+          <svg class="hero-update-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+        </RouterLink>
       </div>
       <div class="hero-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
     </section>
