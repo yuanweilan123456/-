@@ -23,6 +23,16 @@ const error = ref('')
 const result = ref<ToolResult | null>(null)
 const splitResults = ref<ToolResult[]>([])
 const isZh = computed(() => locale.value === 'zh')
+const guideSlugByTool: Partial<Record<FileToolType, string>> = {
+  'pdf-merge': 'merge-pdf-files',
+  'images-to-pdf': 'convert-images-to-pdf',
+  'docx-to-html': 'word-to-html-basics',
+  'images-to-pptx': 'make-a-presentation-from-images',
+}
+const relatedGuidePath = computed(() => {
+  const slug = guideSlugByTool[props.type]
+  return slug ? `/guides/${slug}` : ''
+})
 
 const configs = computed(
   () =>
@@ -199,6 +209,22 @@ onBeforeUnmount(clear)
         }}</span>
       </div>
     </section>
+    <aside v-if="relatedGuidePath" class="related-guide">
+      <div>
+        <p class="section-kicker">{{ isZh ? '相关指南' : 'RELATED GUIDE' }}</p>
+        <p>
+          {{
+            isZh
+              ? '先了解文件顺序、格式限制和处理建议，再开始操作。'
+              : 'Learn about file order, format limits, and practical tips before you start.'
+          }}
+        </p>
+      </div>
+      <RouterLink class="secondary-button" :to="relatedGuidePath">
+        {{ isZh ? '阅读指南' : 'Read the guide' }}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+      </RouterLink>
+    </aside>
     <div class="ad-slot" :aria-label="t('a11y.advertisement')">
       <span>{{ isZh ? '广告位预留 · 上线后启用' : 'Ad space reserved · Enabled after launch' }}</span>
     </div>

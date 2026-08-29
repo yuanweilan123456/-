@@ -11,6 +11,7 @@ const messages = {
       toolbox: '工具箱',
       howItWorks: '使用方式',
       faq: '常见问题',
+      guides: '使用指南',
       about: '关于',
       privacy: '隐私',
       language: '语言',
@@ -72,10 +73,14 @@ const messages = {
       fastText: '静态站点架构，少等待，适合桌面和移动设备。',
     },
     ad: '广告位预留 · 上线后启用',
+    guides: {
+      listTitle: '实用文件处理指南',
+    },
     footer: {
       tagline: '轻量图片工具，隐私从本地开始。',
       about: '关于我们',
       faq: '常见问题',
+      guides: '使用指南',
       linksLabel: '页脚导航',
       privacy: '隐私政策',
       terms: '使用条款',
@@ -85,7 +90,7 @@ const messages = {
       privacyTitle: '隐私政策',
       termsTitle: '使用条款',
       privacyText:
-        'PixelForge 旨在让图片在你的设备上完成处理。MVP 默认不上传、不保存用户图片。网站可能在未来接入必要的统计或广告服务，正式上线前会根据实际数据处理方式更新本政策。',
+        'PixelForge 旨在让文件在你的设备上完成处理。当前版本不上传、不保存用户文件内容。网站已加载 Google AdSense 验证脚本；广告启用后，Google 可能根据其政策使用 Cookie 或类似技术处理广告相关信息。',
       termsText:
         '请仅处理你有权使用的图片。工具按现状提供，处理结果和浏览器兼容性可能因文件和设备而异。请勿使用本工具处理违法、侵权或危害他人的内容。',
       back: '返回工具',
@@ -100,7 +105,7 @@ const messages = {
       aboutTitle: '关于 PixelForge｜本地文件工具箱',
       aboutDescription: '了解 PixelForge 如何用浏览器本地能力提供轻量、私密的文件处理工具。',
       privacyTitle: '隐私政策｜PixelForge',
-      privacyDescription: '了解 PixelForge 如何处理文件、隐私和未来可能接入的广告服务。',
+      privacyDescription: '了解 PixelForge 如何处理文件、隐私偏好和 Google AdSense 广告服务。',
       termsTitle: '使用条款｜PixelForge',
       termsDescription: 'PixelForge 文件工具的使用范围、责任边界和浏览器兼容性说明。',
       notFoundTitle: '页面未找到｜PixelForge',
@@ -125,6 +130,8 @@ const messages = {
       docxToHtmlDescription: '在浏览器本地提取 DOCX 内容并转换为 HTML。',
       imagesToPptxTitle: '图片生成 PPT｜PixelForge',
       imagesToPptxDescription: '在浏览器本地将多张图片生成 PPTX。',
+      guidesTitle: '文件处理指南｜PixelForge',
+      guidesDescription: '了解图片、PDF、Word 和 PPT 常见任务的处理步骤、格式限制和隐私建议。',
     },
   },
   en: {
@@ -134,6 +141,7 @@ const messages = {
       toolbox: 'Toolbox',
       howItWorks: 'How it works',
       faq: 'FAQ',
+      guides: 'Guides',
       about: 'About',
       privacy: 'Privacy',
       language: 'Language',
@@ -195,10 +203,14 @@ const messages = {
       fastText: 'A static-site architecture with less waiting on desktop and mobile.',
     },
     ad: 'Ad space reserved · Enabled after launch',
+    guides: {
+      listTitle: 'Practical file processing guides',
+    },
     footer: {
       tagline: 'Lightweight image tools, privacy starts local.',
       about: 'About',
       faq: 'FAQ',
+      guides: 'Guides',
       linksLabel: 'Footer navigation',
       privacy: 'Privacy policy',
       terms: 'Terms',
@@ -208,7 +220,7 @@ const messages = {
       privacyTitle: 'Privacy policy',
       termsTitle: 'Terms of use',
       privacyText:
-        'PixelForge is designed to process images on your device. The MVP does not upload or store user images by default. If analytics or advertising services are added, this policy will be updated before launch based on the actual data practices.',
+        'PixelForge is designed to process files on your device. The current version does not upload or store user file contents. The site loads the Google AdSense verification script; after ads are enabled, Google may use cookies or similar technologies for advertising as described in its policies.',
       termsText:
         'Only process images that you have the right to use. The tools are provided as-is, and results or browser compatibility may vary by file and device. Do not use this service for illegal, infringing, or harmful content.',
       back: 'Back to tools',
@@ -227,7 +239,7 @@ const messages = {
       aboutDescription:
         'Learn how PixelForge uses browser-local processing to provide lightweight, private file tools.',
       privacyTitle: 'Privacy policy | PixelForge',
-      privacyDescription: 'Learn how PixelForge handles files, privacy, and future advertising services.',
+      privacyDescription: 'Learn how PixelForge handles files, privacy preferences, and Google AdSense advertising.',
       termsTitle: 'Terms of use | PixelForge',
       termsDescription: 'Usage scope, responsibility boundaries, and browser compatibility for PixelForge file tools.',
       notFoundTitle: 'Page not found | PixelForge',
@@ -252,6 +264,9 @@ const messages = {
       docxToHtmlDescription: 'Extract DOCX content and convert it to HTML locally in your browser.',
       imagesToPptxTitle: 'Images to PPT | PixelForge',
       imagesToPptxDescription: 'Create a PPTX from multiple images locally in your browser.',
+      guidesTitle: 'File processing guides | PixelForge',
+      guidesDescription:
+        'Practical steps, format limits, and privacy advice for common image, PDF, Word, and PPT tasks.',
     },
   },
 }

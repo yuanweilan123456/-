@@ -13,7 +13,7 @@ const content = computed(() => {
       ? {
           eyebrow: 'PIXELFORGE / 隐私',
           title: '隐私政策',
-          intro: '本政策说明 PixelForge 当前如何处理你选择的文件，以及未来启用统计或广告服务时会遵循的原则。',
+          intro: '本政策说明 PixelForge 当前如何处理你选择的文件、界面偏好和广告服务。',
           updated: '最后更新：2026 年 8 月',
           back: '返回工具',
           sections: [
@@ -24,11 +24,15 @@ const content = computed(() => {
                 '如果你刷新或关闭页面，当前任务可能丢失；浏览器下载的结果由你的设备和浏览器管理。',
               ],
             },
-            { heading: '本地存储与偏好', body: ['我们只在浏览器本地保存主题和语言偏好，用于下次打开时恢复界面设置。'] },
             {
-              heading: '未来的第三方服务',
+              heading: '本地存储与偏好',
+              body: ['我们在浏览器本地保存主题和语言偏好，用于下次打开时恢复界面设置。'],
+            },
+            {
+              heading: '广告与第三方服务',
               body: [
-                '如果接入广告、统计或错误监控服务，我们会在启用前更新本政策，说明收集范围、用途、供应商和必要的同意方式。',
+                '网站已加载 Google AdSense 脚本，用于网站验证；在网站通过审核并启用广告后，页面可能展示 Google 提供的广告。Google 可能使用 Cookie 或类似技术处理设备、浏览器和广告相关信息，具体以 Google 的隐私政策和广告设置为准。',
+                'PixelForge 不会把你选择的图片、PDF、DOCX 或 PPTX 文件内容发送给 PixelForge 服务器或 Google。需要同意的地区会根据广告服务和访问者所在地区显示相应的隐私选择。',
               ],
             },
           ],
@@ -37,7 +41,7 @@ const content = computed(() => {
           eyebrow: 'PIXELFORGE / PRIVACY',
           title: 'Privacy policy',
           intro:
-            'This policy explains how PixelForge currently handles the files you choose and the principles we will follow if analytics or advertising is enabled.',
+            'This policy explains how PixelForge currently handles your files, interface preferences, and advertising services.',
           updated: 'Last updated: August 2026',
           back: 'Back to tools',
           sections: [
@@ -51,13 +55,14 @@ const content = computed(() => {
             {
               heading: 'Local preferences',
               body: [
-                'We only save theme and language preferences in your browser so the interface can restore those settings next time.',
+                'We save theme and language preferences in your browser so the interface can restore those settings next time.',
               ],
             },
             {
-              heading: 'Future third-party services',
+              heading: 'Advertising and third parties',
               body: [
-                'If advertising, analytics, or error monitoring is added, we will update this policy before activation with the collection scope, purpose, providers, and required consent choices.',
+                'The site loads the Google AdSense script for site verification. After the site is approved and ads are enabled, pages may display advertising provided by Google. Google may use cookies or similar technologies to process device, browser, and advertising-related information; refer to Google privacy and ad settings for details.',
+                'PixelForge does not send the contents of selected images, PDFs, DOCX files, or PPTX files to PixelForge servers or Google. Where required, privacy choices are shown based on the advertising service and visitor location.',
               ],
             },
           ],

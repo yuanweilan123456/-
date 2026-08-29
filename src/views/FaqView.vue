@@ -36,7 +36,7 @@ const content = computed(() =>
           {
             question: '广告什么时候会出现？',
             answer:
-              '当前版本只保留广告位，不加载广告脚本。正式启用前会更新隐私政策，并根据实际使用的广告服务补充必要的同意机制。',
+              '网站已经加载 Google AdSense 验证脚本，但广告要在网站通过审核、完成账号设置并启用广告后才会展示。需要同意的地区会显示相应的隐私选择。',
           },
         ],
       }
@@ -69,7 +69,7 @@ const content = computed(() =>
           {
             question: 'When will ads appear?',
             answer:
-              'The current version only reserves ad space and does not load ad scripts. Before enabling ads, we will update the privacy policy and add the required consent flow for the services used.',
+              'The site already loads the Google AdSense verification script, but ads will only appear after the site passes review, the account setup is complete, and ads are enabled. Required privacy choices will be shown in applicable regions.',
           },
         ],
       },

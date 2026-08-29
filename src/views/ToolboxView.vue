@@ -156,6 +156,9 @@ const tools = computed(() =>
         <span>{{ isZh ? '8 个工具 · 本地处理 · 无需注册' : '8 tools · Local processing · No sign-up' }}</span
         ><RouterLink class="secondary-button" to="/image-tools"
           >{{ isZh ? '图片快速处理' : 'Quick image tools'
+          }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></RouterLink
+        ><RouterLink class="secondary-button" to="/guides"
+          >{{ isZh ? '查看使用指南' : 'Read the guides'
           }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg
         ></RouterLink>
       </div>

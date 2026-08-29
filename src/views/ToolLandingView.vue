@@ -92,6 +92,22 @@ const isZh = computed(() => locale.value === 'zh')
         </p>
       </div>
     </section>
+    <aside v-if="props.type === 'compress'" class="related-guide">
+      <div>
+        <p class="section-kicker">{{ isZh ? '相关指南' : 'RELATED GUIDE' }}</p>
+        <p>
+          {{
+            isZh
+              ? '了解图片格式、尺寸和质量之间的取舍，获得更适合网页和表单的文件。'
+              : 'Learn how format, dimensions, and quality affect the right image for websites and forms.'
+          }}
+        </p>
+      </div>
+      <RouterLink class="secondary-button" to="/guides/compress-images-without-upload">
+        {{ isZh ? '阅读压缩指南' : 'Read the compression guide' }}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+      </RouterLink>
+    </aside>
 
     <div class="ad-slot landing-ad" aria-label="Advertisement placeholder">
       <span>{{ isZh ? '广告位预留 · 上线后启用' : 'Ad space reserved · Enabled after launch' }}</span>

@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, ref, watch, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { updateSeo } from './seo'
+import { getGuide } from './guide-content'
 
 const { locale, t } = useI18n()
 const route = useRoute()
@@ -16,6 +17,7 @@ const seoKeyByRoute: Record<string, string> = {
   'image-tools': 'imageTools',
   toolbox: 'toolbox',
   faq: 'faq',
+  guides: 'guides',
   about: 'about',
   privacy: 'privacy',
   terms: 'terms',
@@ -30,6 +32,13 @@ const seoKeyByRoute: Record<string, string> = {
 }
 
 const seoContent = computed(() => {
+  if (route.name === 'guide') {
+    const guide = getGuide(String(route.params.slug))
+    if (guide) {
+      const content = locale.value === 'zh' ? guide.zh : guide.en
+      return { title: `${content.title}｜PixelForge`, description: content.description }
+    }
+  }
   const key = seoKeyByRoute[String(route.name)] ?? (String(route.name) === 'not-found' ? 'notFound' : 'fileTool')
   return { title: t(`seo.${key}Title`), description: t(`seo.${key}Description`) }
 })
@@ -90,6 +99,7 @@ watch(
         <RouterLink class="nav-link" to="/image-tools">{{ t('nav.tools') }}</RouterLink>
         <RouterLink class="nav-link" to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
         <RouterLink class="nav-link" to="/faq">{{ t('nav.faq') }}</RouterLink>
+        <RouterLink class="nav-link" to="/guides">{{ t('nav.guides') }}</RouterLink>
       </nav>
 
       <div class="header-actions">
@@ -130,6 +140,7 @@ watch(
         <nav class="footer-links" :aria-label="t('footer.linksLabel')">
           <RouterLink to="/about">{{ t('footer.about') }}</RouterLink>
           <RouterLink to="/faq">{{ t('footer.faq') }}</RouterLink>
+          <RouterLink to="/guides">{{ t('footer.guides') }}</RouterLink>
           <RouterLink to="/privacy">{{ t('footer.privacy') }}</RouterLink>
           <RouterLink to="/terms">{{ t('footer.terms') }}</RouterLink>
         </nav>
