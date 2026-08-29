@@ -7,7 +7,7 @@ const messages = {
   zh: {
     nav: {
       main: '主导航',
-      tools: '工具',
+      tools: '图片处理',
       toolbox: '工具箱',
       howItWorks: '使用方式',
       faq: '常见问题',
@@ -20,7 +20,7 @@ const messages = {
     a11y: {
       skipToContent: '跳转到主要内容',
       advertisement: '广告位预留',
-      home: 'PixelForge 图片工具首页',
+      home: 'PixelForge 文件工具箱首页',
     },
     hero: {
       eyebrow: '快速 · 私密 · 免费开始',
@@ -89,8 +89,8 @@ const messages = {
       back: '返回工具',
     },
     seo: {
-      homeTitle: 'PixelForge 图片工具箱｜本地处理，隐私优先',
-      homeDescription: '在浏览器本地压缩、转换和调整图片，无需注册，不上传图片。',
+      homeTitle: 'PixelForge 文件工具箱｜本地处理，隐私优先',
+      homeDescription: '在浏览器本地处理图片、PDF、Word 和 PPT 文件，无需注册，不上传文件。',
       toolboxTitle: '文件工具箱｜PixelForge',
       toolboxDescription: '在浏览器中处理图片、PDF、Word 和 PPT 文件，快速、私密、无需上传。',
       faqTitle: '常见问题｜PixelForge',
@@ -111,6 +111,8 @@ const messages = {
       resizeDescription: '在浏览器本地按比例调整图片尺寸，适合网站和社交平台。',
       fileToolTitle: '在线文件工具｜PixelForge',
       fileToolDescription: '在浏览器本地处理文件，支持 PDF、Word、PPT 和图片工作流。',
+      imageToolsTitle: '图片处理工具｜PixelForge',
+      imageToolsDescription: '在浏览器本地压缩、转换和调整图片，无需注册，不上传图片。',
       pdfMergeTitle: '合并 PDF｜PixelForge',
       pdfMergeDescription: '在浏览器本地将多个 PDF 合并为一个文件。',
       pdfSplitTitle: '拆分 PDF｜PixelForge',
@@ -126,7 +128,7 @@ const messages = {
   en: {
     nav: {
       main: 'Main navigation',
-      tools: 'Tools',
+      tools: 'Image tools',
       toolbox: 'Toolbox',
       howItWorks: 'How it works',
       faq: 'FAQ',
@@ -139,7 +141,7 @@ const messages = {
     a11y: {
       skipToContent: 'Skip to main content',
       advertisement: 'Advertisement placeholder',
-      home: 'PixelForge Image Tools home',
+      home: 'PixelForge File Toolbox home',
     },
     hero: {
       eyebrow: 'Fast · Private · Free to start',
@@ -208,8 +210,8 @@ const messages = {
       back: 'Back to tools',
     },
     seo: {
-      homeTitle: 'PixelForge Image Tools | Local processing, privacy first',
-      homeDescription: 'Compress, convert, and resize images in your browser. No sign-up and no image uploads.',
+      homeTitle: 'PixelForge File Toolbox | Local processing, privacy first',
+      homeDescription: 'Process images, PDFs, Word documents, and PPT files in your browser. No sign-up and no uploads.',
       toolboxTitle: 'File toolbox | PixelForge',
       toolboxDescription: 'Process images, PDFs, Word documents, and PPT files in your browser. Fast, private, and upload-free.',
       faqTitle: 'FAQ | PixelForge',
@@ -230,6 +232,8 @@ const messages = {
       resizeDescription: 'Resize images proportionally in your browser for websites and social platforms.',
       fileToolTitle: 'Online file tools | PixelForge',
       fileToolDescription: 'Process files locally in your browser with PDF, Word, PPT, and image workflows.',
+      imageToolsTitle: 'Image tools | PixelForge',
+      imageToolsDescription: 'Compress, convert, and resize images locally in your browser with no sign-up or uploads.',
       pdfMergeTitle: 'Merge PDFs | PixelForge',
       pdfMergeDescription: 'Merge multiple PDFs into one file locally in your browser.',
       pdfSplitTitle: 'Split PDFs | PixelForge',

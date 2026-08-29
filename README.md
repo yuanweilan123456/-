@@ -8,7 +8,7 @@ M2 产品化页面收尾已完成，当前准备进入发布前的 M3：
 
 - 中文/英文切换
 - 浅色/深色模式
-- 响应式首页骨架
+- 响应式工具箱首页
 - 拖拽/选择图片入口
 - 本地文件预览和移除
 - 输出参数界面骨架
@@ -62,7 +62,8 @@ git push -u origin feat/your-change
 
 ## 目录说明
 
-- `src/views/HomeView.vue`：首页和图片入口
+- `src/views/ToolboxView.vue`：首页工具箱目录
+- `src/views/HomeView.vue`：图片处理工作区（`/image-tools`）
 - `src/i18n.ts`：中英文语言包
 - `src/styles.css`：设计令牌、主题和响应式样式
 - `src/router/index.ts`：页面路由

@@ -47,7 +47,7 @@ onBeforeUnmount(clear)
 
 <template>
   <div class="page-wrap file-tool-page">
-    <RouterLink class="back-link" to="/toolbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>{{ isZh ? '返回工具箱' : 'Back to toolbox' }}</RouterLink>
+    <RouterLink class="back-link" to="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>{{ isZh ? '返回工具箱' : 'Back to toolbox' }}</RouterLink>
     <p class="eyebrow"><span class="eyebrow-dot"></span>PIXELFORGE FILE TOOLBOX</p>
     <h1 id="file-tool-title">{{ configs.title }}</h1>
     <p class="file-tool-description">{{ configs.description }}</p>

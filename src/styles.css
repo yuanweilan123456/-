@@ -204,6 +204,10 @@ h1 { max-width: 630px; margin-bottom: 20px; white-space: pre-line; font-size: cl
 .toolbox-heading { max-width: 720px; margin-bottom: 52px; }
 .toolbox-heading h1 { margin-bottom: 20px; font-size: clamp(42px, 7vw, 70px); }
 .toolbox-heading > p:last-child { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
+.toolbox-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 28px; color: var(--muted); font-size: 13px; font-weight: 700; }
+.toolbox-summary .secondary-button { display: inline-flex; align-items: center; gap: 8px; }
+.toolbox-summary svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+.toolbox-principles { padding-top: 112px; }
 .tool-catalog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .tool-card { min-height: 205px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 12px 38px rgba(47, 55, 85, 0.04); transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
 .tool-card:hover { border-color: color-mix(in srgb, var(--primary) 65%, var(--line)); box-shadow: var(--shadow); transform: translateY(-3px); }

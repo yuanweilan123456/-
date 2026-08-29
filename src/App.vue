@@ -13,6 +13,7 @@ const themeIconLabel = computed(() => (isDark.value ? t('nav.themeLight') : t('n
 
 const seoKeyByRoute: Record<string, string> = {
   home: 'home',
+  'image-tools': 'imageTools',
   toolbox: 'toolbox',
   faq: 'faq',
   about: 'about',
@@ -82,8 +83,8 @@ watch(() => route.fullPath, async () => {
       </RouterLink>
 
       <nav class="site-nav" :aria-label="t('nav.main')">
-        <RouterLink class="nav-link" to="/">{{ t('nav.tools') }}</RouterLink>
-        <RouterLink class="nav-link" to="/toolbox">{{ t('nav.toolbox') }}</RouterLink>
+        <RouterLink class="nav-link" to="/">{{ t('nav.toolbox') }}</RouterLink>
+        <RouterLink class="nav-link" to="/image-tools">{{ t('nav.tools') }}</RouterLink>
         <RouterLink class="nav-link" to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
         <RouterLink class="nav-link" to="/faq">{{ t('nav.faq') }}</RouterLink>
       </nav>

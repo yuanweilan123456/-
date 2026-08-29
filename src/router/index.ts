@@ -11,8 +11,9 @@ import NotFoundView from '../views/NotFoundView.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'home', component: HomeView },
-    { path: '/toolbox', name: 'toolbox', component: ToolboxView },
+    { path: '/', name: 'home', component: ToolboxView },
+    { path: '/toolbox', name: 'toolbox', redirect: { name: 'home' } },
+    { path: '/image-tools', name: 'image-tools', component: HomeView },
     { path: '/faq', name: 'faq', component: FaqView },
     { path: '/about', name: 'about', component: AboutView },
     { path: '/compress-image', name: 'compress-image', component: ToolLandingView, props: { type: 'compress' } },

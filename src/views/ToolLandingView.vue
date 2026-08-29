@@ -28,7 +28,7 @@ const isZh = computed(() => locale.value === 'zh')
     <p class="eyebrow"><span class="eyebrow-dot"></span>{{ content.keyword }}</p>
     <h1>{{ content.title }}</h1>
     <p class="landing-description">{{ content.description }}</p>
-    <RouterLink class="primary-button landing-cta" to="/">{{ isZh ? '开始使用工具' : 'Open the tool' }} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></RouterLink>
+    <RouterLink class="primary-button landing-cta" to="/image-tools">{{ isZh ? '开始使用工具' : 'Open the tool' }} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></RouterLink>
 
     <section class="landing-content" :aria-label="content.title">
       <div><p class="section-kicker">01</p><h2>{{ isZh ? '选择图片' : 'Choose images' }}</h2><p>{{ isZh ? '拖拽或选择 JPG、PNG、WebP 文件。图片不会离开你的设备。' : 'Drop or choose JPG, PNG, or WebP files. Your images stay on your device.' }}</p></div>
