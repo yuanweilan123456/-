@@ -2,7 +2,7 @@
 
 ## 开发环境
 
-- Node.js 20+
+- Node.js 20.19+
 - npm 10+
 
 安装依赖并启动开发服务器：
@@ -29,6 +29,12 @@ npm run check
 ```
 
 该命令包含 Prettier 格式检查、ESLint、TypeScript 类型检查、单元测试和生产构建。
+
+发布前另外运行生产依赖审计：
+
+```bash
+npm run audit:prod
+```
 
 ## 提交信息
 

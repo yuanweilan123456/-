@@ -40,6 +40,7 @@ npm run lint
 npm run typecheck
 npm run test:unit
 npm run build
+npm run audit:prod
 ```
 
 也可以一次执行完整检查：
