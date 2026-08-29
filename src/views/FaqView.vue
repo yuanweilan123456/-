@@ -36,7 +36,7 @@ const content = computed(() =>
           {
             question: '广告什么时候会出现？',
             answer:
-              '网站已经加载 Google AdSense 验证脚本，但广告要在网站通过审核、完成账号设置并启用广告后才会展示。需要同意的地区会显示相应的隐私选择。',
+              '网站已经加载 Google AdSense 验证脚本，但广告要在网站通过审核、完成账号设置并启用广告后才会展示。正式展示广告前，还需要按访问者所在地区完成必要的隐私同意设置。',
           },
         ],
       }
@@ -69,7 +69,7 @@ const content = computed(() =>
           {
             question: 'When will ads appear?',
             answer:
-              'The site already loads the Google AdSense verification script, but ads will only appear after the site passes review, the account setup is complete, and ads are enabled. Required privacy choices will be shown in applicable regions.',
+              'The site already loads the Google AdSense verification script, but ads will only appear after the site passes review, the account setup is complete, and ads are enabled. Before serving ads, required consent settings should be completed for applicable regions.',
           },
         ],
       },

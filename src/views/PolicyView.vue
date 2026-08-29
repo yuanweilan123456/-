@@ -32,7 +32,7 @@ const content = computed(() => {
               heading: '广告与第三方服务',
               body: [
                 '网站已加载 Google AdSense 脚本，用于网站验证；在网站通过审核并启用广告后，页面可能展示 Google 提供的广告。Google 可能使用 Cookie 或类似技术处理设备、浏览器和广告相关信息，具体以 Google 的隐私政策和广告设置为准。',
-                'PixelForge 不会把你选择的图片、PDF、DOCX 或 PPTX 文件内容发送给 PixelForge 服务器或 Google。需要同意的地区会根据广告服务和访问者所在地区显示相应的隐私选择。',
+                'PixelForge 不会把你选择的图片、PDF、DOCX 或 PPTX 文件内容发送给 PixelForge 服务器或 Google。正式展示广告前，应根据广告服务和访问者所在地区完成必要的隐私同意设置。',
               ],
             },
           ],
@@ -62,7 +62,7 @@ const content = computed(() => {
               heading: 'Advertising and third parties',
               body: [
                 'The site loads the Google AdSense script for site verification. After the site is approved and ads are enabled, pages may display advertising provided by Google. Google may use cookies or similar technologies to process device, browser, and advertising-related information; refer to Google privacy and ad settings for details.',
-                'PixelForge does not send the contents of selected images, PDFs, DOCX files, or PPTX files to PixelForge servers or Google. Where required, privacy choices are shown based on the advertising service and visitor location.',
+                'PixelForge does not send the contents of selected images, PDFs, DOCX files, or PPTX files to PixelForge servers or Google. Before serving ads, required consent settings should be completed based on the advertising service and visitor location.',
               ],
             },
           ],
