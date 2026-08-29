@@ -34,13 +34,20 @@ export function getOutputExtension(mimeType: string): string {
 }
 
 export function getOutputName(inputName: string, mimeType: string): string {
-  const baseName = inputName.replace(/\.[^/.]+$/, '').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '-').trim() || 'image'
+  const baseName =
+    inputName
+      .replace(/\.[^/.]+$/, '')
+      .replace(/[\\/:*?"<>|\u0000-\u001f]/g, '-')
+      .trim() || 'image'
   return `${baseName}.${getOutputExtension(mimeType)}`
 }
 
 export function fitDimensions(width: number, height: number, targetWidth?: number): { width: number; height: number } {
   if (!targetWidth || targetWidth >= width) return { width, height }
-  return { width: Math.max(1, Math.round(targetWidth)), height: Math.max(1, Math.round((height * targetWidth) / width)) }
+  return {
+    width: Math.max(1, Math.round(targetWidth)),
+    height: Math.max(1, Math.round((height * targetWidth) / width)),
+  }
 }
 
 export function formatBytes(bytes: number): string {
@@ -65,7 +72,11 @@ function readImageDimensions(file: File): Promise<{ width: number; height: numbe
   })
 }
 
-async function processOnCanvas(file: File, settings: ImageProcessSettings, onProgress: (value: number) => void): Promise<ProcessedImage> {
+async function processOnCanvas(
+  file: File,
+  settings: ImageProcessSettings,
+  onProgress: (value: number) => void,
+): Promise<ProcessedImage> {
   onProgress(12)
   const dimensions = await readImageDimensions(file)
   if (dimensions.width * dimensions.height > MAX_PIXEL_COUNT) throw new Error('too_many_pixels')
@@ -88,24 +99,50 @@ async function processOnCanvas(file: File, settings: ImageProcessSettings, onPro
     onProgress(68)
     const mimeType = getOutputMime(settings.format, file.type)
     const blob = await new Promise<Blob>((resolve, reject) => {
-      canvas.toBlob((result) => result ? resolve(result) : reject(new Error('encode_failed')), mimeType, settings.quality / 100)
+      canvas.toBlob(
+        (result) => (result ? resolve(result) : reject(new Error('encode_failed'))),
+        mimeType,
+        settings.quality / 100,
+      )
     })
     onProgress(100)
-    return { blob, outputName: getOutputName(file.name, mimeType), width: target.width, height: target.height, mimeType }
+    return {
+      blob,
+      outputName: getOutputName(file.name, mimeType),
+      width: target.width,
+      height: target.height,
+      mimeType,
+    }
   } finally {
     URL.revokeObjectURL(imageUrl)
   }
 }
 
-function processWithWorker(file: File, settings: ImageProcessSettings, onProgress: (value: number) => void): Promise<ProcessedImage> {
+function processWithWorker(
+  file: File,
+  settings: ImageProcessSettings,
+  onProgress: (value: number) => void,
+): Promise<ProcessedImage> {
   return new Promise((resolve, reject) => {
     const worker = new Worker(new URL('../../workers/image.worker.ts', import.meta.url), { type: 'module' })
-    worker.onmessage = (event: MessageEvent<{ type: 'progress'; value: number } | { type: 'success'; result: Omit<ProcessedImage, 'blob'> & { buffer: ArrayBuffer } } | { type: 'error'; message: string }>) => {
+    worker.onmessage = (
+      event: MessageEvent<
+        | { type: 'progress'; value: number }
+        | { type: 'success'; result: Omit<ProcessedImage, 'blob'> & { buffer: ArrayBuffer } }
+        | { type: 'error'; message: string }
+      >,
+    ) => {
       if (event.data.type === 'progress') onProgress(event.data.value)
       if (event.data.type === 'success') {
         worker.terminate()
         const result = event.data.result
-        resolve({ blob: new Blob([result.buffer], { type: result.mimeType }), outputName: result.outputName, width: result.width, height: result.height, mimeType: result.mimeType })
+        resolve({
+          blob: new Blob([result.buffer], { type: result.mimeType }),
+          outputName: result.outputName,
+          width: result.width,
+          height: result.height,
+          mimeType: result.mimeType,
+        })
       }
       if (event.data.type === 'error') {
         worker.terminate()
@@ -116,12 +153,20 @@ function processWithWorker(file: File, settings: ImageProcessSettings, onProgres
       worker.terminate()
       reject(new Error('worker_unavailable'))
     }
-    void file.arrayBuffer().then((buffer) => worker.postMessage({ buffer, name: file.name, inputMime: file.type, settings }, [buffer])).catch(() => reject(new Error('read_failed')))
+    void file
+      .arrayBuffer()
+      .then((buffer) => worker.postMessage({ buffer, name: file.name, inputMime: file.type, settings }, [buffer]))
+      .catch(() => reject(new Error('read_failed')))
   })
 }
 
-export async function processImage(file: File, settings: ImageProcessSettings, onProgress: (value: number) => void = () => undefined): Promise<ProcessedImage> {
-  const useWorker = typeof Worker !== 'undefined' && typeof OffscreenCanvas !== 'undefined' && typeof createImageBitmap !== 'undefined'
+export async function processImage(
+  file: File,
+  settings: ImageProcessSettings,
+  onProgress: (value: number) => void = () => undefined,
+): Promise<ProcessedImage> {
+  const useWorker =
+    typeof Worker !== 'undefined' && typeof OffscreenCanvas !== 'undefined' && typeof createImageBitmap !== 'undefined'
   if (useWorker) {
     try {
       return await processWithWorker(file, settings, onProgress)

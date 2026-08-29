@@ -21,10 +21,15 @@ const getMime = (format: ImageFormat, inputMime: string) => {
   return ['image/jpeg', 'image/png', 'image/webp'].includes(inputMime) ? inputMime : 'image/png'
 }
 
-const getExtension = (mimeType: string) => mimeType === 'image/jpeg' ? 'jpg' : mimeType === 'image/webp' ? 'webp' : 'png'
+const getExtension = (mimeType: string) =>
+  mimeType === 'image/jpeg' ? 'jpg' : mimeType === 'image/webp' ? 'webp' : 'png'
 
 const getName = (inputName: string, mimeType: string) => {
-  const base = inputName.replace(/\.[^/.]+$/, '').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '-').trim() || 'image'
+  const base =
+    inputName
+      .replace(/\.[^/.]+$/, '')
+      .replace(/[\\/:*?"<>|\u0000-\u001f]/g, '-')
+      .trim() || 'image'
   return `${base}.${getExtension(mimeType)}`
 }
 
@@ -32,8 +37,14 @@ workerScope.onmessage = async ({ data }) => {
   try {
     workerScope.postMessage({ type: 'progress', value: 12 })
     const source = await createImageBitmap(new Blob([data.buffer], { type: data.inputMime }))
-    const targetWidth = data.settings.width && data.settings.width < source.width ? Math.max(1, Math.round(data.settings.width)) : source.width
-    const targetHeight = targetWidth === source.width ? source.height : Math.max(1, Math.round((source.height * targetWidth) / source.width))
+    const targetWidth =
+      data.settings.width && data.settings.width < source.width
+        ? Math.max(1, Math.round(data.settings.width))
+        : source.width
+    const targetHeight =
+      targetWidth === source.width
+        ? source.height
+        : Math.max(1, Math.round((source.height * targetWidth) / source.width))
     if (source.width * source.height > 40_000_000) throw new Error('too_many_pixels')
     const canvas = new OffscreenCanvas(targetWidth, targetHeight)
     const context = canvas.getContext('2d')
@@ -45,7 +56,19 @@ workerScope.onmessage = async ({ data }) => {
     const blob = await canvas.convertToBlob({ type: mimeType, quality: data.settings.quality / 100 })
     const buffer = await blob.arrayBuffer()
     workerScope.postMessage({ type: 'progress', value: 100 })
-    workerScope.postMessage({ type: 'success', result: { buffer, outputName: getName(data.name, mimeType), width: targetWidth, height: targetHeight, mimeType } }, [buffer])
+    workerScope.postMessage(
+      {
+        type: 'success',
+        result: {
+          buffer,
+          outputName: getName(data.name, mimeType),
+          width: targetWidth,
+          height: targetHeight,
+          mimeType,
+        },
+      },
+      [buffer],
+    )
   } catch (error) {
     workerScope.postMessage({ type: 'error', message: error instanceof Error ? error.message : 'processing_failed' })
   }

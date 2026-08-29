@@ -28,7 +28,7 @@ npm run dev
 npm run check
 ```
 
-该命令包含 TypeScript 类型检查、单元测试和生产构建。
+该命令包含 Prettier 格式检查、ESLint、TypeScript 类型检查、单元测试和生产构建。
 
 ## 提交信息
 

@@ -28,7 +28,7 @@ const router = createRouter({
     { path: '/terms', name: 'terms', component: PolicyView, props: { type: 'terms' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
   ],
-  scrollBehavior: (to) => to.hash ? { el: to.hash, behavior: 'smooth' } : { top: 0 },
+  scrollBehavior: (to) => (to.hash ? { el: to.hash, behavior: 'smooth' } : { top: 0 }),
 })
 
 export default router

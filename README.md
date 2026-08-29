@@ -26,7 +26,7 @@ M2 已完成：FAQ、关于、404、结构化隐私/条款页、动态 SEO 标�
 ## 本地运行
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -35,6 +35,8 @@ npm run dev
 ## 质量检查
 
 ```bash
+npm run format:check
+npm run lint
 npm run typecheck
 npm run test:unit
 npm run build

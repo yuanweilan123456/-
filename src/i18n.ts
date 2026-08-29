@@ -84,8 +84,10 @@ const messages = {
     policy: {
       privacyTitle: '隐私政策',
       termsTitle: '使用条款',
-      privacyText: 'PixelForge 旨在让图片在你的设备上完成处理。MVP 默认不上传、不保存用户图片。网站可能在未来接入必要的统计或广告服务，正式上线前会根据实际数据处理方式更新本政策。',
-      termsText: '请仅处理你有权使用的图片。工具按现状提供，处理结果和浏览器兼容性可能因文件和设备而异。请勿使用本工具处理违法、侵权或危害他人的内容。',
+      privacyText:
+        'PixelForge 旨在让图片在你的设备上完成处理。MVP 默认不上传、不保存用户图片。网站可能在未来接入必要的统计或广告服务，正式上线前会根据实际数据处理方式更新本政策。',
+      termsText:
+        '请仅处理你有权使用的图片。工具按现状提供，处理结果和浏览器兼容性可能因文件和设备而异。请勿使用本工具处理违法、侵权或危害他人的内容。',
       back: '返回工具',
     },
     seo: {
@@ -205,19 +207,25 @@ const messages = {
     policy: {
       privacyTitle: 'Privacy policy',
       termsTitle: 'Terms of use',
-      privacyText: 'PixelForge is designed to process images on your device. The MVP does not upload or store user images by default. If analytics or advertising services are added, this policy will be updated before launch based on the actual data practices.',
-      termsText: 'Only process images that you have the right to use. The tools are provided as-is, and results or browser compatibility may vary by file and device. Do not use this service for illegal, infringing, or harmful content.',
+      privacyText:
+        'PixelForge is designed to process images on your device. The MVP does not upload or store user images by default. If analytics or advertising services are added, this policy will be updated before launch based on the actual data practices.',
+      termsText:
+        'Only process images that you have the right to use. The tools are provided as-is, and results or browser compatibility may vary by file and device. Do not use this service for illegal, infringing, or harmful content.',
       back: 'Back to tools',
     },
     seo: {
       homeTitle: 'PixelForge File Toolbox | Local processing, privacy first',
-      homeDescription: 'Process images, PDFs, Word documents, and PPT files in your browser. No sign-up and no uploads.',
+      homeDescription:
+        'Process images, PDFs, Word documents, and PPT files in your browser. No sign-up and no uploads.',
       toolboxTitle: 'File toolbox | PixelForge',
-      toolboxDescription: 'Process images, PDFs, Word documents, and PPT files in your browser. Fast, private, and upload-free.',
+      toolboxDescription:
+        'Process images, PDFs, Word documents, and PPT files in your browser. Fast, private, and upload-free.',
       faqTitle: 'FAQ | PixelForge',
-      faqDescription: 'Learn how PixelForge local processing works, what files are supported, and which browser limits apply.',
+      faqDescription:
+        'Learn how PixelForge local processing works, what files are supported, and which browser limits apply.',
       aboutTitle: 'About PixelForge | Local file toolbox',
-      aboutDescription: 'Learn how PixelForge uses browser-local processing to provide lightweight, private file tools.',
+      aboutDescription:
+        'Learn how PixelForge uses browser-local processing to provide lightweight, private file tools.',
       privacyTitle: 'Privacy policy | PixelForge',
       privacyDescription: 'Learn how PixelForge handles files, privacy, and future advertising services.',
       termsTitle: 'Terms of use | PixelForge',

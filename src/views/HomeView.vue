@@ -2,7 +2,15 @@
 import JSZip from 'jszip'
 import { computed, onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { formatBytes, MAX_BATCH_COUNT, MAX_FILE_SIZE, processImage, type ImageFormat, type ImageProcessSettings, type ProcessedImage } from '../features/image/image-processor'
+import {
+  formatBytes,
+  MAX_BATCH_COUNT,
+  MAX_FILE_SIZE,
+  processImage,
+  type ImageFormat,
+  type ImageProcessSettings,
+  type ProcessedImage,
+} from '../features/image/image-processor'
 
 type ProcessingStatus = 'pending' | 'processing' | 'success' | 'error'
 
@@ -30,7 +38,11 @@ const keepRatio = ref(true)
 
 const canStart = computed(() => images.value.length > 0 && !isProcessing.value)
 const successfulImages = computed(() => images.value.filter((image) => image.status === 'success'))
-const processButtonLabel = computed(() => isProcessing.value ? t('upload.processing', { current: successfulImages.value.length + 1, total: images.value.length }) : t('upload.start'))
+const processButtonLabel = computed(() =>
+  isProcessing.value
+    ? t('upload.processing', { current: successfulImages.value.length + 1, total: images.value.length })
+    : t('upload.start'),
+)
 
 function openFilePicker() {
   fileInput.value?.click()
@@ -118,7 +130,12 @@ function errorText(error: unknown) {
 }
 
 function getSettings(): ImageProcessSettings {
-  return { format: outputFormat.value, quality: quality.value, width: width.value ? Number(width.value) : undefined, keepRatio: keepRatio.value }
+  return {
+    format: outputFormat.value,
+    quality: quality.value,
+    width: width.value ? Number(width.value) : undefined,
+    keepRatio: keepRatio.value,
+  }
 }
 
 async function processOne(image: LocalImage) {
@@ -129,7 +146,9 @@ async function processOne(image: LocalImage) {
   image.result = undefined
   image.resultUrl = undefined
   try {
-    const result = await processImage(image.file, getSettings(), (progress) => { image.progress = progress })
+    const result = await processImage(image.file, getSettings(), (progress) => {
+      image.progress = progress
+    })
     image.result = result
     image.resultUrl = URL.createObjectURL(result.blob)
     image.status = 'success'
@@ -167,7 +186,9 @@ function downloadResult(image: LocalImage) {
 async function downloadAll() {
   if (successfulImages.value.length === 0) return
   const zip = new JSZip()
-  successfulImages.value.forEach((image) => { if (image.result) zip.file(image.result.outputName, image.result.blob) })
+  successfulImages.value.forEach((image) => {
+    if (image.result) zip.file(image.result.outputName, image.result.blob)
+  })
   const blob = await zip.generateAsync({ type: 'blob' })
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
@@ -197,50 +218,167 @@ onBeforeUnmount(clearImages)
 
     <section class="tool-layout" :aria-label="t('nav.tools')">
       <div class="tool-main">
-        <div class="upload-card" :class="{ dragging: isDragging, 'has-files': images.length > 0 }" @dragenter.prevent="isDragging = true" @dragover.prevent="isDragging = true" @dragleave.prevent="isDragging = false" @drop.prevent="onDrop">
-          <input ref="fileInput" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp" multiple :aria-label="t('upload.choose')" @change="onFileChange" />
+        <div
+          class="upload-card"
+          :class="{ dragging: isDragging, 'has-files': images.length > 0 }"
+          @dragenter.prevent="isDragging = true"
+          @dragover.prevent="isDragging = true"
+          @dragleave.prevent="isDragging = false"
+          @drop.prevent="onDrop"
+        >
+          <input
+            ref="fileInput"
+            class="visually-hidden"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            :aria-label="t('upload.choose')"
+            @change="onFileChange"
+          />
           <div v-if="images.length === 0" class="upload-empty">
-            <div class="upload-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" /></svg></div>
+            <div class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" /></svg>
+            </div>
             <h2>{{ t('upload.title') }}</h2>
             <p class="upload-or">{{ t('upload.or') }}</p>
             <button class="primary-button" type="button" @click="openFilePicker">{{ t('upload.choose') }}</button>
             <p class="upload-formats">{{ t('upload.formats') }}</p>
-            <p class="privacy-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 2.9 8.5 7 10 4.1-1.5 7-5.5 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></svg>{{ t('upload.privacy') }}</p>
+            <p class="privacy-note">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 5 6v5c0 4.5 2.9 8.5 7 10 4.1-1.5 7-5.5 7-10V6l-7-3Z" />
+                <path d="m9 12 2 2 4-4" /></svg
+              >{{ t('upload.privacy') }}
+            </p>
           </div>
 
           <div v-else class="upload-filled">
-            <div class="file-summary"><div><p class="section-kicker">{{ t('upload.selected', { count: images.length }) }}</p><p class="upload-formats">{{ t('upload.formats') }}</p></div><div class="file-actions"><button class="secondary-button" type="button" :disabled="isProcessing" @click="openFilePicker">{{ t('upload.addMore') }}</button><button class="text-button" type="button" :disabled="isProcessing" @click="clearImages">{{ t('upload.clear') }}</button></div></div>
+            <div class="file-summary">
+              <div>
+                <p class="section-kicker">{{ t('upload.selected', { count: images.length }) }}</p>
+                <p class="upload-formats">{{ t('upload.formats') }}</p>
+              </div>
+              <div class="file-actions">
+                <button class="secondary-button" type="button" :disabled="isProcessing" @click="openFilePicker">
+                  {{ t('upload.addMore') }}</button
+                ><button class="text-button" type="button" :disabled="isProcessing" @click="clearImages">
+                  {{ t('upload.clear') }}
+                </button>
+              </div>
+            </div>
             <div class="file-grid">
-              <article v-for="image in images" :key="image.id" class="file-tile" :class="`status-${image.status}`" :aria-label="image.file.name">
+              <article
+                v-for="image in images"
+                :key="image.id"
+                class="file-tile"
+                :class="`status-${image.status}`"
+                :aria-label="image.file.name"
+              >
                 <img :src="image.previewUrl" :alt="image.file.name" />
-                <div class="file-tile-meta"><span :title="image.file.name">{{ image.file.name }}</span><small>{{ formatBytes(image.file.size) }}</small><div class="file-status"><span>{{ statusLabel(image.status) }}</span><span v-if="image.status === 'processing'">{{ image.progress }}%</span></div></div>
-                <div v-if="image.status === 'processing'" class="tile-progress"><span :style="{ width: `${image.progress}%` }"></span></div>
-                <div v-if="image.status === 'success'" class="tile-result"><span>{{ formatBytes(image.result?.blob.size ?? 0) }}</span><button class="mini-button" type="button" @click="downloadResult(image)">{{ t('upload.download') }}</button></div>
-                <div v-if="image.status === 'error'" class="tile-error"><span>{{ image.error }}</span><button class="mini-button" type="button" @click="retryImage(image)">{{ t('upload.retry') }}</button></div>
-                <button v-if="image.status !== 'processing'" class="remove-button" type="button" :aria-label="t('upload.remove', { name: image.file.name })" @click="removeImage(image.id)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>
+                <div class="file-tile-meta">
+                  <span :title="image.file.name">{{ image.file.name }}</span
+                  ><small>{{ formatBytes(image.file.size) }}</small>
+                  <div class="file-status">
+                    <span>{{ statusLabel(image.status) }}</span
+                    ><span v-if="image.status === 'processing'">{{ image.progress }}%</span>
+                  </div>
+                </div>
+                <div v-if="image.status === 'processing'" class="tile-progress">
+                  <span :style="{ width: `${image.progress}%` }"></span>
+                </div>
+                <div v-if="image.status === 'success'" class="tile-result">
+                  <span>{{ formatBytes(image.result?.blob.size ?? 0) }}</span
+                  ><button class="mini-button" type="button" @click="downloadResult(image)">
+                    {{ t('upload.download') }}
+                  </button>
+                </div>
+                <div v-if="image.status === 'error'" class="tile-error">
+                  <span>{{ image.error }}</span
+                  ><button class="mini-button" type="button" @click="retryImage(image)">{{ t('upload.retry') }}</button>
+                </div>
+                <button
+                  v-if="image.status !== 'processing'"
+                  class="remove-button"
+                  type="button"
+                  :aria-label="t('upload.remove', { name: image.file.name })"
+                  @click="removeImage(image.id)"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg>
+                </button>
               </article>
             </div>
             <p v-if="errorMessage" class="error-message" role="alert">{{ errorMessage }}</p>
-            <div v-if="successfulImages.length > 0 && !isProcessing" class="results-bar"><span>{{ t('upload.completed') }} · {{ successfulImages.length }}/{{ images.length }}</span><button class="secondary-button" type="button" @click="downloadAll">{{ t('upload.downloadAll') }}</button></div>
+            <div v-if="successfulImages.length > 0 && !isProcessing" class="results-bar">
+              <span>{{ t('upload.completed') }} · {{ successfulImages.length }}/{{ images.length }}</span
+              ><button class="secondary-button" type="button" @click="downloadAll">
+                {{ t('upload.downloadAll') }}
+              </button>
+            </div>
           </div>
         </div>
-        <div class="ad-slot" :aria-label="t('a11y.advertisement')"><span>{{ t('ad') }}</span></div>
+        <div class="ad-slot" :aria-label="t('a11y.advertisement')">
+          <span>{{ t('ad') }}</span>
+        </div>
       </div>
 
       <aside class="settings-card" aria-labelledby="settings-title">
-        <div class="settings-header"><span class="settings-number">01</span><h2 id="settings-title">{{ t('settings.title') }}</h2></div>
+        <div class="settings-header">
+          <span class="settings-number">01</span>
+          <h2 id="settings-title">{{ t('settings.title') }}</h2>
+        </div>
         <label class="field-label" for="format">{{ t('settings.format') }}</label>
-        <select id="format" v-model="outputFormat" class="field-control"><option value="original">{{ t('settings.original') }}</option><option value="jpeg">JPG</option><option value="png">PNG</option><option value="webp">WebP</option></select>
-        <label class="field-label" for="quality">{{ t('settings.quality') }} <output>{{ quality }}%</output></label>
+        <select id="format" v-model="outputFormat" class="field-control">
+          <option value="original">{{ t('settings.original') }}</option>
+          <option value="jpeg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="webp">WebP</option>
+        </select>
+        <label class="field-label" for="quality"
+          >{{ t('settings.quality') }} <output>{{ quality }}%</output></label
+        >
         <input id="quality" v-model="quality" class="range-control" type="range" min="10" max="100" step="1" />
         <label class="field-label" for="width">{{ t('settings.width') }}</label>
-        <input id="width" v-model="width" class="field-control" type="number" min="1" inputmode="numeric" :placeholder="t('settings.widthHint')" />
-        <label class="checkbox-row"><input v-model="keepRatio" type="checkbox" /><span class="custom-checkbox" aria-hidden="true"></span><span>{{ t('settings.keepRatio') }}</span></label>
-        <button class="process-button" type="button" :disabled="!canStart" @click="startProcessing">{{ processButtonLabel }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></button>
+        <input
+          id="width"
+          v-model="width"
+          class="field-control"
+          type="number"
+          min="1"
+          inputmode="numeric"
+          :placeholder="t('settings.widthHint')"
+        />
+        <label class="checkbox-row"
+          ><input v-model="keepRatio" type="checkbox" /><span class="custom-checkbox" aria-hidden="true"></span
+          ><span>{{ t('settings.keepRatio') }}</span></label
+        >
+        <button class="process-button" type="button" :disabled="!canStart" @click="startProcessing">
+          {{ processButtonLabel }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+        </button>
         <p class="coming-soon">{{ t('upload.privacy') }}</p>
       </aside>
     </section>
 
-    <section id="why" class="trust-section" aria-labelledby="trust-title"><div class="section-heading"><p class="eyebrow">PIXELFORGE PRINCIPLES</p><h2 id="trust-title">{{ t('trust.title') }}</h2></div><div class="trust-grid"><article class="trust-card"><span class="trust-icon">01</span><h3>{{ t('trust.privateTitle') }}</h3><p>{{ t('trust.privateText') }}</p></article><article class="trust-card"><span class="trust-icon">02</span><h3>{{ t('trust.simpleTitle') }}</h3><p>{{ t('trust.simpleText') }}</p></article><article class="trust-card"><span class="trust-icon">03</span><h3>{{ t('trust.fastTitle') }}</h3><p>{{ t('trust.fastText') }}</p></article></div></section>
+    <section id="why" class="trust-section" aria-labelledby="trust-title">
+      <div class="section-heading">
+        <p class="eyebrow">PIXELFORGE PRINCIPLES</p>
+        <h2 id="trust-title">{{ t('trust.title') }}</h2>
+      </div>
+      <div class="trust-grid">
+        <article class="trust-card">
+          <span class="trust-icon">01</span>
+          <h3>{{ t('trust.privateTitle') }}</h3>
+          <p>{{ t('trust.privateText') }}</p>
+        </article>
+        <article class="trust-card">
+          <span class="trust-icon">02</span>
+          <h3>{{ t('trust.simpleTitle') }}</h3>
+          <p>{{ t('trust.simpleText') }}</p>
+        </article>
+        <article class="trust-card">
+          <span class="trust-icon">03</span>
+          <h3>{{ t('trust.fastTitle') }}</h3>
+          <p>{{ t('trust.fastText') }}</p>
+        </article>
+      </div>
+    </section>
   </div>
 </template>
