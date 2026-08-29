@@ -195,10 +195,10 @@ onBeforeUnmount(clearImages)
       <div class="hero-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
     </section>
 
-    <section class="tool-layout" aria-label="Image tool">
+    <section class="tool-layout" :aria-label="t('nav.tools')">
       <div class="tool-main">
         <div class="upload-card" :class="{ dragging: isDragging, 'has-files': images.length > 0 }" @dragenter.prevent="isDragging = true" @dragover.prevent="isDragging = true" @dragleave.prevent="isDragging = false" @drop.prevent="onDrop">
-          <input ref="fileInput" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp" multiple @change="onFileChange" />
+          <input ref="fileInput" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp" multiple :aria-label="t('upload.choose')" @change="onFileChange" />
           <div v-if="images.length === 0" class="upload-empty">
             <div class="upload-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" /></svg></div>
             <h2>{{ t('upload.title') }}</h2>
@@ -211,7 +211,7 @@ onBeforeUnmount(clearImages)
           <div v-else class="upload-filled">
             <div class="file-summary"><div><p class="section-kicker">{{ t('upload.selected', { count: images.length }) }}</p><p class="upload-formats">{{ t('upload.formats') }}</p></div><div class="file-actions"><button class="secondary-button" type="button" :disabled="isProcessing" @click="openFilePicker">{{ t('upload.addMore') }}</button><button class="text-button" type="button" :disabled="isProcessing" @click="clearImages">{{ t('upload.clear') }}</button></div></div>
             <div class="file-grid">
-              <article v-for="image in images" :key="image.id" class="file-tile" :class="`status-${image.status}`">
+              <article v-for="image in images" :key="image.id" class="file-tile" :class="`status-${image.status}`" :aria-label="image.file.name">
                 <img :src="image.previewUrl" :alt="image.file.name" />
                 <div class="file-tile-meta"><span :title="image.file.name">{{ image.file.name }}</span><small>{{ formatBytes(image.file.size) }}</small><div class="file-status"><span>{{ statusLabel(image.status) }}</span><span v-if="image.status === 'processing'">{{ image.progress }}%</span></div></div>
                 <div v-if="image.status === 'processing'" class="tile-progress"><span :style="{ width: `${image.progress}%` }"></span></div>
@@ -224,7 +224,7 @@ onBeforeUnmount(clearImages)
             <div v-if="successfulImages.length > 0 && !isProcessing" class="results-bar"><span>{{ t('upload.completed') }} · {{ successfulImages.length }}/{{ images.length }}</span><button class="secondary-button" type="button" @click="downloadAll">{{ t('upload.downloadAll') }}</button></div>
           </div>
         </div>
-        <div class="ad-slot" aria-label="Advertisement placeholder"><span>{{ t('ad') }}</span></div>
+        <div class="ad-slot" :aria-label="t('a11y.advertisement')"><span>{{ t('ad') }}</span></div>
       </div>
 
       <aside class="settings-card" aria-labelledby="settings-title">
@@ -236,7 +236,7 @@ onBeforeUnmount(clearImages)
         <label class="field-label" for="width">{{ t('settings.width') }}</label>
         <input id="width" v-model="width" class="field-control" type="number" min="1" inputmode="numeric" :placeholder="t('settings.widthHint')" />
         <label class="checkbox-row"><input v-model="keepRatio" type="checkbox" /><span class="custom-checkbox" aria-hidden="true"></span><span>{{ t('settings.keepRatio') }}</span></label>
-        <button class="process-button" type="button" :disabled="!canStart" @click="startProcessing">{{ processButtonLabel }}<span aria-hidden="true">→</span></button>
+        <button class="process-button" type="button" :disabled="!canStart" @click="startProcessing">{{ processButtonLabel }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></button>
         <p class="coming-soon">{{ t('upload.privacy') }}</p>
       </aside>
     </section>

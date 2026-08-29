@@ -30,10 +30,10 @@ const tools = computed(() => isZh.value ? [
 
 <template>
   <div class="page-wrap toolbox-page">
-    <section class="toolbox-heading"><p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'PIXELFORGE FILE TOOLBOX' : 'PIXELFORGE FILE TOOLBOX' }}</p><h1>{{ isZh ? '常用文件工具，集中在一个地方。' : 'Everyday file tools, in one place.' }}</h1><p>{{ isZh ? '图片、PDF、Word 和 PPT 文件都可以在浏览器里处理。' : 'Process images, PDFs, Word documents, and PPT files in your browser.' }}</p></section>
+    <section class="toolbox-heading" aria-labelledby="toolbox-title"><p class="eyebrow"><span class="eyebrow-dot"></span>PIXELFORGE FILE TOOLBOX</p><h1 id="toolbox-title">{{ isZh ? '常用文件工具，集中在一个地方。' : 'Everyday file tools, in one place.' }}</h1><p>{{ isZh ? '图片、PDF、Word 和 PPT 文件都可以在浏览器里处理。' : 'Process images, PDFs, Word documents, and PPT files in your browser.' }}</p></section>
     <div class="tool-catalog">
       <component :is="tool.available ? RouterLink : 'div'" v-for="tool in tools" :key="tool.title" :to="tool.available ? tool.href : undefined" class="tool-card" :class="[`tool-${tool.type}`, { 'is-planned': !tool.available }]">
-        <div class="tool-card-top"><span class="tool-type">{{ tool.type === 'image' ? 'IMG' : tool.type === 'pdf' ? 'PDF' : tool.type === 'word' ? 'DOCX' : tool.type === 'ppt' ? 'PPTX' : 'SOON' }}</span><span v-if="tool.available" class="tool-arrow" aria-hidden="true">↗</span></div>
+        <div class="tool-card-top"><span class="tool-type">{{ tool.type === 'image' ? 'IMG' : tool.type === 'pdf' ? 'PDF' : tool.type === 'word' ? 'DOCX' : tool.type === 'ppt' ? 'PPTX' : 'SOON' }}</span><span v-if="tool.available" class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19 19 5M9 5h10v10" /></svg></span></div>
         <h2>{{ tool.title }}</h2><p>{{ tool.description }}</p><span v-if="!tool.available" class="planned-label">{{ isZh ? '规划中' : 'Planned' }}</span>
       </component>
     </div>
