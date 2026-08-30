@@ -3,10 +3,8 @@ import { computed, nextTick, onMounted, ref, watch, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { updateSeo, type SeoContent } from './seo'
-import { getGuide } from './guide-content'
-import { categoryCopy, categoryOrder, getToolByPath, tools } from './features/tools/catalog'
-import { categoryPageContent, getToolPageContent } from './features/tools/content'
-import type { ToolCategory } from './features/tools/types'
+import { getSeoPage } from './seo-pages'
+import { categoryCopy, categoryOrder } from './features/tools/catalog'
 
 const { locale, t } = useI18n()
 const route = useRoute()
@@ -15,70 +13,16 @@ const mainRef = ref<HTMLElement | null>(null)
 
 const themeIconLabel = computed(() => (isDark.value ? t('nav.themeLight') : t('nav.themeDark')))
 
-const seoKeyByRoute: Record<string, string> = {
-  home: 'home',
-  'image-studio': 'imageTools',
-  faq: 'faq',
-  guides: 'guides',
-  about: 'about',
-  privacy: 'privacy',
-  terms: 'terms',
-}
-
 const seoContent = computed(() => {
   const language = locale.value === 'zh' ? 'zh' : 'en'
-  const tool = getToolByPath(route.path)
-  if (tool) {
-    const content = getToolPageContent(tool, language)
-    return {
-      title: content.seoTitle,
-      description: content.seoDescription,
-      pageType: 'tool',
-      breadcrumbs: [
-        { name: language === 'zh' ? '全部工具' : 'All tools', path: '/' },
-        { name: categoryCopy[tool.category].title[language], path: `/tools/${tool.category}` },
-        { name: tool.title[language], path: tool.path },
-      ],
-    } satisfies SeoContent
-  }
-  const routeCategory = route.meta.category as ToolCategory | undefined
-  if (routeCategory) {
-    const content = categoryPageContent[routeCategory]
-    const categoryTools = tools.filter((item) => item.category === routeCategory)
-    return {
-      title: content.seoTitle[language],
-      description: content.seoDescription[language],
-      pageType: 'category',
-      breadcrumbs: [
-        { name: language === 'zh' ? '全部工具' : 'All tools', path: '/' },
-        { name: categoryCopy[routeCategory].title[language], path: `/tools/${routeCategory}` },
-      ],
-      items: categoryTools.map((item) => ({ name: item.title[language], path: item.path })),
-    } satisfies SeoContent
-  }
-  if (route.name === 'guide') {
-    const guide = getGuide(String(route.params.slug))
-    if (guide) {
-      const content = locale.value === 'zh' ? guide.zh : guide.en
-      return {
-        title: `${content.title} | PixelForge`,
-        description: content.description,
-        pageType: 'article',
-        breadcrumbs: [
-          { name: language === 'zh' ? '全部工具' : 'All tools', path: '/' },
-          { name: language === 'zh' ? '使用指南' : 'Guides', path: '/guides' },
-          { name: content.title, path: route.path },
-        ],
-      } satisfies SeoContent
-    }
-  }
-  const key = seoKeyByRoute[String(route.name)] ?? (String(route.name) === 'not-found' ? 'notFound' : 'fileTool')
+  const page = getSeoPage(route.path, language)
+  if (page) return page
+
   return {
-    title: t(`seo.${key}Title`),
-    description: t(`seo.${key}Description`),
-    pageType: route.name === 'home' ? 'home' : 'page',
-    index: route.name !== 'not-found',
-    items: route.name === 'home' ? tools.map((item) => ({ name: item.title[language], path: item.path })) : undefined,
+    title: t('seo.notFoundTitle'),
+    description: t('seo.notFoundDescription'),
+    pageType: 'page',
+    index: false,
   } satisfies SeoContent
 })
 

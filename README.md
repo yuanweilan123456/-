@@ -4,8 +4,6 @@
 
 ## 当前能力
 
-- 中文/英文切换
-- 浅色/深色模式
 - 英文默认、中文切换和浅色/深色主题
 - 响应式工具目录、搜索和分类筛选
 - 拖拽/选择图片入口
@@ -19,6 +17,8 @@
 - 文件校验值、文件/Base64 双向转换
 - 广告位占位容器
 - 隐私政策和使用条款路由占位
+- 43 个可收录路由的构建期静态 HTML、独立 canonical 与结构化数据
+- 自动生成带 `lastmod` 的站点地图，并在主分支通过 IndexNow 通知搜索引擎
 
 当前共 24 个可用工具，文件均在浏览器本地处理。高保真 PDF、Word、PPT 双向转换未伪装成本地功能，未来如接入服务端引擎，必须先取得用户明确同意。
 
@@ -39,6 +39,7 @@ npm run lint
 npm run typecheck
 npm run test:unit
 npm run build
+npm run verify:dist
 npm run audit:prod
 ```
 
@@ -60,7 +61,7 @@ git commit -m "feat: describe your change"
 git push -u origin feat/your-change
 ```
 
-仓库包含 GitHub Actions CI，会在推送和 Pull Request 时自动执行类型检查、单元测试和生产构建。
+仓库包含 GitHub Actions CI，会在推送和 Pull Request 时自动执行格式、类型、单元测试、生产构建和预渲染检查。主分支检查通过后，还会向 IndexNow 提交站点地图中的规范 URL。
 
 ## 目录说明
 
@@ -71,6 +72,10 @@ git push -u origin feat/your-change
 - `src/i18n.ts`：中英文语言包
 - `src/styles.css`：设计令牌、主题和响应式样式
 - `src/router/index.ts`：页面路由
+- `src/seo-pages.ts`：前端运行时和构建期共用的 SEO 页面清单
+- `scripts/prerender.ts`：构建 43 个无扩展名静态 HTML 页面并刷新站点地图
+- `scripts/verify-prerender.ts`：检查标题、canonical、H1 和 sitemap 完整性
+- `scripts/submit-indexnow.mjs`：向 Bing 等支持 IndexNow 的搜索引擎通知页面变化
 - `docs/`：项目需求、架构、质量和启动决策文档
 - `.github/workflows/ci.yml`：持续集成检查
 - `CONTRIBUTING.md`：分支、提交和检查约定

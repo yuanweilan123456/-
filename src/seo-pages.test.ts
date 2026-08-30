@@ -1,0 +1,42 @@
+import { describe, expect, it } from 'vitest'
+import { getSeoPage, PRERENDER_PATHS } from './seo-pages'
+
+describe('SEO page manifest', () => {
+  it('contains 43 unique canonical routes with resolvable English content', () => {
+    expect(PRERENDER_PATHS).toHaveLength(43)
+    expect(new Set(PRERENDER_PATHS).size).toBe(PRERENDER_PATHS.length)
+
+    for (const routePath of PRERENDER_PATHS) {
+      const page = getSeoPage(routePath, 'en')
+      expect(page?.path).toBe(routePath)
+      expect(page?.title).toBeTruthy()
+      expect(page?.description).toBeTruthy()
+      expect(page?.heading).toBeTruthy()
+      expect(page?.lead).toBeTruthy()
+    }
+  })
+
+  it('keeps category and tool metadata distinct from the homepage', () => {
+    const home = getSeoPage('/', 'en')
+    const category = getSeoPage('/tools/pdf', 'en')
+    const tool = getSeoPage('/tools/pdf/merge', 'en')
+
+    expect(category?.title).not.toBe(home?.title)
+    expect(tool?.title).not.toBe(home?.title)
+    expect(category?.pageType).toBe('category')
+    expect(tool?.pageType).toBe('tool')
+  })
+
+  it('provides localized metadata from the same route definition', () => {
+    const english = getSeoPage('/tools/pdf/merge', 'en')
+    const chinese = getSeoPage('/tools/pdf/merge', 'zh')
+
+    expect(english?.title).toContain('Merge PDFs')
+    expect(chinese?.title).toContain('合并 PDF')
+    expect(english?.path).toBe(chinese?.path)
+  })
+
+  it('does not resolve unknown paths as canonical pages', () => {
+    expect(getSeoPage('/not-a-real-page', 'en')).toBeUndefined()
+  })
+})
