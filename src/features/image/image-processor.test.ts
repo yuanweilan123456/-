@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import JSZip from 'jszip'
-import { fitDimensions, formatBytes, getOutputExtension, getOutputMime, getOutputName } from './image-processor'
+import {
+  fitDimensions,
+  formatBytes,
+  getInputMime,
+  getOutputExtension,
+  getOutputMime,
+  getOutputName,
+} from './image-processor'
+import { shouldKeepOriginal } from './image-rules'
 
 describe('image processor helpers', () => {
   it('maps formats to MIME types', () => {
@@ -8,6 +16,20 @@ describe('image processor helpers', () => {
     expect(getOutputMime('png', 'image/jpeg')).toBe('image/png')
     expect(getOutputMime('original', 'image/webp')).toBe('image/webp')
     expect(getOutputMime('original', 'image/heic')).toBe('image/png')
+  })
+
+  it('infers missing or non-standard MIME types from image names', () => {
+    expect(getInputMime('', 'photo.JPG')).toBe('image/jpeg')
+    expect(getInputMime('image/jpg', 'photo.jpg')).toBe('image/jpeg')
+    expect(getInputMime('', 'graphic.png')).toBe('image/png')
+  })
+
+  it('keeps an already optimized source instead of creating a larger copy', () => {
+    expect(shouldKeepOriginal(1000, 1200, 'image/jpeg', 'image/jpeg', false, 0, false, false)).toBe(true)
+    expect(shouldKeepOriginal(1000, 900, 'image/jpeg', 'image/jpeg', false, 0, false, false)).toBe(false)
+    expect(shouldKeepOriginal(1000, 1200, 'image/jpeg', 'image/webp', false, 0, false, false)).toBe(false)
+    expect(shouldKeepOriginal(1000, 1200, 'image/jpeg', 'image/jpeg', true, 0, false, false)).toBe(false)
+    expect(shouldKeepOriginal(1000, 1200, 'image/jpeg', 'image/jpeg', false, 90, false, false)).toBe(false)
   })
 
   it('keeps ratio while resizing down', () => {

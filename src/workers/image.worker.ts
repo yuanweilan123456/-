@@ -1,3 +1,5 @@
+import { shouldKeepOriginal } from '../features/image/image-rules'
+
 type ImageFormat = 'original' | 'jpeg' | 'png' | 'webp'
 
 type Settings = {
@@ -48,6 +50,7 @@ workerScope.onmessage = async ({ data }) => {
       targetWidth === source.width
         ? source.height
         : Math.max(1, Math.round((source.height * targetWidth) / source.width))
+    const dimensionsChanged = targetWidth !== source.width || targetHeight !== source.height
     if (source.width * source.height > 40_000_000) throw new Error('too_many_pixels')
     const rotated = data.settings.rotation === 90 || data.settings.rotation === 270
     const canvas = new OffscreenCanvas(rotated ? targetHeight : targetWidth, rotated ? targetWidth : targetHeight)
@@ -60,8 +63,18 @@ workerScope.onmessage = async ({ data }) => {
     source.close()
     workerScope.postMessage({ type: 'progress', value: 68 })
     const mimeType = getMime(data.settings.format, data.inputMime)
-    const blob = await canvas.convertToBlob({ type: mimeType, quality: data.settings.quality / 100 })
-    const buffer = await blob.arrayBuffer()
+    const encodedBlob = await canvas.convertToBlob({ type: mimeType, quality: data.settings.quality / 100 })
+    const keptOriginal = shouldKeepOriginal(
+      data.buffer.byteLength,
+      encodedBlob.size,
+      data.inputMime,
+      mimeType,
+      dimensionsChanged,
+      data.settings.rotation,
+      data.settings.flipHorizontal,
+      data.settings.flipVertical,
+    )
+    const buffer = keptOriginal ? data.buffer : await encodedBlob.arrayBuffer()
     workerScope.postMessage({ type: 'progress', value: 100 })
     workerScope.postMessage(
       {
@@ -72,6 +85,7 @@ workerScope.onmessage = async ({ data }) => {
           width: canvas.width,
           height: canvas.height,
           mimeType,
+          keptOriginal,
         },
       },
       [buffer],

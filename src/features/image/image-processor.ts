@@ -1,3 +1,5 @@
+import { shouldKeepOriginal } from './image-rules'
+
 export type ImageFormat = 'original' | 'jpeg' | 'png' | 'webp'
 
 export type ImageProcessSettings = {
@@ -16,11 +18,21 @@ export type ProcessedImage = {
   width: number
   height: number
   mimeType: string
+  keptOriginal: boolean
 }
 
 export const MAX_FILE_SIZE = 20 * 1024 * 1024
 export const MAX_BATCH_COUNT = 20
 export const MAX_PIXEL_COUNT = 40_000_000
+
+export function getInputMime(inputMime: string, inputName: string): string {
+  if (inputMime === 'image/jpg') return 'image/jpeg'
+  if (inputMime === 'image/jpeg' || inputMime === 'image/png' || inputMime === 'image/webp') return inputMime
+  if (/\.jpe?g$/i.test(inputName)) return 'image/jpeg'
+  if (/\.png$/i.test(inputName)) return 'image/png'
+  if (/\.webp$/i.test(inputName)) return 'image/webp'
+  return inputMime
+}
 
 export function getOutputMime(format: ImageFormat, inputMime: string): string {
   if (format === 'jpeg') return 'image/jpeg'
@@ -104,14 +116,26 @@ async function processOnCanvas(
     context.scale(settings.flipHorizontal ? -1 : 1, settings.flipVertical ? -1 : 1)
     context.drawImage(image, -target.width / 2, -target.height / 2, target.width, target.height)
     onProgress(68)
-    const mimeType = getOutputMime(settings.format, file.type)
-    const blob = await new Promise<Blob>((resolve, reject) => {
+    const inputMime = getInputMime(file.type, file.name)
+    const mimeType = getOutputMime(settings.format, inputMime)
+    const encodedBlob = await new Promise<Blob>((resolve, reject) => {
       canvas.toBlob(
         (result) => (result ? resolve(result) : reject(new Error('encode_failed'))),
         mimeType,
         settings.quality / 100,
       )
     })
+    const keptOriginal = shouldKeepOriginal(
+      file.size,
+      encodedBlob.size,
+      inputMime,
+      mimeType,
+      target.width !== dimensions.width || target.height !== dimensions.height,
+      settings.rotation,
+      settings.flipHorizontal,
+      settings.flipVertical,
+    )
+    const blob = keptOriginal ? file.slice(0, file.size, mimeType) : encodedBlob
     onProgress(100)
     return {
       blob,
@@ -119,6 +143,7 @@ async function processOnCanvas(
       width: canvas.width,
       height: canvas.height,
       mimeType,
+      keptOriginal,
     }
   } finally {
     URL.revokeObjectURL(imageUrl)
@@ -149,6 +174,7 @@ function processWithWorker(
           width: result.width,
           height: result.height,
           mimeType: result.mimeType,
+          keptOriginal: result.keptOriginal,
         })
       }
       if (event.data.type === 'error') {
@@ -162,7 +188,11 @@ function processWithWorker(
     }
     void file
       .arrayBuffer()
-      .then((buffer) => worker.postMessage({ buffer, name: file.name, inputMime: file.type, settings }, [buffer]))
+      .then((buffer) =>
+        worker.postMessage({ buffer, name: file.name, inputMime: getInputMime(file.type, file.name), settings }, [
+          buffer,
+        ]),
+      )
       .catch(() => reject(new Error('read_failed')))
   })
 }

@@ -21,7 +21,6 @@ type LocalImage = {
   status: ProcessingStatus
   progress: number
   result?: ProcessedImage
-  resultUrl?: string
   error?: string
 }
 
@@ -97,14 +96,12 @@ function removeImage(id: string) {
   const image = images.value.find((item) => item.id === id)
   if (!image) return
   URL.revokeObjectURL(image.previewUrl)
-  if (image.resultUrl) URL.revokeObjectURL(image.resultUrl)
   images.value = images.value.filter((item) => item.id !== id)
 }
 
 function clearImages() {
   images.value.forEach((image) => {
     URL.revokeObjectURL(image.previewUrl)
-    if (image.resultUrl) URL.revokeObjectURL(image.resultUrl)
   })
   images.value = []
   errorMessage.value = ''
@@ -148,15 +145,12 @@ async function processOne(image: LocalImage) {
   image.status = 'processing'
   image.progress = 0
   image.error = ''
-  if (image.resultUrl) URL.revokeObjectURL(image.resultUrl)
   image.result = undefined
-  image.resultUrl = undefined
   try {
     const result = await processImage(image.file, getSettings(), (progress) => {
       image.progress = progress
     })
     image.result = result
-    image.resultUrl = URL.createObjectURL(result.blob)
     image.status = 'success'
     image.progress = 100
   } catch (error) {
@@ -181,12 +175,13 @@ async function retryImage(image: LocalImage) {
 }
 
 function downloadResult(image: LocalImage) {
-  if (!image.resultUrl || !image.result) return
+  if (!image.result) return
+  const resultUrl = URL.createObjectURL(image.result.blob)
   const link = document.createElement('a')
-  link.href = image.resultUrl
+  link.href = resultUrl
   link.download = image.result.outputName
   link.click()
-  window.setTimeout(() => URL.revokeObjectURL(image.resultUrl!), 1000)
+  window.setTimeout(() => URL.revokeObjectURL(resultUrl), 1000)
 }
 
 async function downloadAll() {
@@ -302,7 +297,9 @@ onBeforeUnmount(clearImages)
                   <span :style="{ width: `${image.progress}%` }"></span>
                 </div>
                 <div v-if="image.status === 'success'" class="tile-result">
-                  <span>{{ formatBytes(image.result?.blob.size ?? 0) }}</span
+                  <span>
+                    {{ formatBytes(image.result?.blob.size ?? 0) }}
+                    <small v-if="image.result?.keptOriginal">{{ t('upload.alreadyOptimized') }}</small> </span
                   ><button class="mini-button" type="button" @click="downloadResult(image)">
                     {{ t('upload.download') }}
                   </button>
