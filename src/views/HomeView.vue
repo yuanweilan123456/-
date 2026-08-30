@@ -35,6 +35,9 @@ const outputFormat = ref<ImageFormat>('original')
 const quality = ref(82)
 const width = ref('')
 const keepRatio = ref(true)
+const rotation = ref<0 | 90 | 180 | 270>(0)
+const flipHorizontal = ref(false)
+const flipVertical = ref(false)
 
 const canStart = computed(() => images.value.length > 0 && !isProcessing.value)
 const successfulImages = computed(() => images.value.filter((image) => image.status === 'success'))
@@ -135,6 +138,9 @@ function getSettings(): ImageProcessSettings {
     quality: quality.value,
     width: width.value ? Number(width.value) : undefined,
     keepRatio: keepRatio.value,
+    rotation: rotation.value,
+    flipHorizontal: flipHorizontal.value,
+    flipVertical: flipVertical.value,
   }
 }
 
@@ -360,6 +366,23 @@ onBeforeUnmount(clearImages)
           ><input v-model="keepRatio" type="checkbox" /><span class="custom-checkbox" aria-hidden="true"></span
           ><span>{{ t('settings.keepRatio') }}</span></label
         >
+        <label class="field-label" for="rotation">{{ t('settings.rotation') }}</label>
+        <select id="rotation" v-model="rotation" class="field-control">
+          <option :value="0">0°</option>
+          <option :value="90">90°</option>
+          <option :value="180">180°</option>
+          <option :value="270">270°</option>
+        </select>
+        <div class="flip-options">
+          <label class="checkbox-label"
+            ><input v-model="flipHorizontal" type="checkbox" /><span class="custom-checkbox" aria-hidden="true"></span
+            ><span>{{ t('settings.flipHorizontal') }}</span></label
+          >
+          <label class="checkbox-label"
+            ><input v-model="flipVertical" type="checkbox" /><span class="custom-checkbox" aria-hidden="true"></span
+            ><span>{{ t('settings.flipVertical') }}</span></label
+          >
+        </div>
         <button class="process-button" type="button" :disabled="!canStart" @click="startProcessing">
           {{ processButtonLabel }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
         </button>

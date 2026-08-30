@@ -1,14 +1,13 @@
 import { createI18n } from 'vue-i18n'
 
 const savedLocale = window.localStorage.getItem('pixelforge-locale')
-const browserLocale = navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en'
 
 const messages = {
   zh: {
     nav: {
       main: '主导航',
-      tools: '图片处理',
-      toolbox: '工具箱',
+      tools: '图片工作台',
+      toolbox: '全部工具',
       howItWorks: '使用方式',
       faq: '常见问题',
       guides: '使用指南',
@@ -64,13 +63,16 @@ const messages = {
       widthHint: '留空则保持原尺寸',
       keepRatio: '保持图片比例',
       original: '原格式',
+      rotation: '旋转角度',
+      flipHorizontal: '水平翻转',
+      flipVertical: '垂直翻转',
     },
     trust: {
       title: '为什么选择 PixelForge？',
       privateTitle: '隐私优先',
-      privateText: '图片在你的设备上处理，不经过我们的服务器。',
+      privateText: '文件在你的设备上处理，不经过我们的服务器。',
       simpleTitle: '无需学习',
-      simpleText: '清晰的参数和结果反馈，几步完成日常图片处理。',
+      simpleText: '清晰的参数和结果反馈，几步完成日常文件处理。',
       fastTitle: '轻量快速',
       fastText: '静态站点架构，少等待，适合桌面和移动设备。',
     },
@@ -79,14 +81,14 @@ const messages = {
       listTitle: '实用文件处理指南',
     },
     footer: {
-      tagline: '轻量图片工具，隐私从本地开始。',
+      tagline: '实用文件工具，隐私从本地开始。',
       about: '关于我们',
       faq: '常见问题',
       guides: '使用指南',
       linksLabel: '页脚导航',
       privacy: '隐私政策',
       terms: '使用条款',
-      copyright: '© 2026 PixelForge Image Tools',
+      copyright: '© 2026 PixelForge File Tools',
     },
     policy: {
       privacyTitle: '隐私政策',
@@ -94,7 +96,7 @@ const messages = {
       privacyText:
         'PixelForge 旨在让文件在你的设备上完成处理。当前版本不上传、不保存用户文件内容。网站已加载 Google AdSense 验证脚本；广告启用后，Google 可能根据其政策使用 Cookie 或类似技术处理广告相关信息。',
       termsText:
-        '请仅处理你有权使用的图片。工具按现状提供，处理结果和浏览器兼容性可能因文件和设备而异。请勿使用本工具处理违法、侵权或危害他人的内容。',
+        '请仅处理你有权使用的文件。工具按现状提供，处理结果和浏览器兼容性可能因文件和设备而异。请勿使用本工具处理违法、侵权或危害他人的内容。',
       back: '返回工具',
     },
     seo: {
@@ -139,8 +141,8 @@ const messages = {
   en: {
     nav: {
       main: 'Main navigation',
-      tools: 'Image tools',
-      toolbox: 'Toolbox',
+      tools: 'Image studio',
+      toolbox: 'All tools',
       howItWorks: 'How it works',
       faq: 'FAQ',
       guides: 'Guides',
@@ -196,13 +198,16 @@ const messages = {
       widthHint: 'Leave empty to keep original size',
       keepRatio: 'Keep image ratio',
       original: 'Original format',
+      rotation: 'Rotation',
+      flipHorizontal: 'Flip horizontally',
+      flipVertical: 'Flip vertically',
     },
     trust: {
       title: 'Why PixelForge?',
       privateTitle: 'Privacy first',
-      privateText: 'Images are processed on your device, never through our server.',
+      privateText: 'Files are processed on your device, never through our server.',
       simpleTitle: 'Easy by design',
-      simpleText: 'Clear settings and feedback for everyday image tasks.',
+      simpleText: 'Clear settings and feedback for everyday file tasks.',
       fastTitle: 'Lightweight and fast',
       fastText: 'A static-site architecture with less waiting on desktop and mobile.',
     },
@@ -211,14 +216,14 @@ const messages = {
       listTitle: 'Practical file processing guides',
     },
     footer: {
-      tagline: 'Lightweight image tools, privacy starts local.',
+      tagline: 'Practical file tools, privacy starts local.',
       about: 'About',
       faq: 'FAQ',
       guides: 'Guides',
       linksLabel: 'Footer navigation',
       privacy: 'Privacy policy',
       terms: 'Terms',
-      copyright: '© 2026 PixelForge Image Tools',
+      copyright: '© 2026 PixelForge File Tools',
     },
     policy: {
       privacyTitle: 'Privacy policy',
@@ -226,7 +231,7 @@ const messages = {
       privacyText:
         'PixelForge is designed to process files on your device. The current version does not upload or store user file contents. The site loads the Google AdSense verification script; after ads are enabled, Google may use cookies or similar technologies for advertising as described in its policies.',
       termsText:
-        'Only process images that you have the right to use. The tools are provided as-is, and results or browser compatibility may vary by file and device. Do not use this service for illegal, infringing, or harmful content.',
+        'Only process files that you have the right to use. The tools are provided as-is, and results or browser compatibility may vary by file and device. Do not use this service for illegal, infringing, or harmful content.',
       back: 'Back to tools',
     },
     seo: {
@@ -277,7 +282,7 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  locale: savedLocale === 'en' || savedLocale === 'zh' ? savedLocale : browserLocale,
+  locale: savedLocale === 'en' || savedLocale === 'zh' ? savedLocale : 'en',
   fallbackLocale: 'en',
   messages,
 })

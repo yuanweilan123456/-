@@ -5,6 +5,9 @@ export type ImageProcessSettings = {
   quality: number
   width?: number
   keepRatio: boolean
+  rotation: 0 | 90 | 180 | 270
+  flipHorizontal: boolean
+  flipVertical: boolean
 }
 
 export type ProcessedImage = {
@@ -91,11 +94,15 @@ async function processOnCanvas(
       image.src = imageUrl
     })
     const canvas = document.createElement('canvas')
-    canvas.width = target.width
-    canvas.height = target.height
+    const rotated = settings.rotation === 90 || settings.rotation === 270
+    canvas.width = rotated ? target.height : target.width
+    canvas.height = rotated ? target.width : target.height
     const context = canvas.getContext('2d')
     if (!context) throw new Error('canvas_unavailable')
-    context.drawImage(image, 0, 0, target.width, target.height)
+    context.translate(canvas.width / 2, canvas.height / 2)
+    context.rotate((settings.rotation * Math.PI) / 180)
+    context.scale(settings.flipHorizontal ? -1 : 1, settings.flipVertical ? -1 : 1)
+    context.drawImage(image, -target.width / 2, -target.height / 2, target.width, target.height)
     onProgress(68)
     const mimeType = getOutputMime(settings.format, file.type)
     const blob = await new Promise<Blob>((resolve, reject) => {
@@ -109,8 +116,8 @@ async function processOnCanvas(
     return {
       blob,
       outputName: getOutputName(file.name, mimeType),
-      width: target.width,
-      height: target.height,
+      width: canvas.width,
+      height: canvas.height,
       mimeType,
     }
   } finally {

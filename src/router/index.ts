@@ -1,68 +1,71 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { fileTools } from '../features/tools/catalog'
+
+const imageRoutes: RouteRecordRaw[] = [
+  {
+    path: '/tools/image/compress',
+    name: 'image-compress',
+    component: () => import('../views/ToolLandingView.vue'),
+    props: { type: 'compress' },
+  },
+  {
+    path: '/tools/image/convert',
+    name: 'image-convert',
+    component: () => import('../views/ToolLandingView.vue'),
+    props: { type: 'convert' },
+  },
+  {
+    path: '/tools/image/resize',
+    name: 'image-resize',
+    component: () => import('../views/ToolLandingView.vue'),
+    props: { type: 'resize' },
+  },
+  {
+    path: '/tools/image/rotate',
+    name: 'image-rotate',
+    component: () => import('../views/ToolLandingView.vue'),
+    props: { type: 'rotate' },
+  },
+  {
+    path: '/tools/image/flip',
+    name: 'image-flip',
+    component: () => import('../views/ToolLandingView.vue'),
+    props: { type: 'flip' },
+  },
+]
+
+const fileToolRoutes: RouteRecordRaw[] = fileTools.map((tool) => ({
+  path: tool.path,
+  name: tool.id,
+  component: () => import('../views/FileToolView.vue'),
+  props: { type: tool.id },
+}))
+
+const legacyRedirects: RouteRecordRaw[] = [
+  { path: '/toolbox', redirect: '/' },
+  { path: '/image-tools', redirect: '/tools/image/studio' },
+  { path: '/compress-image', redirect: '/tools/image/compress' },
+  { path: '/convert-image', redirect: '/tools/image/convert' },
+  { path: '/resize-image', redirect: '/tools/image/resize' },
+  { path: '/pdf/merge', redirect: '/tools/pdf/merge' },
+  { path: '/pdf/split', redirect: '/tools/pdf/split' },
+  { path: '/pdf/images-to-pdf', redirect: '/tools/pdf/images-to-pdf' },
+  { path: '/word/to-html', redirect: '/tools/document/docx-to-html' },
+  { path: '/ppt/images-to-pptx', redirect: '/tools/presentation/images-to-pptx' },
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'home', component: () => import('../views/ToolboxView.vue') },
-    { path: '/toolbox', name: 'toolbox', redirect: { name: 'home' } },
-    { path: '/image-tools', name: 'image-tools', component: () => import('../views/HomeView.vue') },
+    { path: '/tools/image/studio', name: 'image-studio', component: () => import('../views/HomeView.vue') },
+    ...imageRoutes,
+    ...fileToolRoutes,
+    ...legacyRedirects,
     { path: '/faq', name: 'faq', component: () => import('../views/FaqView.vue') },
     { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
     { path: '/guides', name: 'guides', component: () => import('../views/GuidesView.vue') },
-    {
-      path: '/guides/:slug',
-      name: 'guide',
-      component: () => import('../views/GuideView.vue'),
-      props: true,
-    },
-    {
-      path: '/compress-image',
-      name: 'compress-image',
-      component: () => import('../views/ToolLandingView.vue'),
-      props: { type: 'compress' },
-    },
-    {
-      path: '/convert-image',
-      name: 'convert-image',
-      component: () => import('../views/ToolLandingView.vue'),
-      props: { type: 'convert' },
-    },
-    {
-      path: '/resize-image',
-      name: 'resize-image',
-      component: () => import('../views/ToolLandingView.vue'),
-      props: { type: 'resize' },
-    },
-    {
-      path: '/pdf/merge',
-      name: 'pdf-merge',
-      component: () => import('../views/FileToolView.vue'),
-      props: { type: 'pdf-merge' },
-    },
-    {
-      path: '/pdf/split',
-      name: 'pdf-split',
-      component: () => import('../views/FileToolView.vue'),
-      props: { type: 'pdf-split' },
-    },
-    {
-      path: '/pdf/images-to-pdf',
-      name: 'images-to-pdf',
-      component: () => import('../views/FileToolView.vue'),
-      props: { type: 'images-to-pdf' },
-    },
-    {
-      path: '/word/to-html',
-      name: 'docx-to-html',
-      component: () => import('../views/FileToolView.vue'),
-      props: { type: 'docx-to-html' },
-    },
-    {
-      path: '/ppt/images-to-pptx',
-      name: 'images-to-pptx',
-      component: () => import('../views/FileToolView.vue'),
-      props: { type: 'images-to-pptx' },
-    },
+    { path: '/guides/:slug', name: 'guide', component: () => import('../views/GuideView.vue'), props: true },
     {
       path: '/privacy',
       name: 'privacy',

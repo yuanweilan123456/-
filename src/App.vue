@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { updateSeo } from './seo'
 import { getGuide } from './guide-content'
+import { getToolByPath } from './features/tools/catalog'
 
 const { locale, t } = useI18n()
 const route = useRoute()
@@ -14,24 +15,20 @@ const themeIconLabel = computed(() => (isDark.value ? t('nav.themeLight') : t('n
 
 const seoKeyByRoute: Record<string, string> = {
   home: 'home',
-  'image-tools': 'imageTools',
-  toolbox: 'toolbox',
+  'image-studio': 'imageTools',
   faq: 'faq',
   guides: 'guides',
   about: 'about',
   privacy: 'privacy',
   terms: 'terms',
-  'compress-image': 'compress',
-  'convert-image': 'convert',
-  'resize-image': 'resize',
-  'pdf-merge': 'pdfMerge',
-  'pdf-split': 'pdfSplit',
-  'images-to-pdf': 'imagesToPdf',
-  'docx-to-html': 'docxToHtml',
-  'images-to-pptx': 'imagesToPptx',
 }
 
 const seoContent = computed(() => {
+  const tool = getToolByPath(route.path)
+  if (tool) {
+    const language = locale.value === 'zh' ? 'zh' : 'en'
+    return { title: `${tool.title[language]} | PixelForge`, description: tool.description[language] }
+  }
   if (route.name === 'guide') {
     const guide = getGuide(String(route.params.slug))
     if (guide) {
@@ -96,7 +93,7 @@ watch(
 
       <nav class="site-nav" :aria-label="t('nav.main')">
         <RouterLink class="nav-link" to="/">{{ t('nav.toolbox') }}</RouterLink>
-        <RouterLink class="nav-link" to="/image-tools">{{ t('nav.tools') }}</RouterLink>
+        <RouterLink class="nav-link" to="/tools/image/studio">{{ t('nav.tools') }}</RouterLink>
         <RouterLink class="nav-link" to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
         <RouterLink class="nav-link" to="/faq">{{ t('nav.faq') }}</RouterLink>
         <RouterLink class="nav-link" to="/guides">{{ t('nav.guides') }}</RouterLink>
@@ -122,7 +119,7 @@ watch(
         </button>
         <button class="language-button" type="button" :aria-label="t('nav.language')" @click="toggleLocale">
           <span aria-hidden="true">文 / A</span>
-          <span>{{ locale === 'zh' ? '中文' : 'EN' }}</span>
+          <span>{{ locale === 'zh' ? 'EN' : '中文' }}</span>
         </button>
       </div>
     </header>

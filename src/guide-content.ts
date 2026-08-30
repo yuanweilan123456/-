@@ -18,7 +18,7 @@ export type Guide = {
 export const guides: Guide[] = [
   {
     slug: 'compress-images-without-upload',
-    toolPath: '/compress-image',
+    toolPath: '/tools/image/compress',
     readingTime: '3 min',
     zh: {
       title: '不上传图片，如何在线压缩图片？',
@@ -75,7 +75,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'merge-pdf-files',
-    toolPath: '/pdf/merge',
+    toolPath: '/tools/pdf/merge',
     readingTime: '3 min',
     zh: {
       title: '如何把多个 PDF 合并成一个文件？',
@@ -136,7 +136,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'convert-images-to-pdf',
-    toolPath: '/pdf/images-to-pdf',
+    toolPath: '/tools/pdf/images-to-pdf',
     readingTime: '3 min',
     zh: {
       title: '如何把多张图片转换成一个 PDF？',
@@ -193,7 +193,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'word-to-html-basics',
-    toolPath: '/word/to-html',
+    toolPath: '/tools/document/docx-to-html',
     readingTime: '3 min',
     zh: {
       title: 'Word 文档转 HTML 时需要注意什么？',
@@ -254,7 +254,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'make-a-presentation-from-images',
-    toolPath: '/ppt/images-to-pptx',
+    toolPath: '/tools/presentation/images-to-pptx',
     readingTime: '3 min',
     zh: {
       title: '如何用多张图片快速生成 PPT？',

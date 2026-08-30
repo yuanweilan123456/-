@@ -1,198 +1,140 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
+import { categoryCopy, categoryOrder, tools } from '../features/tools/catalog'
+import type { ToolCategory } from '../features/tools/types'
 
 const { locale, t } = useI18n()
+const query = ref('')
+const activeCategory = ref<ToolCategory | 'all'>('all')
 const isZh = computed(() => locale.value === 'zh')
-const tools = computed(() =>
-  isZh.value
-    ? [
-        {
-          title: '图片压缩',
-          description: '减小 JPG、PNG、WebP 文件体积。',
-          href: '/compress-image',
-          type: 'image',
-          available: true,
-        },
-        {
-          title: '图片格式转换',
-          description: '在 JPG、PNG、WebP 之间转换。',
-          href: '/convert-image',
-          type: 'image',
-          available: true,
-        },
-        {
-          title: '图片尺寸调整',
-          description: '按比例调整图片宽度和尺寸。',
-          href: '/resize-image',
-          type: 'image',
-          available: true,
-        },
-        {
-          title: 'PDF 合并',
-          description: '将多个 PDF 合并成一个文件。',
-          href: '/pdf/merge',
-          type: 'pdf',
-          available: true,
-        },
-        {
-          title: 'PDF 拆分',
-          description: '按页拆分 PDF，并打包下载。',
-          href: '/pdf/split',
-          type: 'pdf',
-          available: true,
-        },
-        {
-          title: '图片转 PDF',
-          description: '将多张图片生成一个 PDF。',
-          href: '/pdf/images-to-pdf',
-          type: 'pdf',
-          available: true,
-        },
-        {
-          title: 'Word 转 HTML',
-          description: '提取 DOCX 内容并转换为 HTML。',
-          href: '/word/to-html',
-          type: 'word',
-          available: true,
-        },
-        {
-          title: '图片生成 PPT',
-          description: '每张图片生成一页 PPTX。',
-          href: '/ppt/images-to-pptx',
-          type: 'ppt',
-          available: true,
-        },
-        {
-          title: 'PDF ↔ Word/PPT',
-          description: '高保真双向转换，后续接入专业引擎。',
-          href: '/toolbox',
-          type: 'planned',
-          available: false,
-        },
-      ]
-    : [
-        {
-          title: 'Compress images',
-          description: 'Reduce JPG, PNG, and WebP file sizes.',
-          href: '/compress-image',
-          type: 'image',
-          available: true,
-        },
-        {
-          title: 'Convert image format',
-          description: 'Convert between JPG, PNG, and WebP.',
-          href: '/convert-image',
-          type: 'image',
-          available: true,
-        },
-        {
-          title: 'Resize images',
-          description: 'Resize image width while keeping its ratio.',
-          href: '/resize-image',
-          type: 'image',
-          available: true,
-        },
-        {
-          title: 'Merge PDFs',
-          description: 'Combine multiple PDFs into one file.',
-          href: '/pdf/merge',
-          type: 'pdf',
-          available: true,
-        },
-        {
-          title: 'Split PDFs',
-          description: 'Split PDFs by page and download a ZIP.',
-          href: '/pdf/split',
-          type: 'pdf',
-          available: true,
-        },
-        {
-          title: 'Images to PDF',
-          description: 'Create one PDF from multiple images.',
-          href: '/pdf/images-to-pdf',
-          type: 'pdf',
-          available: true,
-        },
-        {
-          title: 'Word to HTML',
-          description: 'Extract DOCX content as clean HTML.',
-          href: '/word/to-html',
-          type: 'word',
-          available: true,
-        },
-        {
-          title: 'Images to PPT',
-          description: 'Create one PPTX slide per image.',
-          href: '/ppt/images-to-pptx',
-          type: 'ppt',
-          available: true,
-        },
-        {
-          title: 'PDF ↔ Word/PPT',
-          description: 'High-fidelity conversion via a professional engine later.',
-          href: '/toolbox',
-          type: 'planned',
-          available: false,
-        },
-      ],
+const language = computed(() => (isZh.value ? 'zh' : 'en'))
+const filteredTools = computed(() => {
+  const term = query.value.trim().toLocaleLowerCase()
+  return tools.filter((tool) => {
+    const categoryMatches = activeCategory.value === 'all' || tool.category === activeCategory.value
+    const text = `${tool.title.en} ${tool.title.zh} ${tool.description.en} ${tool.description.zh}`.toLocaleLowerCase()
+    return categoryMatches && (!term || text.includes(term))
+  })
+})
+const groups = computed(() =>
+  categoryOrder
+    .map((category) => ({ category, tools: filteredTools.value.filter((tool) => tool.category === category) }))
+    .filter((group) => group.tools.length),
 )
+
+function clearFilters() {
+  query.value = ''
+  activeCategory.value = 'all'
+}
 </script>
 
 <template>
   <div class="page-wrap toolbox-page">
     <section class="toolbox-heading" aria-labelledby="toolbox-title">
       <p class="eyebrow"><span class="eyebrow-dot"></span>PIXELFORGE FILE TOOLBOX</p>
-      <h1 id="toolbox-title">{{ isZh ? '常用文件工具，集中在一个地方。' : 'Everyday file tools, in one place.' }}</h1>
+      <h1 id="toolbox-title">
+        {{ isZh ? '你需要的文件工具，都在这里。' : 'Every file tool you need, in one place.' }}
+      </h1>
       <p>
         {{
           isZh
-            ? '图片、PDF、Word 和 PPT 文件都可以在浏览器里处理。'
-            : 'Process images, PDFs, Word documents, and PPT files in your browser.'
+            ? '在浏览器本地处理图片、PDF、文档、演示文稿、压缩包和数据，无需注册。'
+            : 'Work with images, PDFs, documents, presentations, archives, and data locally in your browser.'
         }}
       </p>
       <div class="toolbox-summary">
-        <span>{{ isZh ? '8 个工具 · 本地处理 · 无需注册' : '8 tools · Local processing · No sign-up' }}</span
-        ><RouterLink class="secondary-button" to="/image-tools"
-          >{{ isZh ? '图片快速处理' : 'Quick image tools'
-          }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></RouterLink
-        ><RouterLink class="secondary-button" to="/guides"
+        <span>{{
+          isZh
+            ? `${tools.length} 个可用工具 · 本地处理 · 无需注册`
+            : `${tools.length} working tools · Local processing · No sign-up`
+        }}</span>
+        <RouterLink class="secondary-button" to="/tools/image/studio"
+          >{{ isZh ? '打开图片工作台' : 'Open image studio'
+          }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg
+        ></RouterLink>
+        <RouterLink class="secondary-button" to="/guides"
           >{{ isZh ? '查看使用指南' : 'Read the guides'
           }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg
         ></RouterLink>
       </div>
     </section>
-    <div class="tool-catalog">
-      <component
-        :is="tool.available ? RouterLink : 'div'"
-        v-for="tool in tools"
-        :key="tool.title"
-        :to="tool.available ? tool.href : undefined"
-        class="tool-card"
-        :class="[`tool-${tool.type}`, { 'is-planned': !tool.available }]"
-      >
-        <div class="tool-card-top">
-          <span class="tool-type">{{
-            tool.type === 'image'
-              ? 'IMG'
-              : tool.type === 'pdf'
-                ? 'PDF'
-                : tool.type === 'word'
-                  ? 'DOCX'
-                  : tool.type === 'ppt'
-                    ? 'PPTX'
-                    : 'SOON'
-          }}</span
-          ><span v-if="tool.available" class="tool-arrow" aria-hidden="true"
-            ><svg viewBox="0 0 24 24"><path d="M5 19 19 5M9 5h10v10" /></svg
-          ></span>
+
+    <section class="tool-directory" aria-labelledby="directory-title">
+      <div class="directory-toolbar">
+        <div>
+          <p class="section-kicker">{{ isZh ? '工具目录' : 'TOOL DIRECTORY' }}</p>
+          <h2 id="directory-title">{{ isZh ? '按类型查找工具' : 'Find a tool by category' }}</h2>
         </div>
-        <h2>{{ tool.title }}</h2>
-        <p>{{ tool.description }}</p>
-        <span v-if="!tool.available" class="planned-label">{{ isZh ? '规划中' : 'Planned' }}</span>
-      </component>
-    </div>
+        <label class="tool-search"
+          ><span class="visually-hidden">{{ isZh ? '搜索工具' : 'Search tools' }}</span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-4-4" /></svg
+          ><input v-model="query" type="search" :placeholder="isZh ? '搜索 PDF、ZIP、JSON…' : 'Search PDF, ZIP, JSON…'"
+        /></label>
+      </div>
+      <div class="category-filters" role="group" :aria-label="isZh ? '工具分类' : 'Tool categories'">
+        <button type="button" :class="{ active: activeCategory === 'all' }" @click="activeCategory = 'all'">
+          {{ isZh ? '全部' : 'All' }} <span>{{ tools.length }}</span>
+        </button>
+        <button
+          v-for="category in categoryOrder"
+          :key="category"
+          type="button"
+          :class="{ active: activeCategory === category }"
+          @click="activeCategory = category"
+        >
+          {{ categoryCopy[category].title[language] }}
+          <span>{{ tools.filter((tool) => tool.category === category).length }}</span>
+        </button>
+      </div>
+
+      <div v-if="groups.length" class="tool-groups">
+        <section
+          v-for="group in groups"
+          :key="group.category"
+          class="tool-group"
+          :aria-labelledby="`category-${group.category}`"
+        >
+          <header>
+            <div>
+              <h3 :id="`category-${group.category}`">{{ categoryCopy[group.category].title[language] }}</h3>
+              <p>{{ categoryCopy[group.category].description[language] }}</p>
+            </div>
+            <span>{{ group.tools.length }}</span>
+          </header>
+          <div class="tool-catalog">
+            <RouterLink
+              v-for="tool in group.tools"
+              :key="tool.id"
+              :to="tool.path"
+              class="tool-card"
+              :class="`tool-${tool.category}`"
+            >
+              <div class="tool-card-top">
+                <span class="tool-type">{{ tool.badge }}</span
+                ><span class="tool-arrow" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24"><path d="M5 19 19 5M9 5h10v10" /></svg
+                ></span>
+              </div>
+              <h4>{{ tool.title[language] }}</h4>
+              <p>{{ tool.description[language] }}</p>
+              <span class="tool-card-action">{{ tool.action[language] }}</span>
+            </RouterLink>
+          </div>
+        </section>
+      </div>
+      <div v-else class="empty-tool-search">
+        <strong>{{ isZh ? '没有找到匹配工具' : 'No matching tools' }}</strong>
+        <p>{{ isZh ? '尝试更换关键词或选择“全部”。' : 'Try another search term or select All.' }}</p>
+        <button type="button" @click="clearFilters">
+          {{ isZh ? '清除筛选' : 'Clear filters' }}
+        </button>
+      </div>
+    </section>
+
     <section id="why" class="trust-section toolbox-principles" aria-labelledby="toolbox-principles-title">
       <div class="section-heading">
         <p class="eyebrow">PIXELFORGE PRINCIPLES</p>

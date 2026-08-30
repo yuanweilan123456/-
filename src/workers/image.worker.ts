@@ -5,6 +5,9 @@ type Settings = {
   quality: number
   width?: number
   keepRatio: boolean
+  rotation: 0 | 90 | 180 | 270
+  flipHorizontal: boolean
+  flipVertical: boolean
 }
 
 type RequestMessage = { buffer: ArrayBuffer; name: string; inputMime: string; settings: Settings }
@@ -46,10 +49,14 @@ workerScope.onmessage = async ({ data }) => {
         ? source.height
         : Math.max(1, Math.round((source.height * targetWidth) / source.width))
     if (source.width * source.height > 40_000_000) throw new Error('too_many_pixels')
-    const canvas = new OffscreenCanvas(targetWidth, targetHeight)
+    const rotated = data.settings.rotation === 90 || data.settings.rotation === 270
+    const canvas = new OffscreenCanvas(rotated ? targetHeight : targetWidth, rotated ? targetWidth : targetHeight)
     const context = canvas.getContext('2d')
     if (!context) throw new Error('canvas_unavailable')
-    context.drawImage(source, 0, 0, targetWidth, targetHeight)
+    context.translate(canvas.width / 2, canvas.height / 2)
+    context.rotate((data.settings.rotation * Math.PI) / 180)
+    context.scale(data.settings.flipHorizontal ? -1 : 1, data.settings.flipVertical ? -1 : 1)
+    context.drawImage(source, -targetWidth / 2, -targetHeight / 2, targetWidth, targetHeight)
     source.close()
     workerScope.postMessage({ type: 'progress', value: 68 })
     const mimeType = getMime(data.settings.format, data.inputMime)
@@ -62,8 +69,8 @@ workerScope.onmessage = async ({ data }) => {
         result: {
           buffer,
           outputName: getName(data.name, mimeType),
-          width: targetWidth,
-          height: targetHeight,
+          width: canvas.width,
+          height: canvas.height,
           mimeType,
         },
       },

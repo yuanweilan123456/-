@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://file-tools.xyz/</loc></url>
-  <url><loc>https://file-tools.xyz/image-tools</loc></url>
-  <url><loc>https://file-tools.xyz/compress-image</loc></url>
-  <url><loc>https://file-tools.xyz/convert-image</loc></url>
-  <url><loc>https://file-tools.xyz/resize-image</loc></url>
-  <url><loc>https://file-tools.xyz/pdf/merge</loc></url>
-  <url><loc>https://file-tools.xyz/pdf/split</loc></url>
-  <url><loc>https://file-tools.xyz/pdf/images-to-pdf</loc></url>
-  <url><loc>https://file-tools.xyz/word/to-html</loc></url>
-  <url><loc>https://file-tools.xyz/ppt/images-to-pptx</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image/studio</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image/compress</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image/convert</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image/resize</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image/rotate</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image/flip</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf/merge</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf/split</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf/extract-pages</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf/remove-pages</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf/rotate-pages</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf/images-to-pdf</loc></url>
+  <url><loc>https://file-tools.xyz/tools/document/docx-to-html</loc></url>
+  <url><loc>https://file-tools.xyz/tools/document/docx-to-text</loc></url>
+  <url><loc>https://file-tools.xyz/tools/document/text-to-docx</loc></url>
+  <url><loc>https://file-tools.xyz/tools/presentation/images-to-pptx</loc></url>
+  <url><loc>https://file-tools.xyz/tools/presentation/text-to-pptx</loc></url>
+  <url><loc>https://file-tools.xyz/tools/archive/create-zip</loc></url>
+  <url><loc>https://file-tools.xyz/tools/archive/extract-zip</loc></url>
+  <url><loc>https://file-tools.xyz/tools/data/json-formatter</loc></url>
+  <url><loc>https://file-tools.xyz/tools/data/csv-to-json</loc></url>
+  <url><loc>https://file-tools.xyz/tools/data/json-to-csv</loc></url>
+  <url><loc>https://file-tools.xyz/tools/utility/checksum</loc></url>
+  <url><loc>https://file-tools.xyz/tools/utility/file-to-base64</loc></url>
+  <url><loc>https://file-tools.xyz/tools/utility/base64-to-file</loc></url>
   <url><loc>https://file-tools.xyz/guides</loc></url>
   <url><loc>https://file-tools.xyz/guides/compress-images-without-upload</loc></url>
   <url><loc>https://file-tools.xyz/guides/merge-pdf-files</loc></url>

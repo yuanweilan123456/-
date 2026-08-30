@@ -28,10 +28,10 @@
 10. 本地处理提示、隐私说明和浏览器兼容提示。
 11. 简体中文/英文切换，记忆用户选择。
 12. 浅色/深色模式切换，并支持跟随系统主题。
-13. 文件工具箱目录，提供图片、PDF、DOCX 和 PPTX 工具入口。
-14. PDF 合并、PDF 拆分、图片转 PDF。
-15. DOCX 转 HTML/文本。
-16. 图片生成 PPTX。
+13. 文件工具箱目录，提供 7 个分类、搜索和筛选。
+14. PDF 合并、拆分、提取/删除/旋转页面、图片转 PDF。
+15. DOCX 转 HTML/文本、文本生成 DOCX。
+16. 图片/文本生成 PPTX、ZIP、JSON/CSV、校验值和 Base64 工具。
 
 ### P1：首发后补充
 
@@ -40,12 +40,12 @@
 - 最近一次参数保存在本地浏览器。
 - 离线 PWA 缓存。
 - PDF 转图片预览。
-- Markdown/纯文本转 DOCX。
+- Markdown 转 DOCX。
 - PDF、Word、PPT 高保真双向转换（需要独立转换引擎）。
 
 ### P2：暂不排期
 
-- PDF 工具集合。
+- 需要服务端引擎的高保真格式互转。
 - 云端链接分享。
 - 用户账号和历史记录。
 - AI 背景移除或增强。
@@ -53,10 +53,14 @@
 ## 3. 页面范围
 
 - `/`：工具箱首页，展示所有可用工具和隐私原则。
-- `/image-tools`：核心图片处理工作区。
-- `/compress-image`：图片压缩 SEO 落地页。
-- `/convert-image`：格式转换 SEO 落地页。
-- `/resize-image`：尺寸调整 SEO 落地页。
+- `/tools/image/studio`：核心图片处理工作区。
+- `/tools/image/*`：图片工具落地页。
+- `/tools/pdf/*`：PDF 工具。
+- `/tools/document/*`：文档工具。
+- `/tools/presentation/*`：演示文稿工具。
+- `/tools/archive/*`：压缩包工具。
+- `/tools/data/*`：数据工具。
+- `/tools/utility/*`：文件实用工具。
 - `/about`：产品说明、隐私承诺和联系方式。
 - `/privacy`：隐私政策。
 - `/terms`：使用条款。

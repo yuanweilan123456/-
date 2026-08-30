@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
 
-const props = defineProps<{ type: 'compress' | 'convert' | 'resize' }>()
+const props = defineProps<{ type: 'compress' | 'convert' | 'resize' | 'rotate' | 'flip' }>()
 const { locale } = useI18n()
 
 const content = computed(() => {
@@ -23,6 +23,16 @@ const content = computed(() => {
       description: '输入目标宽度，按比例调整图片尺寸，适合上传网站、表单和社交平台。',
       keyword: '图片尺寸调整',
     },
+    rotate: {
+      title: '在线旋转图片',
+      description: '将 JPG、PNG 和 WebP 图片旋转 90、180 或 270 度，文件无需上传。',
+      keyword: '图片旋转',
+    },
+    flip: {
+      title: '在线翻转图片',
+      description: '在浏览器本地水平或垂直翻转图片，快速生成新文件。',
+      keyword: '图片翻转',
+    },
   }
   const en = {
     compress: {
@@ -40,6 +50,16 @@ const content = computed(() => {
       description: 'Set a target width and resize images proportionally for websites, forms, and social platforms.',
       keyword: 'Image resizing',
     },
+    rotate: {
+      title: 'Rotate images online',
+      description: 'Rotate JPG, PNG, and WebP images by 90, 180, or 270 degrees without uploading them.',
+      keyword: 'Image rotation',
+    },
+    flip: {
+      title: 'Flip images online',
+      description: 'Flip images horizontally or vertically, processed locally in your browser.',
+      keyword: 'Image flipping',
+    },
   }
   return (locale.value === 'zh' ? zh : en)[props.type]
 })
@@ -52,7 +72,7 @@ const isZh = computed(() => locale.value === 'zh')
     <p class="eyebrow"><span class="eyebrow-dot"></span>{{ content.keyword }}</p>
     <h1>{{ content.title }}</h1>
     <p class="landing-description">{{ content.description }}</p>
-    <RouterLink class="primary-button landing-cta" to="/image-tools"
+    <RouterLink class="primary-button landing-cta" to="/tools/image/studio"
       >{{ isZh ? '开始使用工具' : 'Open the tool' }}
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg
     ></RouterLink>

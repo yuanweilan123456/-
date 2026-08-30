@@ -5,7 +5,7 @@
 - 前端：Vue 3、TypeScript、Vite。
 - 样式：普通 CSS 或轻量 CSS Modules，使用语义化设计令牌。
 - 路由：Vue Router；若后续选择纯静态多页面，可保留清晰的页面入口。
-- 国际化：轻量 i18n 方案，语言包按页面拆分，默认根据浏览器语言初始化但允许用户手动切换。
+- 国际化：Vue I18n，默认英文并允许用户切换中文，记忆用户选择。
 - 主题：CSS 语义令牌 + `prefers-color-scheme`，用户手动选择优先于系统设置。
 - 图片处理：浏览器 Canvas、Blob、Web Worker；批量压缩包使用成熟且体积可控的 ZIP 库。
 - 测试：Vitest、Vue Test Utils、Playwright。
@@ -16,15 +16,17 @@
 
 ```text
 src/
-├── app/              应用初始化、路由、全局样式
-├── components/       上传区、参数面板、结果列表、广告容器
-├── features/image/   图片校验、解码、处理、任务状态
-├── workers/          非阻塞图片处理 Worker
-├── features/file-tools/ PDF、DOCX、PPTX 本地工具适配器
-├── pages/             首页、工具页、内容页、政策页
-├── services/          下载、ZIP、统计和能力检测适配器
-├── content/           SEO 文案、FAQ 和页面元数据
-└── shared/            类型、常量、错误模型、工具函数
+├── features/tools/          统一工具目录、类型和结果模型
+├── features/image/          图片处理
+├── features/pdf/            PDF 页面工具
+├── features/documents/      DOCX/文本工具
+├── features/presentations/  PPTX 生成工具
+├── features/archives/       ZIP 工具
+├── features/data/           JSON/CSV 工具
+├── features/utilities/      校验值和 Base64 工具
+├── workers/                 非阻塞图片处理 Worker
+├── views/                   首页、工具页、内容页和政策页
+└── router/                  分类化 URL 与旧地址兼容跳转
 ```
 
 ## 3. 数据流
