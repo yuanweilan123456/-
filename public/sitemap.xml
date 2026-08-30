@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://file-tools.xyz/</loc></url>
+  <url><loc>https://file-tools.xyz/tools/image</loc></url>
+  <url><loc>https://file-tools.xyz/tools/pdf</loc></url>
+  <url><loc>https://file-tools.xyz/tools/document</loc></url>
+  <url><loc>https://file-tools.xyz/tools/presentation</loc></url>
+  <url><loc>https://file-tools.xyz/tools/archive</loc></url>
+  <url><loc>https://file-tools.xyz/tools/data</loc></url>
+  <url><loc>https://file-tools.xyz/tools/utility</loc></url>
   <url><loc>https://file-tools.xyz/tools/image/studio</loc></url>
   <url><loc>https://file-tools.xyz/tools/image/compress</loc></url>
   <url><loc>https://file-tools.xyz/tools/image/convert</loc></url>

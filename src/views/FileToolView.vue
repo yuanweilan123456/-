@@ -15,7 +15,8 @@ import {
   splitPdf,
 } from '../features/pdf/pdf-tools'
 import { imagesToPptx, textToPptx } from '../features/presentations/presentation-tools'
-import { getTool } from '../features/tools/catalog'
+import { categoryCopy, getTool, tools } from '../features/tools/catalog'
+import { getToolPageContent } from '../features/tools/content'
 import { resultToBlob } from '../features/tools/result'
 import type { FileToolId, ToolResult } from '../features/tools/types'
 import { base64ToFile, calculateChecksum, fileToBase64, type HashAlgorithm } from '../features/utilities/file-utilities'
@@ -44,6 +45,11 @@ const language = computed(() => (isZh.value ? 'zh' : 'en'))
 const title = computed(() => tool.value.title[language.value])
 const description = computed(() => tool.value.description[language.value])
 const action = computed(() => tool.value.action[language.value])
+const pageContent = computed(() => getToolPageContent(tool.value, language.value))
+const categoryTitle = computed(() => categoryCopy[tool.value.category].title[language.value])
+const relatedTools = computed(() =>
+  tools.filter((item) => item.category === tool.value.category && item.id !== tool.value.id).slice(0, 3),
+)
 const needsPages = computed(() => ['pdf-extract-pages', 'pdf-remove-pages', 'pdf-rotate-pages'].includes(props.type))
 const acceptsText = computed(() => tool.value.input === 'text' || tool.value.input === 'base64')
 const canRun = computed(() => (acceptsText.value ? Boolean(textInput.value.trim()) : files.value.length > 0))
@@ -231,12 +237,17 @@ async function run() {
 
 <template>
   <div class="page-wrap file-tool-page">
-    <RouterLink class="back-link" to="/"
-      ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg
-      >{{ isZh ? '返回全部工具' : 'Back to all tools' }}</RouterLink
-    >
+    <nav class="breadcrumbs" :aria-label="isZh ? '面包屑导航' : 'Breadcrumb'">
+      <RouterLink to="/">{{ isZh ? '全部工具' : 'All tools' }}</RouterLink>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <RouterLink :to="`/tools/${tool.category}`">{{ categoryTitle }}</RouterLink>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <span aria-current="page">{{ title }}</span>
+    </nav>
     <header class="file-tool-heading">
-      <p class="eyebrow"><span class="eyebrow-dot"></span>{{ tool.badge }} · {{ tool.category.toUpperCase() }}</p>
+      <p class="eyebrow">
+        <span class="eyebrow-dot"></span>{{ tool.badge }} · {{ isZh ? '本地工具' : 'BROWSER-LOCAL TOOL' }}
+      </p>
       <h1 id="file-tool-title">{{ title }}</h1>
       <p>{{ description }}</p>
       <span class="local-processing-note">{{
@@ -423,5 +434,42 @@ async function run() {
         }}
       </p>
     </aside>
+
+    <section class="tool-explainer" :aria-labelledby="`${tool.id}-steps-title`">
+      <div class="section-heading compact-heading">
+        <p class="section-kicker">{{ isZh ? '使用方法' : 'HOW IT WORKS' }}</p>
+        <h2 :id="`${tool.id}-steps-title`">
+          {{ isZh ? `三步完成${title}` : `${title} in three steps` }}
+        </h2>
+      </div>
+      <ol class="tool-step-grid">
+        <li v-for="(step, index) in pageContent.steps" :key="step">
+          <span aria-hidden="true">0{{ index + 1 }}</span>
+          <p>{{ step }}</p>
+        </li>
+      </ol>
+      <div class="tool-why-copy">
+        <h2>{{ pageContent.whyTitle }}</h2>
+        <p>{{ pageContent.whyText }}</p>
+        <RouterLink :to="`/tools/${tool.category}`">
+          {{ isZh ? `查看全部${categoryTitle}` : `Explore all ${categoryTitle.toLowerCase()}` }}
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+        </RouterLink>
+      </div>
+    </section>
+
+    <section v-if="relatedTools.length" class="related-tools" aria-labelledby="related-tools-title">
+      <div class="section-heading compact-heading">
+        <p class="section-kicker">{{ isZh ? '继续处理' : 'KEEP WORKING' }}</p>
+        <h2 id="related-tools-title">{{ isZh ? '相关工具' : 'Related tools' }}</h2>
+      </div>
+      <div class="related-tool-grid">
+        <RouterLink v-for="related in relatedTools" :key="related.id" :to="related.path">
+          <span>{{ related.badge }}</span>
+          <strong>{{ related.title[language] }}</strong>
+          <p>{{ related.description[language] }}</p>
+        </RouterLink>
+      </div>
+    </section>
   </div>
 </template>

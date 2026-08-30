@@ -16,10 +16,13 @@ const content = computed(() => {
 
 <template>
   <div v-if="guide && content" class="page-wrap guide-page">
-    <RouterLink class="back-link" to="/guides">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
-      {{ isZh ? '返回使用指南' : 'Back to guides' }}
-    </RouterLink>
+    <nav class="breadcrumbs" :aria-label="isZh ? '面包屑导航' : 'Breadcrumb'">
+      <RouterLink to="/">{{ isZh ? '全部工具' : 'All tools' }}</RouterLink>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <RouterLink to="/guides">{{ isZh ? '使用指南' : 'Guides' }}</RouterLink>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <span aria-current="page">{{ content.title }}</span>
+    </nav>
     <article>
       <p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'PIXELFORGE 使用指南' : 'PIXELFORGE GUIDE' }}</p>
       <h1>{{ content.title }}</h1>

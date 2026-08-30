@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
+import { categoryCopy, tools } from '../features/tools/catalog'
 
 const props = defineProps<{ type: 'compress' | 'convert' | 'resize' | 'rotate' | 'flip' }>()
 const { locale } = useI18n()
@@ -65,10 +66,22 @@ const content = computed(() => {
 })
 
 const isZh = computed(() => locale.value === 'zh')
+const language = computed<'en' | 'zh'>(() => (isZh.value ? 'zh' : 'en'))
+const currentTool = computed(() => tools.find((tool) => tool.id === `image-${props.type}`)!)
+const relatedTools = computed(() =>
+  tools.filter((tool) => tool.category === 'image' && tool.id !== currentTool.value.id).slice(0, 3),
+)
 </script>
 
 <template>
   <div class="page-wrap landing-page">
+    <nav class="breadcrumbs" :aria-label="isZh ? '面包屑导航' : 'Breadcrumb'">
+      <RouterLink to="/">{{ isZh ? '全部工具' : 'All tools' }}</RouterLink>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <RouterLink to="/tools/image">{{ categoryCopy.image.title[language] }}</RouterLink>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <span aria-current="page">{{ content.title }}</span>
+    </nav>
     <p class="eyebrow"><span class="eyebrow-dot"></span>{{ content.keyword }}</p>
     <h1>{{ content.title }}</h1>
     <p class="landing-description">{{ content.description }}</p>
@@ -128,6 +141,20 @@ const isZh = computed(() => locale.value === 'zh')
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
       </RouterLink>
     </aside>
+
+    <section class="related-tools" aria-labelledby="related-image-tools-title">
+      <div class="section-heading compact-heading">
+        <p class="section-kicker">{{ isZh ? '继续处理' : 'KEEP WORKING' }}</p>
+        <h2 id="related-image-tools-title">{{ isZh ? '相关图片工具' : 'Related image tools' }}</h2>
+      </div>
+      <div class="related-tool-grid">
+        <RouterLink v-for="tool in relatedTools" :key="tool.id" :to="tool.path">
+          <span>{{ tool.badge }}</span>
+          <strong>{{ tool.title[language] }}</strong>
+          <p>{{ tool.description[language] }}</p>
+        </RouterLink>
+      </div>
+    </section>
 
     <div class="ad-slot landing-ad" aria-label="Advertisement placeholder">
       <span>{{ isZh ? '广告位预留 · 上线后启用' : 'Ad space reserved · Enabled after launch' }}</span>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import { fileTools } from '../features/tools/catalog'
+import { categoryOrder, fileTools } from '../features/tools/catalog'
 
 const imageRoutes: RouteRecordRaw[] = [
   {
@@ -41,6 +41,14 @@ const fileToolRoutes: RouteRecordRaw[] = fileTools.map((tool) => ({
   props: { type: tool.id },
 }))
 
+const categoryRoutes: RouteRecordRaw[] = categoryOrder.map((category) => ({
+  path: `/tools/${category}`,
+  name: `category-${category}`,
+  component: () => import('../views/CategoryView.vue'),
+  props: { category },
+  meta: { category },
+}))
+
 const legacyRedirects: RouteRecordRaw[] = [
   { path: '/toolbox', redirect: '/' },
   { path: '/image-tools', redirect: '/tools/image/studio' },
@@ -61,6 +69,7 @@ const router = createRouter({
     { path: '/tools/image/studio', name: 'image-studio', component: () => import('../views/HomeView.vue') },
     ...imageRoutes,
     ...fileToolRoutes,
+    ...categoryRoutes,
     ...legacyRedirects,
     { path: '/faq', name: 'faq', component: () => import('../views/FaqView.vue') },
     { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
