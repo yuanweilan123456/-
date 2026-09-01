@@ -2,7 +2,8 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
-import { getGuide } from '../guide-content'
+import { categoryCopy } from '../features/tools/catalog'
+import { getGuide, guides } from '../guide-content'
 
 const props = defineProps<{ slug: string }>()
 const { locale } = useI18n()
@@ -11,6 +12,11 @@ const isZh = computed(() => locale.value === 'zh')
 const content = computed(() => {
   const current = guide.value
   return current ? (isZh.value ? current.zh : current.en) : null
+})
+const relatedGuides = computed(() => {
+  const current = guide.value
+  if (!current) return []
+  return guides.filter((item) => item.category === current.category && item.slug !== current.slug).slice(0, 3)
 })
 </script>
 
@@ -45,6 +51,25 @@ const content = computed(() => {
       <section v-for="section in content.sections" :key="section.heading" class="guide-section">
         <h2>{{ section.heading }}</h2>
         <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
+      </section>
+
+      <section v-if="relatedGuides.length" class="guide-related-section" aria-labelledby="related-guides-title">
+        <header>
+          <div>
+            <p class="section-kicker">{{ isZh ? '继续学习' : 'KEEP LEARNING' }}</p>
+            <h2 id="related-guides-title">{{ isZh ? '相关使用指南' : 'Related guides' }}</h2>
+          </div>
+          <RouterLink :to="`/tools/${guide.category}`">
+            {{ categoryCopy[guide.category].title[isZh ? 'zh' : 'en'] }}
+          </RouterLink>
+        </header>
+        <div class="guide-related-grid">
+          <RouterLink v-for="item in relatedGuides" :key="item.slug" :to="`/guides/${item.slug}`">
+            <span>{{ item.readingTime }}</span>
+            <strong>{{ isZh ? item.zh.title : item.en.title }}</strong>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+          </RouterLink>
+        </div>
       </section>
     </article>
   </div>

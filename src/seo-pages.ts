@@ -35,15 +35,15 @@ const staticPages: LocalizedStaticPage[] = [
       title: 'Free File Tools – PDF, Images, DOCX & More – PixelForge',
       description:
         'Use 24 free online tools for images, PDF, Word, PowerPoint, ZIP, JSON, and CSV. Process files locally with no uploads or sign-up.',
-      heading: 'Free online file tools that keep your files private',
-      lead: 'Work with images, PDFs, Word, PowerPoint, ZIP, JSON, and CSV without uploading files or creating an account.',
+      heading: 'Free online file tools, private by design.',
+      lead: 'Convert, compress, and organize PDFs, images, Word, PowerPoint, ZIP, and data files right in your browser. No uploads. No account.',
     },
     zh: {
       title: '免费在线文件工具｜PDF、图片、Word 与更多｜PixelForge',
       description:
         '24 个免费在线文件工具，支持图片、PDF、Word、PPT、ZIP、JSON 和 CSV。浏览器本地处理，无需上传或注册。',
-      heading: '免费的在线文件工具，文件始终留在你的设备上',
-      lead: '无需上传或注册，即可处理图片、PDF、Word、PPT、ZIP、JSON 和 CSV。',
+      heading: '免费的在线文件工具，私密完成每个任务。',
+      lead: '直接在浏览器中处理 PDF、图片、Word、PPT、ZIP 和数据文件。无需上传，无需注册。',
     },
   },
   {
@@ -242,7 +242,13 @@ export function getSeoPage(path: string, language: SeoLanguage = 'en'): SeoPageD
         { name: language === 'zh' ? '使用指南' : 'Guides', path: '/guides' },
         { name: content.title, path: pathname },
       ],
-      links: [{ name: content.toolLabel, path: guide.toolPath }],
+      links: [
+        { name: content.toolLabel, path: guide.toolPath },
+        ...guides
+          .filter((item) => item.category === guide.category && item.slug !== guide.slug)
+          .slice(0, 3)
+          .map((item) => ({ name: item[language].title, path: `/guides/${item.slug}` })),
+      ],
       sections: [
         { heading: language === 'zh' ? '操作步骤' : 'Steps', items: content.steps },
         ...content.sections.map((section) => ({ heading: section.heading, paragraphs: section.paragraphs })),

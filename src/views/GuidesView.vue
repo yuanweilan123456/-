@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
+import { categoryCopy, categoryOrder } from '../features/tools/catalog'
+import type { ToolCategory } from '../features/tools/types'
 import { guides } from '../guide-content'
 
 const { locale, t } = useI18n()
 const isZh = computed(() => locale.value === 'zh')
+const language = computed(() => (isZh.value ? 'zh' : 'en'))
+const activeCategory = ref<ToolCategory | 'all'>('all')
+const guideCategories = categoryOrder.filter((category) => guides.some((guide) => guide.category === category))
+const visibleGuides = computed(() =>
+  activeCategory.value === 'all' ? guides : guides.filter((guide) => guide.category === activeCategory.value),
+)
 </script>
 
 <template>
@@ -20,21 +28,46 @@ const isZh = computed(() => locale.value === 'zh')
       }}
     </p>
 
-    <section class="guide-grid" aria-labelledby="guide-list-title">
-      <h2 id="guide-list-title" class="visually-hidden">{{ t('guides.listTitle') }}</h2>
-      <article v-for="guide in guides" :key="guide.slug" class="guide-card">
-        <div class="guide-card-meta">
-          <span>{{ guide.readingTime }}</span>
-          <span aria-hidden="true">·</span>
-          <span>{{ isZh ? '实用指南' : 'Practical guide' }}</span>
+    <section class="guide-library" aria-labelledby="guide-list-title">
+      <header class="guide-library-header">
+        <div>
+          <p class="section-kicker">{{ isZh ? '按任务浏览' : 'BROWSE BY TASK' }}</p>
+          <h2 id="guide-list-title">{{ t('guides.listTitle') }}</h2>
         </div>
-        <h2>{{ isZh ? guide.zh.title : guide.en.title }}</h2>
-        <p>{{ isZh ? guide.zh.description : guide.en.description }}</p>
-        <RouterLink class="secondary-button" :to="`/guides/${guide.slug}`">
-          {{ isZh ? '阅读指南' : 'Read guide' }}
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
-        </RouterLink>
-      </article>
+        <p>{{ isZh ? `共 ${guides.length} 篇指南` : `${guides.length} practical guides` }}</p>
+      </header>
+
+      <div class="guide-filters" role="group" :aria-label="isZh ? '指南分类' : 'Guide categories'">
+        <button type="button" :class="{ active: activeCategory === 'all' }" @click="activeCategory = 'all'">
+          {{ isZh ? '全部' : 'All' }} <span>{{ guides.length }}</span>
+        </button>
+        <button
+          v-for="category in guideCategories"
+          :key="category"
+          type="button"
+          :class="[`tool-${category}`, { active: activeCategory === category }]"
+          @click="activeCategory = category"
+        >
+          {{ categoryCopy[category].title[language] }}
+          <span>{{ guides.filter((guide) => guide.category === category).length }}</span>
+        </button>
+      </div>
+
+      <div class="guide-grid" aria-live="polite">
+        <article v-for="guide in visibleGuides" :key="guide.slug" class="guide-card" :class="`tool-${guide.category}`">
+          <div class="guide-card-meta">
+            <span class="guide-category-label">{{ categoryCopy[guide.category].title[language] }}</span>
+            <span aria-hidden="true">·</span>
+            <span>{{ guide.readingTime }}</span>
+          </div>
+          <h2>{{ isZh ? guide.zh.title : guide.en.title }}</h2>
+          <p>{{ isZh ? guide.zh.description : guide.en.description }}</p>
+          <RouterLink class="secondary-button" :to="`/guides/${guide.slug}`">
+            {{ isZh ? '阅读指南' : 'Read guide' }}
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+          </RouterLink>
+        </article>
+      </div>
     </section>
   </div>
 </template>

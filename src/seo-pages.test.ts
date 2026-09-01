@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { getSeoPage, PRERENDER_PATHS } from './seo-pages'
 
 describe('SEO page manifest', () => {
-  it('contains 43 unique canonical routes with resolvable English content', () => {
-    expect(PRERENDER_PATHS).toHaveLength(43)
+  it('contains 47 unique canonical routes with resolvable English content', () => {
+    expect(PRERENDER_PATHS).toHaveLength(47)
     expect(new Set(PRERENDER_PATHS).size).toBe(PRERENDER_PATHS.length)
 
     for (const routePath of PRERENDER_PATHS) {
@@ -38,5 +38,18 @@ describe('SEO page manifest', () => {
 
   it('does not resolve unknown paths as canonical pages', () => {
     expect(getSeoPage('/not-a-real-page', 'en')).toBeUndefined()
+  })
+
+  it('publishes long-tail guides as articles with related internal links', () => {
+    const guide = getSeoPage('/guides/split-pdf-into-separate-pages', 'en')
+
+    expect(guide?.pageType).toBe('article')
+    expect(guide?.title).toContain('split one PDF')
+    expect(guide?.links).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ path: '/tools/pdf/split' }),
+        expect.objectContaining({ path: '/guides/merge-pdf-files' }),
+      ]),
+    )
   })
 })

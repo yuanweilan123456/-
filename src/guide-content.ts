@@ -1,3 +1,5 @@
+import type { ToolCategory } from './features/tools/types'
+
 export type GuideLocaleContent = {
   title: string
   description: string
@@ -9,6 +11,7 @@ export type GuideLocaleContent = {
 
 export type Guide = {
   slug: string
+  category: ToolCategory
   toolPath: string
   readingTime: string
   zh: GuideLocaleContent
@@ -18,6 +21,7 @@ export type Guide = {
 export const guides: Guide[] = [
   {
     slug: 'compress-images-without-upload',
+    category: 'image',
     toolPath: '/tools/image/compress',
     readingTime: '3 min',
     zh: {
@@ -75,6 +79,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'merge-pdf-files',
+    category: 'pdf',
     toolPath: '/tools/pdf/merge',
     readingTime: '3 min',
     zh: {
@@ -136,6 +141,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'convert-images-to-pdf',
+    category: 'pdf',
     toolPath: '/tools/pdf/images-to-pdf',
     readingTime: '3 min',
     zh: {
@@ -193,6 +199,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'word-to-html-basics',
+    category: 'document',
     toolPath: '/tools/document/docx-to-html',
     readingTime: '3 min',
     zh: {
@@ -254,6 +261,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'make-a-presentation-from-images',
+    category: 'presentation',
     toolPath: '/tools/presentation/images-to-pptx',
     readingTime: '3 min',
     zh: {
@@ -309,6 +317,258 @@ export const guides: Guide[] = [
           paragraphs: [
             'Use a consistent image ratio and orientation when possible, and rename files with 01, 02, and 03 prefixes before selecting them. Images with different ratios may show whitespace to avoid cropping content.',
             'Check the first, last, and a few differently sized images after generation to confirm the deck opens correctly in your presentation software.',
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: 'split-pdf-into-separate-pages',
+    category: 'pdf',
+    toolPath: '/tools/pdf/split',
+    readingTime: '3 min',
+    zh: {
+      title: '如何把一个 PDF 拆分成多个单页文件？',
+      description: '在浏览器中把 PDF 每一页拆成独立文件，适合提取表单、扫描件和指定页面。',
+      toolLabel: '立即拆分 PDF',
+      intro:
+        '当一份 PDF 包含多张表单、收据或扫描页时，逐页拆分能让提交和归档更简单。PixelForge 直接在浏览器中读取并生成单页 PDF，不需要上传原文件。',
+      steps: [
+        '打开 PDF 拆分工具并选择文件。',
+        '等待浏览器读取页面数量。',
+        '开始拆分，下载包含所有单页 PDF 的 ZIP 文件。',
+      ],
+      sections: [
+        {
+          heading: '拆分 PDF 和提取页面有什么区别？',
+          paragraphs: [
+            '拆分会为原文件的每一页创建独立 PDF，适合整份文件逐页归档。提取页面则只选择需要的页码，并把它们保存到一个新的 PDF 中。',
+            '如果只需要合同中的一页或几页，使用“提取页面”通常更方便；如果每页都需要独立提交，则使用拆分工具。',
+          ],
+        },
+        {
+          heading: '拆分前应注意什么？',
+          paragraphs: [
+            '先确认 PDF 没有密码保护并且可以正常打开。扫描文件页数很多时会占用更多内存，关闭不需要的浏览器标签可以提高稳定性。',
+            '生成结果会打包成 ZIP，下载后应检查页码和内容，再根据用途重命名文件。',
+          ],
+        },
+      ],
+    },
+    en: {
+      title: 'How to split one PDF into separate page files',
+      description:
+        'Split every PDF page into a separate file in your browser for forms, scans, and page-by-page filing.',
+      toolLabel: 'Split a PDF now',
+      intro:
+        'When a PDF contains several forms, receipts, or scanned pages, separating every page makes submission and filing easier. PixelForge reads the document and creates single-page PDFs in your browser without uploading the source file.',
+      steps: [
+        'Open the PDF splitter and choose your file.',
+        'Wait for the browser to read the page count.',
+        'Start splitting and download the ZIP containing every page PDF.',
+      ],
+      sections: [
+        {
+          heading: 'Splitting versus extracting pages',
+          paragraphs: [
+            'Splitting creates one PDF for every page in the source document, which is useful for page-by-page filing. Extracting pages lets you choose only certain page numbers and saves them together in one new PDF.',
+            'Use page extraction when you need a few contract pages. Use splitting when every page needs to be submitted or stored independently.',
+          ],
+        },
+        {
+          heading: 'What to check before splitting',
+          paragraphs: [
+            'Make sure the PDF is not password protected and opens normally. Long scanned files use more memory, so closing unused browser tabs can improve stability.',
+            'The result is packaged as a ZIP file. Check page order and content after downloading, then rename individual files for their final purpose.',
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: 'convert-csv-to-json',
+    category: 'data',
+    toolPath: '/tools/data/csv-to-json',
+    readingTime: '4 min',
+    zh: {
+      title: '如何把 CSV 转换成 JSON？',
+      description: '了解 CSV 表头、分隔符和数据类型如何影响 JSON 转换结果，并在浏览器本地完成转换。',
+      toolLabel: 'CSV 转 JSON',
+      intro:
+        'CSV 常用于电子表格和数据导出，JSON 更适合接口、脚本和网页应用。转换前整理表头与分隔符，可以减少字段错位和空值问题。',
+      steps: [
+        '打开 CSV 转 JSON 工具并粘贴或导入 CSV 内容。',
+        '确认第一行是字段名称，并检查分隔符。',
+        '转换后预览 JSON，再复制或下载结果。',
+      ],
+      sections: [
+        {
+          heading: '怎样准备 CSV 文件？',
+          paragraphs: [
+            '第一行应包含唯一且清晰的字段名，例如 name、email 和 created_at。字段内如果包含逗号，应使用双引号包裹，避免被识别成额外列。',
+            '不同系统可能使用逗号、分号或制表符作为分隔符。转换结果列数异常时，应先确认原文件使用的分隔方式。',
+          ],
+        },
+        {
+          heading: '为什么数字可能变成字符串？',
+          paragraphs: [
+            'CSV 本身不保存严格的数据类型，许多转换器会把所有单元格作为文本处理，以避免丢失前导零、长编号或日期格式。',
+            '如果 JSON 将用于程序接口，应在代码中根据字段规则转换数字、布尔值和日期，并验证空值的处理方式。',
+          ],
+        },
+      ],
+    },
+    en: {
+      title: 'How to convert CSV data to JSON',
+      description:
+        'Understand how headers, delimiters, and data types affect CSV-to-JSON conversion and convert locally.',
+      toolLabel: 'Convert CSV to JSON',
+      intro:
+        'CSV is common for spreadsheets and exports, while JSON fits APIs, scripts, and web applications. Cleaning up headers and delimiters before conversion prevents shifted fields and confusing empty values.',
+      steps: [
+        'Open the CSV to JSON tool and paste or import CSV content.',
+        'Confirm that the first row contains field names and check the delimiter.',
+        'Preview the JSON result, then copy or download it.',
+      ],
+      sections: [
+        {
+          heading: 'How to prepare CSV data',
+          paragraphs: [
+            'The first row should contain clear, unique names such as name, email, and created_at. Values containing commas should be wrapped in double quotes so they are not interpreted as extra columns.',
+            'CSV exports may use commas, semicolons, or tabs as delimiters. If the converted rows have the wrong number of fields, inspect the original delimiter first.',
+          ],
+        },
+        {
+          heading: 'Why numbers may become strings',
+          paragraphs: [
+            'CSV does not preserve strict data types. Many converters keep cell values as text to avoid losing leading zeros, long identifiers, or exact date formatting.',
+            'When the JSON feeds an API, convert numbers, booleans, and dates according to your schema and verify how empty values should be represented.',
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: 'create-a-zip-file-in-browser',
+    category: 'archive',
+    toolPath: '/tools/archive/create-zip',
+    readingTime: '3 min',
+    zh: {
+      title: '如何在线创建 ZIP 压缩包？',
+      description: '把多个文件在浏览器中打包成 ZIP，了解适用场景、压缩效果和文件命名建议。',
+      toolLabel: '创建 ZIP 文件',
+      intro:
+        'ZIP 可以把多个文件整理成一个下载或发送包。PixelForge 在浏览器本地完成打包，适合整理附件、作业、图片和小型项目文件。',
+      steps: [
+        '打开 ZIP 创建工具并选择多个文件。',
+        '检查文件名和数量，避免加入不需要的内容。',
+        '创建并下载 ZIP，然后打开一次确认文件完整。',
+      ],
+      sections: [
+        {
+          heading: 'ZIP 一定会让文件变小吗？',
+          paragraphs: [
+            '文本、CSV 和未压缩数据通常能明显缩小；JPG、MP4、PDF 和其他已经压缩的格式可能变化不大。ZIP 的主要价值也包括把多个文件合并成一个包。',
+            '如果目标是缩小图片，先使用图片压缩工具，再把处理后的文件加入 ZIP，通常效果更好。',
+          ],
+        },
+        {
+          heading: '怎样让压缩包更容易使用？',
+          paragraphs: [
+            '使用简短、可读的文件名，避免同名文件，并在文件名中保留扩展名。发送前可以给 ZIP 使用项目名和日期命名。',
+            '本地工具不会把文件上传到 PixelForge，但下载后的 ZIP 仍需要你自行保管和安全传输。',
+          ],
+        },
+      ],
+    },
+    en: {
+      title: 'How to create a ZIP file online in your browser',
+      description:
+        'Package multiple files into a ZIP locally and learn when compression helps and how to name the archive.',
+      toolLabel: 'Create a ZIP file',
+      intro:
+        'ZIP files organize several items into one package for downloading or sharing. PixelForge builds the archive locally in your browser, which works well for attachments, assignments, images, and small project files.',
+      steps: [
+        'Open the ZIP creator and choose multiple files.',
+        'Check filenames and the file count before processing.',
+        'Create and download the ZIP, then open it once to confirm every file is present.',
+      ],
+      sections: [
+        {
+          heading: 'Will ZIP always make files smaller?',
+          paragraphs: [
+            'Text, CSV, and uncompressed data often shrink noticeably. JPG, MP4, PDF, and other already compressed formats may change very little. ZIP is still useful because it combines many files into one package.',
+            'When image size is the main concern, compress the images first and then add the processed versions to the ZIP.',
+          ],
+        },
+        {
+          heading: 'How to make an archive easy to use',
+          paragraphs: [
+            'Use short readable filenames, avoid duplicates, and keep file extensions. Name the final ZIP with a project name and date when it will be shared with others.',
+            'The local tool does not upload files to PixelForge, but you are still responsible for storing and sending the downloaded archive securely.',
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: 'convert-text-to-word-docx',
+    category: 'document',
+    toolPath: '/tools/document/text-to-docx',
+    readingTime: '3 min',
+    zh: {
+      title: '如何把纯文本转换成 Word DOCX 文件？',
+      description: '将笔记、草稿或复制的文本快速保存为可编辑 DOCX，并了解转换后的排版范围。',
+      toolLabel: '文本转 DOCX',
+      intro:
+        '当你只有一段纯文本，却需要提交或继续编辑 Word 文档时，可以直接生成 DOCX。它适合草稿、会议记录和简单说明，不需要先打开桌面版 Word。',
+      steps: [
+        '打开文本转 DOCX 工具并粘贴内容。',
+        '检查段落和空行是否正确。',
+        '生成 DOCX，下载后在 Word 或兼容软件中继续编辑。',
+      ],
+      sections: [
+        {
+          heading: '哪些格式可以保留？',
+          paragraphs: [
+            '纯文本主要保留字符、换行和段落，不包含原本不存在的字体、颜色、表格或图片。生成的 DOCX 提供一个干净的可编辑起点。',
+            '如果内容包含 Markdown 标记，它通常会作为普通字符写入文档。需要正式排版时，应在 Word 中继续设置标题、列表和页边距。',
+          ],
+        },
+        {
+          heading: '适合哪些用途？',
+          paragraphs: [
+            '它适合把聊天记录、代码之外的说明、会议笔记或网页复制文本快速转换成 Word 文件。对于复杂报告，建议先整理段落结构再生成。',
+            '下载后应检查特殊字符和换行，并根据接收方要求设置文件名和文档属性。',
+          ],
+        },
+      ],
+    },
+    en: {
+      title: 'How to convert plain text into a Word DOCX file',
+      description:
+        'Save notes, drafts, or copied text as an editable DOCX and understand which formatting is included.',
+      toolLabel: 'Convert text to DOCX',
+      intro:
+        'When you have plain text but need an editable Word document, you can generate a DOCX directly. This is useful for drafts, meeting notes, and simple instructions without opening desktop Word first.',
+      steps: [
+        'Open the text to DOCX tool and paste your content.',
+        'Check paragraphs and blank lines.',
+        'Create the DOCX, download it, and continue editing in Word or a compatible app.',
+      ],
+      sections: [
+        {
+          heading: 'Which formatting is preserved?',
+          paragraphs: [
+            'Plain text mainly contains characters, line breaks, and paragraphs. It does not include fonts, colors, tables, or images that were never part of the source. The generated DOCX is a clean editable starting point.',
+            'Markdown marks are normally written as ordinary characters. For a formal document, continue in Word to add headings, lists, and page layout.',
+          ],
+        },
+        {
+          heading: 'When is this useful?',
+          paragraphs: [
+            'It is useful for turning meeting notes, simple instructions, chat exports, or copied web text into a Word file. For longer reports, organize paragraph breaks before generating the document.',
+            'After downloading, check special characters and line breaks, then rename the file and update document properties as required.',
           ],
         },
       ],
