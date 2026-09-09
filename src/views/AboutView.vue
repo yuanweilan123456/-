@@ -29,6 +29,20 @@ const content = computed(() =>
             text: '先做好图片、PDF、Word 和 PPT 的常用场景，再根据真实需求扩展更复杂的转换。',
           },
         ],
+        storyTitle: '这个项目为什么存在',
+        story: [
+          '很多临时文件任务并不需要注册账号或把材料交给远程服务器。PixelForge 希望把这些高频操作做成可以直接打开、看懂并完成的浏览器工具，同时诚实说明格式兼容和设备性能边界。',
+          '这是一个持续维护的独立工具项目。网站内容、工具实现和问题记录保存在公开代码仓库中；每次发布都经过自动化检查，重要流程还会在真实浏览器中复核。',
+        ],
+        standardsTitle: '我们的内容与产品原则',
+        standards: [
+          { title: '任务优先', text: '一页解决一个明确任务，不用重复页面或夸张承诺制造数量。' },
+          { title: '限制透明', text: '明确说明支持格式、结果差异、内存限制和不适用场景。' },
+          { title: '持续验证', text: '工具、指南和公开页面随实现一起测试和更新。' },
+          { title: '保护源文件', text: '鼓励用户保留原文件，并在正式使用前打开下载结果检查。' },
+        ],
+        testing: '查看质量与测试方法',
+        contact: '联系与反馈',
         toolbox: '查看全部工具',
       }
     : {
@@ -53,6 +67,32 @@ const content = computed(() =>
             text: 'We are starting with practical image, PDF, Word, and PPT workflows, then expanding from real demand.',
           },
         ],
+        storyTitle: 'Why this project exists',
+        story: [
+          'Many temporary file tasks do not require an account or a remote server. PixelForge turns frequent workflows into browser tools that people can open, understand, and complete directly, while being honest about format compatibility and device limits.',
+          'This is an independently maintained tools project. Site content, tool implementation, and issue history live in a public code repository. Every release passes automated checks, and important workflows are reviewed in a real browser.',
+        ],
+        standardsTitle: 'Our content and product principles',
+        standards: [
+          {
+            title: 'Task first',
+            text: 'One page solves one clear job without duplicate pages or exaggerated promises.',
+          },
+          {
+            title: 'Visible limits',
+            text: 'Supported formats, result differences, memory limits, and unsuitable cases are stated clearly.',
+          },
+          {
+            title: 'Continuous checks',
+            text: 'Tools, guides, and public pages are tested and updated with the implementation.',
+          },
+          {
+            title: 'Protect originals',
+            text: 'Users are encouraged to keep source files and open every result before relying on it.',
+          },
+        ],
+        testing: 'Read our quality and testing method',
+        contact: 'Contact and feedback',
         toolbox: 'Explore the toolbox',
       },
 )
@@ -72,8 +112,31 @@ const content = computed(() =>
       </article>
     </section>
 
-    <RouterLink class="primary-button inline-button" to="/toolbox"
-      >{{ content.toolbox }} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg
-    ></RouterLink>
+    <section class="about-story">
+      <div>
+        <p class="section-kicker">{{ isZh ? '我们的目的' : 'OUR PURPOSE' }}</p>
+        <h2>{{ content.storyTitle }}</h2>
+      </div>
+      <div>
+        <p v-for="paragraph in content.story" :key="paragraph">{{ paragraph }}</p>
+      </div>
+    </section>
+
+    <section class="about-standards">
+      <p class="section-kicker">{{ isZh ? '工作原则' : 'WORKING PRINCIPLES' }}</p>
+      <h2>{{ content.standardsTitle }}</h2>
+      <div>
+        <article v-for="standard in content.standards" :key="standard.title">
+          <h3>{{ standard.title }}</h3>
+          <p>{{ standard.text }}</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="about-actions">
+      <RouterLink class="primary-button" to="/">{{ content.toolbox }}</RouterLink>
+      <RouterLink class="secondary-button" to="/how-we-test">{{ content.testing }}</RouterLink>
+      <RouterLink class="text-link" to="/contact">{{ content.contact }}</RouterLink>
+    </div>
   </div>
 </template>

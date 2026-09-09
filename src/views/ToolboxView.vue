@@ -333,6 +333,48 @@ async function selectCategory(category: ToolCategory | 'all') {
       </div>
     </section>
 
+    <section class="home-resources" aria-labelledby="home-resources-title">
+      <div class="section-heading compact-heading">
+        <p class="section-kicker">{{ isZh ? '放心使用' : 'USE WITH CONFIDENCE' }}</p>
+        <h2 id="home-resources-title">
+          {{ isZh ? '开始处理前，先了解方法与边界' : 'Know the method and limits before you begin' }}
+        </h2>
+      </div>
+      <div class="home-resource-grid">
+        <RouterLink to="/guides">
+          <span>01</span>
+          <strong>{{ isZh ? '实用使用指南' : 'Practical guides' }}</strong>
+          <p>
+            {{
+              isZh ? '查看格式建议、具体步骤和结果检查清单。' : 'Get format advice, clear steps, and result checklists.'
+            }}
+          </p>
+        </RouterLink>
+        <RouterLink to="/how-we-test">
+          <span>02</span>
+          <strong>{{ isZh ? '质量与测试方法' : 'Quality and testing' }}</strong>
+          <p>
+            {{
+              isZh
+                ? '了解工具如何测试，以及浏览器本地处理的限制。'
+                : 'See how tools are tested and where browser-local processing has limits.'
+            }}
+          </p>
+        </RouterLink>
+        <RouterLink to="/contact">
+          <span>03</span>
+          <strong>{{ isZh ? '联系与反馈' : 'Contact and feedback' }}</strong>
+          <p>
+            {{
+              isZh
+                ? '报告可复现的问题，或建议新的本地文件功能。'
+                : 'Report a reproducible problem or suggest a useful local-file feature.'
+            }}
+          </p>
+        </RouterLink>
+      </div>
+    </section>
+
     <section class="home-final-cta" aria-labelledby="home-final-title">
       <div>
         <p class="section-kicker">{{ isZh ? '需要一点帮助？' : 'NEED A HAND?' }}</p>

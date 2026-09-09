@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { getSeoPage, PRERENDER_PATHS } from './seo-pages'
 
 describe('SEO page manifest', () => {
-  it('contains 47 unique canonical routes with resolvable English content', () => {
-    expect(PRERENDER_PATHS).toHaveLength(47)
+  it('contains 49 unique canonical routes with resolvable English content', () => {
+    expect(PRERENDER_PATHS).toHaveLength(49)
     expect(new Set(PRERENDER_PATHS).size).toBe(PRERENDER_PATHS.length)
 
     for (const routePath of PRERENDER_PATHS) {
@@ -44,11 +44,27 @@ describe('SEO page manifest', () => {
     const guide = getSeoPage('/guides/split-pdf-into-separate-pages', 'en')
 
     expect(guide?.pageType).toBe('article')
+    expect(guide?.dateModified).toBe('2026-09-09')
     expect(guide?.title).toContain('split one PDF')
     expect(guide?.links).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ path: '/tools/pdf/split' }),
         expect.objectContaining({ path: '/guides/merge-pdf-files' }),
+      ]),
+    )
+  })
+
+  it('publishes visible quality and contact pages for user trust', () => {
+    const quality = getSeoPage('/how-we-test', 'en')
+    const contact = getSeoPage('/contact', 'en')
+    const home = getSeoPage('/', 'en')
+
+    expect(quality?.sections).toHaveLength(4)
+    expect(contact?.sections).toHaveLength(3)
+    expect(home?.links).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ path: '/how-we-test' }),
+        expect.objectContaining({ path: '/contact' }),
       ]),
     )
   })

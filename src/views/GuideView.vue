@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
 import { categoryCopy } from '../features/tools/catalog'
 import { getGuide, guides } from '../guide-content'
+import { getGuideDetails } from '../guide-details'
 
 const props = defineProps<{ slug: string }>()
 const { locale } = useI18n()
@@ -12,6 +13,17 @@ const isZh = computed(() => locale.value === 'zh')
 const content = computed(() => {
   const current = guide.value
   return current ? (isZh.value ? current.zh : current.en) : null
+})
+const details = computed(() => getGuideDetails(props.slug)?.[isZh.value ? 'zh' : 'en'])
+const reviewedDate = computed(() => {
+  const reviewed = getGuideDetails(props.slug)?.reviewed
+  if (!reviewed) return ''
+  return new Intl.DateTimeFormat(isZh.value ? 'zh-CN' : 'en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${reviewed}T00:00:00Z`))
 })
 const relatedGuides = computed(() => {
   const current = guide.value
@@ -33,6 +45,12 @@ const relatedGuides = computed(() => {
       <p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'PIXELFORGE 使用指南' : 'PIXELFORGE GUIDE' }}</p>
       <h1>{{ content.title }}</h1>
       <p class="guide-lead">{{ content.intro }}</p>
+      <div class="guide-byline">
+        <span>{{ isZh ? '由' : 'Written and reviewed by' }}</span>
+        <RouterLink to="/about">{{ isZh ? 'PixelForge 项目团队' : 'the PixelForge project team' }}</RouterLink>
+        <span aria-hidden="true">·</span>
+        <span>{{ isZh ? `更新于 ${reviewedDate}` : `Updated ${reviewedDate}` }}</span>
+      </div>
       <div class="guide-actions">
         <RouterLink class="primary-button" :to="guide.toolPath">
           {{ content.toolLabel }}
@@ -40,6 +58,21 @@ const relatedGuides = computed(() => {
         </RouterLink>
         <span class="guide-reading-time">{{ guide.readingTime }} {{ isZh ? '阅读' : 'read' }}</span>
       </div>
+
+      <section v-if="details" class="guide-facts" :aria-label="isZh ? '指南概览' : 'Guide overview'">
+        <div>
+          <span>{{ isZh ? '适合' : 'Best for' }}</span>
+          <strong>{{ details.bestFor }}</strong>
+        </div>
+        <div>
+          <span>{{ isZh ? '输入' : 'Input' }}</span>
+          <strong>{{ details.input }}</strong>
+        </div>
+        <div>
+          <span>{{ isZh ? '输出' : 'Output' }}</span>
+          <strong>{{ details.output }}</strong>
+        </div>
+      </section>
 
       <section class="guide-steps" :aria-label="isZh ? '使用步骤' : 'Steps'">
         <h2>{{ isZh ? '三步完成' : 'Complete it in three steps' }}</h2>
@@ -51,6 +84,28 @@ const relatedGuides = computed(() => {
       <section v-for="section in content.sections" :key="section.heading" class="guide-section">
         <h2>{{ section.heading }}</h2>
         <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
+      </section>
+
+      <section v-if="details" class="guide-section guide-checklist">
+        <p class="section-kicker">{{ isZh ? '完成前检查' : 'BEFORE YOU FINISH' }}</p>
+        <h2>{{ isZh ? '下载结果前的检查清单' : 'A practical result checklist' }}</h2>
+        <ul>
+          <li v-for="item in details.checklist" :key="item">{{ item }}</li>
+        </ul>
+      </section>
+
+      <section v-if="details" class="guide-section guide-troubleshooting" aria-labelledby="guide-questions-title">
+        <p class="section-kicker">{{ isZh ? '问题排查' : 'TROUBLESHOOTING' }}</p>
+        <h2 id="guide-questions-title">{{ isZh ? '常见问题与解决方法' : 'Common questions and fixes' }}</h2>
+        <div class="guide-question-list">
+          <details v-for="(item, index) in details.questions" :key="item.question" :open="index === 0">
+            <summary>
+              <span>{{ item.question }}</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <p>{{ item.answer }}</p>
+          </details>
+        </div>
       </section>
 
       <section v-if="relatedGuides.length" class="guide-related-section" aria-labelledby="related-guides-title">

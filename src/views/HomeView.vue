@@ -328,9 +328,6 @@ onBeforeUnmount(clearImages)
             </div>
           </div>
         </div>
-        <div class="ad-slot" :aria-label="t('a11y.advertisement')">
-          <span>{{ t('ad') }}</span>
-        </div>
       </div>
 
       <aside class="settings-card" aria-labelledby="settings-title">

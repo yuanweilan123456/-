@@ -435,6 +435,26 @@ async function run() {
       </p>
     </aside>
 
+    <aside class="result-safety-note">
+      <div>
+        <p class="section-kicker">{{ isZh ? '使用结果前' : 'BEFORE RELYING ON A RESULT' }}</p>
+        <strong>{{
+          isZh ? '保留原文件，并打开下载结果检查' : 'Keep the original and inspect the downloaded file'
+        }}</strong>
+        <p>
+          {{
+            isZh
+              ? '请检查页码、文字、图片方向、特殊字符和文件名。复杂排版、加密文件或损坏文件可能无法完整处理。'
+              : 'Check page order, text, image orientation, special characters, and the filename. Complex layouts, encrypted files, or damaged files may not process completely.'
+          }}
+        </p>
+      </div>
+      <div class="result-safety-links">
+        <RouterLink to="/how-we-test">{{ isZh ? '查看测试方法' : 'How we test' }}</RouterLink>
+        <RouterLink to="/contact">{{ isZh ? '报告问题' : 'Report a problem' }}</RouterLink>
+      </div>
+    </aside>
+
     <section class="tool-explainer" :aria-labelledby="`${tool.id}-steps-title`">
       <div class="section-heading compact-heading">
         <p class="section-kicker">{{ isZh ? '使用方法' : 'HOW IT WORKS' }}</p>

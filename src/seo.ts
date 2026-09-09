@@ -12,6 +12,7 @@ export type SeoContent = {
   breadcrumbs?: SeoLink[]
   items?: SeoLink[]
   index?: boolean
+  dateModified?: string
 }
 
 export const SITE_URL = 'https://file-tools.xyz'
@@ -56,6 +57,7 @@ export function buildStructuredData(content: SeoContent, canonical: string, lang
     webPage.headline = content.title.replace(/\s*[|｜].*$/, '')
     webPage.author = { '@type': 'Organization', name: 'PixelForge', url: `${SITE_URL}/about` }
     webPage.publisher = { '@type': 'Organization', name: 'PixelForge', url: `${SITE_URL}/` }
+    if (content.dateModified) webPage.dateModified = content.dateModified
   }
 
   if (content.pageType === 'home') {

@@ -142,6 +142,26 @@ const relatedTools = computed(() =>
       </RouterLink>
     </aside>
 
+    <aside class="result-safety-note landing-safety-note">
+      <div>
+        <p class="section-kicker">{{ isZh ? '结果检查' : 'CHECK THE RESULT' }}</p>
+        <strong>{{ isZh ? '先打开下载结果，再删除原图片' : 'Open the result before deleting the original' }}</strong>
+        <p>
+          {{
+            isZh
+              ? '不同格式和质量设置会影响清晰度、透明背景和文件大小。请在正式使用前放大检查。'
+              : 'Format and quality settings affect sharpness, transparency, and file size. Zoom in and review the image before using it.'
+          }}
+        </p>
+      </div>
+      <div class="result-safety-links">
+        <RouterLink to="/guides/compress-images-without-upload">{{
+          isZh ? '阅读图片指南' : 'Read the image guide'
+        }}</RouterLink>
+        <RouterLink to="/how-we-test">{{ isZh ? '查看测试方法' : 'How we test' }}</RouterLink>
+      </div>
+    </aside>
+
     <section class="related-tools" aria-labelledby="related-image-tools-title">
       <div class="section-heading compact-heading">
         <p class="section-kicker">{{ isZh ? '继续处理' : 'KEEP WORKING' }}</p>
@@ -155,9 +175,5 @@ const relatedTools = computed(() =>
         </RouterLink>
       </div>
     </section>
-
-    <div class="ad-slot landing-ad" aria-label="Advertisement placeholder">
-      <span>{{ isZh ? '广告位预留 · 上线后启用' : 'Ad space reserved · Enabled after launch' }}</span>
-    </div>
   </div>
 </template>

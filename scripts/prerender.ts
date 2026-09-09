@@ -67,9 +67,9 @@ function renderSections(page: SeoPageDefinition) {
 
 function renderStaticShell(page: SeoPageDefinition) {
   return `<div id="app"><div class="prerender-shell" data-prerendered-route="${escapeHtml(page.path)}">
-    <header><a class="prerender-brand" href="/">PixelForge</a><nav aria-label="Main navigation"><a href="/">All tools</a><a href="/guides">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a></nav></header>
+    <header><a class="prerender-brand" href="/">PixelForge</a><nav aria-label="Main navigation"><a href="/">All tools</a><a href="/guides">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a><a href="/how-we-test">How we test</a><a href="/contact">Contact</a></nav></header>
     <main>${renderBreadcrumbs(page)}<h1>${escapeHtml(page.heading)}</h1><p class="prerender-lead">${escapeHtml(page.lead)}</p>${renderSections(page)}${renderLinks(page.links)}</main>
-    <footer><a href="/privacy">Privacy</a><a href="/terms">Terms</a><p>Free browser-local file tools from PixelForge.</p></footer>
+    <footer><a href="/about">About</a><a href="/how-we-test">How we test</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><p>Free browser-local file tools from PixelForge.</p></footer>
   </div></div>`
 }
 

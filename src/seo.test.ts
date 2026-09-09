@@ -40,4 +40,20 @@ describe('SEO structured data', () => {
     const itemList = data['@graph'].find((item) => item['@type'] === 'ItemList')
     expect(itemList).toMatchObject({ numberOfItems: 2 })
   })
+
+  it('includes the reviewed date on guide article data', () => {
+    const canonical = `${SITE_URL}/guides/merge-pdf-files`
+    const data = buildStructuredData(
+      {
+        title: 'How to merge PDF files | PixelForge',
+        description: 'A practical PDF merging guide.',
+        pageType: 'article',
+        dateModified: '2026-09-09',
+      },
+      canonical,
+    )
+
+    const article = data['@graph'].find((item) => item['@type'] === 'Article')
+    expect(article).toMatchObject({ dateModified: '2026-09-09' })
+  })
 })

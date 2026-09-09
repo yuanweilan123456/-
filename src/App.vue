@@ -94,6 +94,7 @@ watch(
           <RouterLink class="nav-link" to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
           <RouterLink class="nav-link" to="/faq">{{ t('nav.faq') }}</RouterLink>
           <RouterLink class="nav-link" to="/guides">{{ t('nav.guides') }}</RouterLink>
+          <RouterLink class="nav-link" to="/about">{{ t('nav.about') }}</RouterLink>
         </nav>
 
         <div class="header-actions">
@@ -128,6 +129,7 @@ watch(
               <RouterLink to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
               <RouterLink to="/faq">{{ t('nav.faq') }}</RouterLink>
               <RouterLink to="/guides">{{ t('nav.guides') }}</RouterLink>
+              <RouterLink to="/about">{{ t('nav.about') }}</RouterLink>
               <div class="mobile-menu-actions">
                 <button type="button" @click="toggleTheme">
                   <svg v-if="!isDark" viewBox="0 0 24 24" aria-hidden="true">
@@ -164,6 +166,8 @@ watch(
           <RouterLink to="/about">{{ t('footer.about') }}</RouterLink>
           <RouterLink to="/faq">{{ t('footer.faq') }}</RouterLink>
           <RouterLink to="/guides">{{ t('footer.guides') }}</RouterLink>
+          <RouterLink to="/how-we-test">{{ t('footer.testing') }}</RouterLink>
+          <RouterLink to="/contact">{{ t('footer.contact') }}</RouterLink>
           <RouterLink to="/privacy">{{ t('footer.privacy') }}</RouterLink>
           <RouterLink to="/terms">{{ t('footer.terms') }}</RouterLink>
         </nav>

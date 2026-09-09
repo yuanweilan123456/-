@@ -19,7 +19,6 @@ const messages = {
     },
     a11y: {
       skipToContent: '跳转到主要内容',
-      advertisement: '广告位预留',
       home: 'PixelForge 文件工具箱首页',
     },
     hero: {
@@ -77,7 +76,6 @@ const messages = {
       fastTitle: '轻量快速',
       fastText: '静态站点架构，少等待，适合桌面和移动设备。',
     },
-    ad: '广告位预留 · 上线后启用',
     guides: {
       listTitle: '实用文件处理指南',
     },
@@ -86,6 +84,8 @@ const messages = {
       about: '关于我们',
       faq: '常见问题',
       guides: '使用指南',
+      testing: '质量与测试',
+      contact: '联系反馈',
       linksLabel: '页脚导航',
       privacy: '隐私政策',
       terms: '使用条款',
@@ -156,7 +156,6 @@ const messages = {
     },
     a11y: {
       skipToContent: 'Skip to main content',
-      advertisement: 'Advertisement placeholder',
       home: 'PixelForge File Toolbox home',
     },
     hero: {
@@ -214,7 +213,6 @@ const messages = {
       fastTitle: 'Lightweight and fast',
       fastText: 'A static-site architecture with less waiting on desktop and mobile.',
     },
-    ad: 'Ad space reserved · Enabled after launch',
     guides: {
       listTitle: 'Practical file processing guides',
     },
@@ -223,6 +221,8 @@ const messages = {
       about: 'About',
       faq: 'FAQ',
       guides: 'Guides',
+      testing: 'Quality & testing',
+      contact: 'Contact',
       linksLabel: 'Footer navigation',
       privacy: 'Privacy policy',
       terms: 'Terms',

@@ -34,9 +34,19 @@ const content = computed(() =>
               '可以。页面针对移动端设计，但大文件处理会受到手机内存、浏览器能力和电量的影响。建议使用最新版 Chrome、Edge、Safari 或 Firefox。',
           },
           {
-            question: '广告什么时候会出现？',
+            question: '处理结果是否一定和原文件完全一致？',
             answer:
-              '网站已经加载 Google AdSense 验证脚本，但广告要在网站通过审核、完成账号设置并启用广告后才会展示。正式展示广告前，还需要按访问者所在地区完成必要的隐私同意设置。',
+              '不一定。PDF 页面外观通常能够保留，但交互表单、签名、书签和批注可能变化；DOCX 的复杂分页、浮动对象和字体也不保证完全还原。请保留原文件并打开下载结果检查。',
+          },
+          {
+            question: 'PixelForge 如何测试这些工具？',
+            answer:
+              '每次发布会运行类型检查、代码规范、单元测试、生产构建和可抓取页面校验。重要页面还会在桌面、移动端、深色和浅色模式中进行真实浏览器检查。完整方法可以在“质量与测试”页面查看。',
+          },
+          {
+            question: '遇到错误应该提供哪些信息？',
+            answer:
+              '请提供工具名称、浏览器及版本、操作步骤、预期结果和实际结果。不要在公开反馈中上传包含身份、财务、医疗或其他敏感内容的真实文件。',
           },
         ],
       }
@@ -67,9 +77,19 @@ const content = computed(() =>
               'Yes. The layout is mobile-friendly, but large files depend on device memory, browser capabilities, and battery. Use the latest Chrome, Edge, Safari, or Firefox.',
           },
           {
-            question: 'When will ads appear?',
+            question: 'Will a result always match the source perfectly?',
             answer:
-              'The site already loads the Google AdSense verification script, but ads will only appear after the site passes review, the account setup is complete, and ads are enabled. Before serving ads, required consent settings should be completed for applicable regions.',
+              'Not always. PDF page appearance is usually preserved, but interactive forms, signatures, bookmarks, and annotations may change. Complex DOCX pagination, floating objects, and fonts are also not guaranteed. Keep the original and open every downloaded result.',
+          },
+          {
+            question: 'How does PixelForge test the tools?',
+            answer:
+              'Every release runs type checks, code-quality rules, unit tests, a production build, and crawlable-page verification. Important pages are also checked in a real browser on desktop and mobile, in light and dark themes. The full method is documented on the Quality & testing page.',
+          },
+          {
+            question: 'What information helps when reporting a problem?',
+            answer:
+              'Include the tool name, browser and version, steps, expected result, and actual result. Never attach a real file containing identity, financial, medical, or other sensitive information to a public report.',
           },
         ],
       },
@@ -92,6 +112,12 @@ const content = computed(() =>
       </details>
     </section>
 
-    <RouterLink class="secondary-button inline-button" to="/">{{ content.back }}</RouterLink>
+    <div class="faq-actions">
+      <RouterLink class="primary-button" to="/">{{ content.back }}</RouterLink>
+      <RouterLink class="secondary-button" to="/how-we-test">{{
+        isZh ? '查看质量与测试方法' : 'Read how we test'
+      }}</RouterLink>
+      <RouterLink class="text-link" to="/contact">{{ isZh ? '联系与反馈' : 'Contact and feedback' }}</RouterLink>
+    </div>
   </div>
 </template>
