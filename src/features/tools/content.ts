@@ -1,4 +1,5 @@
 import type { LocalizedText, ToolCategory, ToolDefinition } from './types'
+import { getToolEditorial, toolEditorial } from './editorial'
 
 type CategoryLocaleContent = {
   heading: string
@@ -380,6 +381,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
 export function getToolPageContent(tool: ToolDefinition, language: 'en' | 'zh') {
   const isZh = language === 'zh'
   const category = categoryPageContent[tool.category][language]
+  const editorial = getToolEditorial(tool.id, language)
   const source =
     tool.input === 'text' || tool.input === 'base64'
       ? isZh
@@ -406,9 +408,9 @@ export function getToolPageContent(tool: ToolDefinition, language: 'en' | 'zh') 
     whyTitle: isZh
       ? `为什么使用 PixelForge ${tool.title.zh}？`
       : `Why use PixelForge for ${tool.title.en.toLowerCase()}?`,
-    whyText: isZh
-      ? `${tool.description.zh}整个任务在当前浏览器会话中运行，适合希望减少上传步骤的日常文件处理。`
-      : `${tool.description.en} The task runs in your current browser session, making it useful when you want a straightforward workflow with fewer upload steps.`,
+    whyText: editorial.overview,
     categoryLead: category.lead,
+    editorial,
+    reviewed: toolEditorial[tool.id].reviewed,
   }
 }

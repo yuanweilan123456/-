@@ -44,6 +44,7 @@ const content = computed(() =>
         testing: '查看质量与测试方法',
         contact: '联系与反馈',
         toolbox: '查看全部工具',
+        source: '查看公开源代码与更新记录',
       }
     : {
         eyebrow: 'ABOUT PIXELFORGE',
@@ -94,6 +95,7 @@ const content = computed(() =>
         testing: 'Read our quality and testing method',
         contact: 'Contact and feedback',
         toolbox: 'Explore the toolbox',
+        source: 'View source code and release history',
       },
 )
 </script>
@@ -136,6 +138,13 @@ const content = computed(() =>
     <div class="about-actions">
       <RouterLink class="primary-button" to="/">{{ content.toolbox }}</RouterLink>
       <RouterLink class="secondary-button" to="/how-we-test">{{ content.testing }}</RouterLink>
+      <a
+        class="secondary-button"
+        href="https://github.com/yuanweilan123456/-"
+        target="_blank"
+        rel="noopener noreferrer"
+        >{{ content.source }}</a
+      >
       <RouterLink class="text-link" to="/contact">{{ content.contact }}</RouterLink>
     </div>
   </div>

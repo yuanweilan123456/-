@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'
 import { categoryCopy, tools } from '../features/tools/catalog'
+import { getToolEditorial, toolEditorial } from '../features/tools/editorial'
 
 const props = defineProps<{ type: 'compress' | 'convert' | 'resize' | 'rotate' | 'flip' }>()
 const { locale } = useI18n()
@@ -68,6 +69,8 @@ const content = computed(() => {
 const isZh = computed(() => locale.value === 'zh')
 const language = computed<'en' | 'zh'>(() => (isZh.value ? 'zh' : 'en'))
 const currentTool = computed(() => tools.find((tool) => tool.id === `image-${props.type}`)!)
+const editorial = computed(() => getToolEditorial(currentTool.value.id, language.value))
+const reviewed = computed(() => toolEditorial[currentTool.value.id].reviewed)
 const relatedTools = computed(() =>
   tools.filter((tool) => tool.category === 'image' && tool.id !== currentTool.value.id).slice(0, 3),
 )
@@ -124,6 +127,52 @@ const relatedTools = computed(() =>
           }}
         </p>
       </div>
+    </section>
+
+    <section class="tool-editorial landing-editorial" :aria-labelledby="`${currentTool.id}-notes-title`">
+      <div class="tool-editorial-intro">
+        <div>
+          <p class="section-kicker">{{ isZh ? '任务说明' : 'TASK NOTES' }}</p>
+          <h2 :id="`${currentTool.id}-notes-title`">
+            {{ isZh ? `开始${content.keyword}前` : `Before you start ${content.keyword.toLowerCase()}` }}
+          </h2>
+        </div>
+        <p>{{ editorial.overview }}</p>
+      </div>
+      <div class="tool-editorial-grid">
+        <article>
+          <span>01</span>
+          <h3>{{ isZh ? '适合任务' : 'Best suited for' }}</h3>
+          <p>{{ editorial.bestFor }}</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>{{ isZh ? '输入' : 'Input' }}</h3>
+          <p>{{ editorial.input }}</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>{{ isZh ? '输出' : 'Output' }}</h3>
+          <p>{{ editorial.output }}</p>
+        </article>
+      </div>
+      <div class="tool-editorial-details">
+        <article>
+          <p class="section-kicker">{{ isZh ? '已知限制' : 'KNOWN LIMITATION' }}</p>
+          <h3>{{ isZh ? '需要提前注意' : 'What to consider' }}</h3>
+          <p>{{ editorial.limitation }}</p>
+        </article>
+        <article>
+          <p class="section-kicker">{{ isZh ? '实用建议' : 'PRACTICAL TIPS' }}</p>
+          <h3>{{ isZh ? '获得更好的图片结果' : 'Get a better image result' }}</h3>
+          <ul>
+            <li v-for="tip in editorial.tips" :key="tip">{{ tip }}</li>
+          </ul>
+        </article>
+      </div>
+      <p class="tool-reviewed">
+        {{ isZh ? '内容复核日期' : 'Content reviewed' }}: <time :datetime="reviewed">{{ reviewed }}</time>
+      </p>
     </section>
     <aside v-if="props.type === 'compress'" class="related-guide">
       <div>

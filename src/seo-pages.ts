@@ -394,7 +394,14 @@ const staticPages: LocalizedStaticPage[] = [
       description: 'Learn how PixelForge handles files, privacy preferences, and Google AdSense advertising.',
       heading: 'Privacy policy',
       lead: 'PixelForge is designed to process files on your device and does not upload or store user file contents.',
-      links: [{ name: 'Contact and feedback', path: '/contact' }],
+      links: [
+        { name: 'Contact and feedback', path: '/contact' },
+        { name: 'Google Ads Settings', path: 'https://adssettings.google.com/' },
+        {
+          name: 'How Google uses information from partner sites',
+          path: 'https://policies.google.com/technologies/partner-sites',
+        },
+      ],
       sections: [
         {
           heading: 'File processing',
@@ -428,7 +435,11 @@ const staticPages: LocalizedStaticPage[] = [
       description: '了解 PixelForge 如何处理文件、隐私偏好和 Google AdSense 广告服务。',
       heading: '隐私政策',
       lead: 'PixelForge 旨在让文件留在你的设备上处理，不上传或保存用户文件内容。',
-      links: [{ name: '联系与反馈', path: '/contact' }],
+      links: [
+        { name: '联系与反馈', path: '/contact' },
+        { name: 'Google 广告设置', path: 'https://adssettings.google.com/' },
+        { name: 'Google 如何使用合作伙伴网站信息', path: 'https://policies.google.com/technologies/partner-sites' },
+      ],
       sections: [
         {
           heading: '文件处理',
@@ -538,6 +549,25 @@ export function getSeoPage(path: string, language: SeoLanguage = 'en'): SeoPageD
       sections: [
         { heading: language === 'zh' ? '使用方法' : 'How it works', items: content.steps },
         { heading: content.whyTitle, paragraphs: [content.whyText] },
+        {
+          heading: language === 'zh' ? '适合哪些任务' : 'Best suited for',
+          paragraphs: [content.editorial.bestFor],
+        },
+        {
+          heading: language === 'zh' ? '输入与输出' : 'Input and output',
+          paragraphs: [
+            `${language === 'zh' ? '输入：' : 'Input: '}${content.editorial.input}`,
+            `${language === 'zh' ? '输出：' : 'Output: '}${content.editorial.output}`,
+          ],
+        },
+        {
+          heading: language === 'zh' ? '已知限制' : 'Known limitation',
+          paragraphs: [content.editorial.limitation],
+        },
+        {
+          heading: language === 'zh' ? '实用建议' : 'Practical tips',
+          items: content.editorial.tips,
+        },
       ],
     }
   }

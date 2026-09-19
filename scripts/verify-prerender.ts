@@ -3,9 +3,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { SITE_URL } from '../src/seo.ts'
 import { getSeoPage, PRERENDER_PATHS } from '../src/seo-pages.ts'
+import { tools } from '../src/features/tools/catalog.ts'
 
 const PROJECT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DIST_DIR = path.join(PROJECT_DIR, 'dist')
+const EDITORIAL_TOOL_PATHS = new Set(tools.map((tool) => tool.path))
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -30,6 +32,18 @@ for (const routePath of PRERENDER_PATHS) {
   if (!html.includes(`data-prerendered-route="${routePath}"`)) throw new Error(`Missing static shell for ${routePath}`)
   if (!html.includes(`<h1>${escapeHtml(page.heading)}</h1>`)) throw new Error(`Missing static H1 for ${routePath}`)
   if (html.includes('<noscript>')) throw new Error(`Duplicate noscript fallback remains for ${routePath}`)
+  if (EDITORIAL_TOOL_PATHS.has(routePath)) {
+    if (!html.includes('<h2>Known limitation</h2>')) throw new Error(`Missing tool limitation for ${routePath}`)
+    if (!html.includes('<h2>Practical tips</h2>')) throw new Error(`Missing practical tips for ${routePath}`)
+    const visibleWords = html
+      .replace(/<script[\s\S]*?<\/script>/g, ' ')
+      .replace(/<style[\s\S]*?<\/style>/g, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&[a-z]+;/g, ' ')
+      .trim()
+      .split(/\s+/)
+    if (visibleWords.length < 150) throw new Error(`Thin prerendered tool page for ${routePath}`)
+  }
 }
 
 const sitemap = await readFile(path.join(DIST_DIR, 'sitemap.xml'), 'utf8')
@@ -39,4 +53,6 @@ if (sitemapUrls.length !== PRERENDER_PATHS.length) {
 }
 if (!sitemap.includes('<lastmod>')) throw new Error('Sitemap is missing lastmod freshness signals')
 
-console.log(`Verified ${PRERENDER_PATHS.length} prerendered pages, canonical tags, H1 content, and sitemap URLs.`)
+console.log(
+  `Verified ${PRERENDER_PATHS.length} prerendered pages, canonical tags, content depth, H1 content, and sitemap URLs.`,
+)

@@ -435,6 +435,55 @@ async function run() {
       </p>
     </aside>
 
+    <section class="tool-editorial" :aria-labelledby="`${tool.id}-guide-title`">
+      <div class="tool-editorial-intro">
+        <div>
+          <p class="section-kicker">{{ isZh ? '工具说明' : 'TOOL NOTES' }}</p>
+          <h2 :id="`${tool.id}-guide-title`">
+            {{ isZh ? `使用${title}前需要了解什么` : `What to know before using ${title.toLowerCase()}` }}
+          </h2>
+        </div>
+        <p>{{ pageContent.editorial.overview }}</p>
+      </div>
+
+      <div class="tool-editorial-grid">
+        <article>
+          <span>01</span>
+          <h3>{{ isZh ? '适合任务' : 'Best suited for' }}</h3>
+          <p>{{ pageContent.editorial.bestFor }}</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>{{ isZh ? '输入' : 'Input' }}</h3>
+          <p>{{ pageContent.editorial.input }}</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>{{ isZh ? '输出' : 'Output' }}</h3>
+          <p>{{ pageContent.editorial.output }}</p>
+        </article>
+      </div>
+
+      <div class="tool-editorial-details">
+        <article>
+          <p class="section-kicker">{{ isZh ? '已知限制' : 'KNOWN LIMITATION' }}</p>
+          <h3>{{ isZh ? '这个工具不会做什么' : 'What this tool does not do' }}</h3>
+          <p>{{ pageContent.editorial.limitation }}</p>
+        </article>
+        <article>
+          <p class="section-kicker">{{ isZh ? '实用建议' : 'PRACTICAL TIPS' }}</p>
+          <h3>{{ isZh ? '获得更可靠的结果' : 'Get a more reliable result' }}</h3>
+          <ul>
+            <li v-for="tip in pageContent.editorial.tips" :key="tip">{{ tip }}</li>
+          </ul>
+        </article>
+      </div>
+      <p class="tool-reviewed">
+        {{ isZh ? '内容复核日期' : 'Content reviewed' }}:
+        <time :datetime="pageContent.reviewed">{{ pageContent.reviewed }}</time>
+      </p>
+    </section>
+
     <aside class="result-safety-note">
       <div>
         <p class="section-kicker">{{ isZh ? '使用结果前' : 'BEFORE RELYING ON A RESULT' }}</p>

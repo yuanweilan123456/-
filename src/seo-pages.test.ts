@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { tools } from './features/tools/catalog'
 import { getSeoPage, PRERENDER_PATHS } from './seo-pages'
 
 describe('SEO page manifest', () => {
@@ -67,5 +68,28 @@ describe('SEO page manifest', () => {
         expect.objectContaining({ path: '/contact' }),
       ]),
     )
+  })
+
+  it('publishes substantial, distinct editorial content for every tool page', () => {
+    const toolPaths = new Set(tools.map((tool) => tool.path))
+    const toolPages = PRERENDER_PATHS.filter((routePath) => toolPaths.has(routePath)).map((routePath) =>
+      getSeoPage(routePath, 'en'),
+    )
+    const overviews = toolPages.map((page) =>
+      page?.sections?.find((section) => section.heading.startsWith('Why use PixelForge'))?.paragraphs?.join(' '),
+    )
+
+    expect(toolPages).toHaveLength(tools.length)
+    expect(new Set(overviews).size).toBe(toolPages.length)
+    for (const page of toolPages) {
+      expect(page?.sections).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ heading: 'Best suited for' }),
+          expect.objectContaining({ heading: 'Input and output' }),
+          expect.objectContaining({ heading: 'Known limitation' }),
+          expect.objectContaining({ heading: 'Practical tips' }),
+        ]),
+      )
+    }
   })
 })

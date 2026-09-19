@@ -14,7 +14,7 @@ const content = computed(() => {
           eyebrow: 'PIXELFORGE / 隐私',
           title: '隐私政策',
           intro: '本政策说明 PixelForge 当前如何处理你选择的文件、界面偏好和广告服务。',
-          updated: '最后更新：2026 年 9 月 9 日',
+          updated: '最后更新：2026 年 9 月 19 日',
           back: '返回工具',
           sections: [
             {
@@ -40,6 +40,10 @@ const content = computed(() => {
               ],
               links: [
                 { label: 'Google 广告设置', href: 'https://adssettings.google.com/' },
+                {
+                  label: 'Google 如何使用合作伙伴网站信息',
+                  href: 'https://policies.google.com/technologies/partner-sites',
+                },
                 { label: 'Google 隐私权与条款', href: 'https://policies.google.com/privacy' },
               ],
             },
@@ -57,7 +61,7 @@ const content = computed(() => {
           title: 'Privacy policy',
           intro:
             'This policy explains how PixelForge currently handles your files, interface preferences, and advertising services.',
-          updated: 'Last updated: September 9, 2026',
+          updated: 'Last updated: September 19, 2026',
           back: 'Back to tools',
           sections: [
             {
@@ -83,6 +87,10 @@ const content = computed(() => {
               ],
               links: [
                 { label: 'Google Ads Settings', href: 'https://adssettings.google.com/' },
+                {
+                  label: 'How Google uses information from partner sites',
+                  href: 'https://policies.google.com/technologies/partner-sites',
+                },
                 { label: 'Google Privacy & Terms', href: 'https://policies.google.com/privacy' },
               ],
             },
@@ -102,7 +110,7 @@ const content = computed(() => {
         eyebrow: 'PIXELFORGE / 条款',
         title: '使用条款',
         intro: '使用 PixelForge 即表示你理解并接受以下使用范围和责任边界。',
-        updated: '最后更新：2026 年 9 月 9 日',
+        updated: '最后更新：2026 年 9 月 19 日',
         back: '返回工具',
         sections: [
           { heading: '允许的使用', body: ['请只处理你有权使用的文件，并遵守适用的法律、平台规则和第三方权利。'] },
@@ -123,7 +131,7 @@ const content = computed(() => {
         eyebrow: 'PIXELFORGE / TERMS',
         title: 'Terms of use',
         intro: 'By using PixelForge, you understand and accept the following scope and responsibility boundaries.',
-        updated: 'Last updated: September 9, 2026',
+        updated: 'Last updated: September 19, 2026',
         back: 'Back to tools',
         sections: [
           {
