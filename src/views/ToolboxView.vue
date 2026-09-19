@@ -60,10 +60,23 @@ async function selectCategory(category: ToolCategory | 'all') {
 <template>
   <div class="page-wrap toolbox-page">
     <section class="toolbox-heading" aria-labelledby="toolbox-title">
+      <div class="hero-ambient" aria-hidden="true">
+        <span class="hero-aurora hero-aurora-one"></span>
+        <span class="hero-aurora hero-aurora-two"></span>
+        <span class="hero-mesh"></span>
+      </div>
       <div class="toolbox-hero-copy">
         <p class="eyebrow"><span class="eyebrow-dot"></span>PIXELFORGE FILE TOOLBOX</p>
         <h1 id="toolbox-title">
-          {{ isZh ? '免费的在线文件工具，私密完成每个任务。' : 'Free online file tools, private by design.' }}
+          <template v-if="isZh">
+            <span>免费的在线</span>
+            <span>文件工具，</span>
+            <span class="hero-title-accent">私密完成每个任务。</span>
+          </template>
+          <template v-else>
+            <span>Free online file tools,</span>
+            <span class="hero-title-accent">private by design.</span>
+          </template>
         </h1>
         <p class="toolbox-lead">
           {{
@@ -116,6 +129,10 @@ async function selectCategory(category: ToolCategory | 'all') {
       </div>
 
       <aside class="quick-start-panel" :aria-label="isZh ? '快速开始' : 'Quick start'">
+        <div class="quick-live-status">
+          <span aria-hidden="true"></span>
+          {{ isZh ? '在你的浏览器中实时运行' : 'Live in your browser' }}
+        </div>
         <header>
           <div class="quick-start-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -141,11 +158,12 @@ async function selectCategory(category: ToolCategory | 'all') {
 
         <div v-if="quickTools.length" class="quick-tool-list">
           <RouterLink
-            v-for="tool in quickTools"
+            v-for="(tool, index) in quickTools"
             :key="tool.id"
             :to="tool.path"
             class="quick-tool-link"
             :class="`tool-${tool.category}`"
+            :style="{ '--card-index': index }"
           >
             <span class="quick-tool-badge">{{ tool.badge }}</span>
             <span
@@ -179,11 +197,12 @@ async function selectCategory(category: ToolCategory | 'all') {
       </div>
       <div class="popular-tool-grid">
         <RouterLink
-          v-for="tool in popularTools"
+          v-for="(tool, index) in popularTools"
           :key="tool.id"
           :to="tool.path"
           class="popular-tool-link"
           :class="`tool-${tool.category}`"
+          :style="{ '--card-index': index }"
         >
           <span class="popular-tool-icon">{{ tool.badge }}</span>
           <span class="popular-tool-copy"
@@ -266,11 +285,12 @@ async function selectCategory(category: ToolCategory | 'all') {
           </header>
           <div class="tool-catalog">
             <RouterLink
-              v-for="tool in group.tools"
+              v-for="(tool, index) in group.tools"
               :key="tool.id"
               :to="tool.path"
               class="tool-card"
               :class="`tool-${tool.category}`"
+              :style="{ '--card-index': index }"
             >
               <div class="tool-card-top">
                 <span class="tool-type">{{ tool.badge }}</span

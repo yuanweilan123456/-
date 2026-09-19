@@ -91,7 +91,9 @@ watch(
         <nav class="site-nav" :aria-label="t('nav.main')">
           <RouterLink class="nav-link" to="/">{{ t('nav.toolbox') }}</RouterLink>
           <RouterLink class="nav-link" to="/tools/image/studio">{{ t('nav.tools') }}</RouterLink>
-          <RouterLink class="nav-link" to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
+          <RouterLink class="nav-link" :class="{ 'is-current': route.hash === '#why' }" to="/#why">{{
+            t('nav.howItWorks')
+          }}</RouterLink>
           <RouterLink class="nav-link" to="/faq">{{ t('nav.faq') }}</RouterLink>
           <RouterLink class="nav-link" to="/guides">{{ t('nav.guides') }}</RouterLink>
           <RouterLink class="nav-link" to="/about">{{ t('nav.about') }}</RouterLink>
@@ -153,7 +155,11 @@ watch(
     </div>
 
     <main id="main-content" ref="mainRef" tabindex="-1">
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </Transition>
+      </RouterView>
     </main>
 
     <footer class="site-footer">
