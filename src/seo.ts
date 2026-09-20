@@ -55,7 +55,7 @@ export function buildStructuredData(content: SeoContent, canonical: string, lang
   }
   if (content.pageType === 'article') {
     webPage.headline = content.title.replace(/\s*[|｜].*$/, '')
-    webPage.author = { '@type': 'Organization', name: 'FileTools', url: `${SITE_URL}/about` }
+    webPage.author = { '@type': 'Organization', name: 'FileTools', url: `${SITE_URL}/how-we-test` }
     webPage.publisher = {
       '@type': 'Organization',
       name: 'FileTools',

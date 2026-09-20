@@ -5,6 +5,7 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { updateSeo, type SeoContent } from './seo'
 import { getSeoPage } from './seo-pages'
 import { categoryCopy, categoryOrder } from './features/tools/catalog'
+import ParticleBackdrop from './components/ParticleBackdrop.vue'
 
 const { locale, t } = useI18n()
 const route = useRoute()
@@ -72,6 +73,7 @@ watch(
 
 <template>
   <div class="app-shell">
+    <ParticleBackdrop />
     <a class="skip-link" href="#main-content" @click="focusMainContent">{{ t('a11y.skipToContent') }}</a>
     <div class="header-bar">
       <header class="site-header">
@@ -98,7 +100,6 @@ watch(
           }}</RouterLink>
           <RouterLink class="nav-link" to="/faq">{{ t('nav.faq') }}</RouterLink>
           <RouterLink class="nav-link" to="/guides">{{ t('nav.guides') }}</RouterLink>
-          <RouterLink class="nav-link" to="/about">{{ t('nav.about') }}</RouterLink>
         </nav>
 
         <div class="header-actions">
@@ -133,7 +134,6 @@ watch(
               <RouterLink to="/#why">{{ t('nav.howItWorks') }}</RouterLink>
               <RouterLink to="/faq">{{ t('nav.faq') }}</RouterLink>
               <RouterLink to="/guides">{{ t('nav.guides') }}</RouterLink>
-              <RouterLink to="/about">{{ t('nav.about') }}</RouterLink>
               <div class="mobile-menu-actions">
                 <button type="button" @click="toggleTheme">
                   <svg v-if="!isDark" viewBox="0 0 24 24" aria-hidden="true">
@@ -181,7 +181,6 @@ watch(
           <p>{{ t('footer.tagline') }}</p>
         </div>
         <nav class="footer-links" :aria-label="t('footer.linksLabel')">
-          <RouterLink to="/about">{{ t('footer.about') }}</RouterLink>
           <RouterLink to="/faq">{{ t('footer.faq') }}</RouterLink>
           <RouterLink to="/guides">{{ t('footer.guides') }}</RouterLink>
           <RouterLink to="/how-we-test">{{ t('footer.testing') }}</RouterLink>

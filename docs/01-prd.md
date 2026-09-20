@@ -61,7 +61,7 @@
 - `/tools/archive/*`：压缩包工具。
 - `/tools/data/*`：数据工具。
 - `/tools/utility/*`：文件实用工具。
-- `/about`：产品说明、隐私承诺和联系方式。
+- `/how-we-test`：质量保证、测试方式和隐私处理说明。
 - `/privacy`：隐私政策。
 - `/terms`：使用条款。
 - `/faq`：常见问题。

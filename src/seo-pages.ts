@@ -183,68 +183,6 @@ const staticPages: LocalizedStaticPage[] = [
     },
   },
   {
-    path: '/about',
-    pageType: 'page',
-    en: {
-      title: 'About FileTools | Local file toolbox',
-      description: 'Learn how FileTools uses browser-local processing to provide lightweight, private file tools.',
-      heading: 'A small, dependable local file toolbox',
-      lead: 'FileTools focuses on useful everyday file tasks with clear steps and browser-local processing.',
-      links: [
-        { name: 'How we test', path: '/how-we-test' },
-        { name: 'Contact and feedback', path: '/contact' },
-      ],
-      sections: [
-        {
-          heading: 'Why this project exists',
-          paragraphs: [
-            'Many temporary file tasks do not require an account or remote server. FileTools makes those workflows direct and understandable while explaining format and device limits.',
-            'This independently maintained project keeps its implementation and issue history in a public repository. Releases pass automated checks and important workflows are reviewed in a real browser.',
-          ],
-        },
-        {
-          heading: 'Files stay on your device',
-          paragraphs: [
-            'Current tools process files in the browser without creating a FileTools account or storing file contents on a FileTools server.',
-          ],
-        },
-        {
-          heading: 'Task-first and transparent',
-          paragraphs: [
-            'Each page solves one clear task, states known limitations, and encourages users to keep originals and inspect downloaded results.',
-          ],
-        },
-      ],
-    },
-    zh: {
-      title: '关于 FileTools｜本地文件工具箱',
-      description: '了解 FileTools 如何用浏览器本地能力提供轻量、私密的文件处理工具。',
-      heading: '小而可靠的本地文件工具箱',
-      lead: 'FileTools 专注于高频文件任务、清晰步骤和浏览器本地处理。',
-      links: [
-        { name: '质量与测试', path: '/how-we-test' },
-        { name: '联系与反馈', path: '/contact' },
-      ],
-      sections: [
-        {
-          heading: '这个项目为什么存在',
-          paragraphs: [
-            '许多临时文件任务不需要账号或远程服务器。FileTools 让这些流程直接、易懂，同时说明格式和设备限制。',
-            '这是一个持续维护的独立项目，实现代码和问题记录保存在公开仓库；每次发布都通过自动化检查，重要流程还会在真实浏览器中复核。',
-          ],
-        },
-        {
-          heading: '文件留在你的设备',
-          paragraphs: ['当前工具在浏览器中处理文件，不建立 FileTools 账号，也不在 FileTools 服务器保存文件内容。'],
-        },
-        {
-          heading: '任务优先，限制透明',
-          paragraphs: ['每个页面解决一个明确任务，说明已知限制，并提醒用户保留原文件和检查下载结果。'],
-        },
-      ],
-    },
-  },
-  {
     path: '/how-we-test',
     pageType: 'page',
     en: {
@@ -666,7 +604,6 @@ export function getSeoPage(path: string, language: SeoLanguage = 'en'): SeoPageD
       })),
       { name: language === 'zh' ? '实用使用指南' : 'Practical guides', path: '/guides' },
       { name: language === 'zh' ? '质量与测试' : 'Quality and testing', path: '/how-we-test' },
-      { name: language === 'zh' ? '关于 FileTools' : 'About FileTools', path: '/about' },
       { name: language === 'zh' ? '联系与反馈' : 'Contact and feedback', path: '/contact' },
     ]
   } else if (pathname === '/tools/image/studio') {

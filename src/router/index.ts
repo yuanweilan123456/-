@@ -72,7 +72,6 @@ const router = createRouter({
     ...categoryRoutes,
     ...legacyRedirects,
     { path: '/faq', name: 'faq', component: () => import('../views/FaqView.vue') },
-    { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
     { path: '/how-we-test', name: 'how-we-test', component: () => import('../views/HowWeTestView.vue') },
     { path: '/contact', name: 'contact', component: () => import('../views/ContactView.vue') },
     { path: '/guides', name: 'guides', component: () => import('../views/GuidesView.vue') },

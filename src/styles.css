@@ -4158,59 +4158,12 @@ h1 {
   padding: 0 40px 20px 2px;
 }
 
-.about-story {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
-  gap: 56px;
-  margin-top: 84px;
-  padding: 36px;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: var(--surface-muted);
-}
-.about-story h2,
-.about-standards h2,
 .quality-report-card h2,
 .contact-checklist h2 {
   margin: 7px 0 0;
   font-size: clamp(24px, 3vw, 34px);
   letter-spacing: -0.04em;
 }
-.about-story > div:last-child p {
-  margin: 0 0 14px;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.8;
-}
-.about-story > div:last-child p:last-child {
-  margin-bottom: 0;
-}
-.about-standards {
-  margin-top: 76px;
-}
-.about-standards > div {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 24px;
-}
-.about-standards article {
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface);
-}
-.about-standards h3 {
-  margin: 0 0 9px;
-  font-size: 17px;
-}
-.about-standards article p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.65;
-}
-.about-actions,
 .faq-actions,
 .policy-actions {
   display: flex;
@@ -4219,7 +4172,6 @@ h1 {
   gap: 11px;
   margin-top: 40px;
 }
-.about-actions a,
 .faq-actions a,
 .policy-actions a {
   display: inline-flex;
@@ -4448,13 +4400,9 @@ h1 {
   .contact-option-grid article > span {
     margin-bottom: 24px;
   }
-  .about-story,
   .contact-checklist {
     grid-template-columns: 1fr;
     gap: 28px;
-  }
-  .about-standards > div {
-    grid-template-columns: 1fr;
   }
   .quality-method-card {
     grid-template-columns: 44px minmax(0, 1fr);
@@ -4484,18 +4432,15 @@ h1 {
     font-size: clamp(37px, 11vw, 46px);
     line-height: 1.06;
   }
-  .about-story,
   .contact-checklist,
   .quality-report-card {
     padding: 23px 20px;
   }
-  .about-actions,
   .faq-actions,
   .policy-actions {
     align-items: stretch;
     flex-direction: column;
   }
-  .about-actions a,
   .faq-actions a,
   .policy-actions a {
     width: 100%;

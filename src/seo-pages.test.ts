@@ -3,9 +3,10 @@ import { tools } from './features/tools/catalog'
 import { getSeoPage, PRERENDER_PATHS } from './seo-pages'
 
 describe('SEO page manifest', () => {
-  it('contains 49 unique canonical routes with resolvable English content', () => {
-    expect(PRERENDER_PATHS).toHaveLength(49)
+  it('contains 48 unique canonical routes with resolvable English content', () => {
+    expect(PRERENDER_PATHS).toHaveLength(48)
     expect(new Set(PRERENDER_PATHS).size).toBe(PRERENDER_PATHS.length)
+    expect(PRERENDER_PATHS).not.toContain('/about')
 
     for (const routePath of PRERENDER_PATHS) {
       const page = getSeoPage(routePath, 'en')

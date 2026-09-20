@@ -47,7 +47,9 @@ const relatedGuides = computed(() => {
       <p class="guide-lead">{{ content.intro }}</p>
       <div class="guide-byline">
         <span>{{ isZh ? '由' : 'Written and reviewed by' }}</span>
-        <RouterLink to="/about">{{ isZh ? 'FileTools 项目团队' : 'the FileTools project team' }}</RouterLink>
+        <RouterLink to="/how-we-test">{{
+          isZh ? 'FileTools 质量与测试说明' : 'FileTools quality and testing notes'
+        }}</RouterLink>
         <span aria-hidden="true">·</span>
         <span>{{ isZh ? `更新于 ${reviewedDate}` : `Updated ${reviewedDate}` }}</span>
       </div>
