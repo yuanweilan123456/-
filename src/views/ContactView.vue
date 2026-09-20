@@ -11,7 +11,7 @@ const content = computed(() =>
         eyebrow: '联系与反馈',
         title: '让问题可以被看见、复现和修复。',
         intro:
-          'PixelForge 目前通过公开的 GitHub Issues 接收错误报告、功能建议和网站反馈。公开记录能让处理进度和解决方案对其他用户也有帮助。',
+          'FileTools 目前通过公开的 GitHub Issues 接收错误报告、功能建议和网站反馈。公开记录能让处理进度和解决方案对其他用户也有帮助。',
         cards: [
           {
             title: '报告工具错误',
@@ -40,7 +40,7 @@ const content = computed(() =>
         eyebrow: 'CONTACT & FEEDBACK',
         title: 'Make a problem visible, reproducible, and fixable.',
         intro:
-          'PixelForge currently accepts bug reports, feature requests, and website feedback through public GitHub Issues. A public record helps other users follow progress and reuse a solution.',
+          'FileTools currently accepts bug reports, feature requests, and website feedback through public GitHub Issues. A public record helps other users follow progress and reuse a solution.',
         cards: [
           {
             title: 'Report a tool problem',

@@ -66,7 +66,9 @@ async function selectCategory(category: ToolCategory | 'all') {
         <span class="hero-mesh"></span>
       </div>
       <div class="toolbox-hero-copy">
-        <p class="eyebrow"><span class="eyebrow-dot"></span>PIXELFORGE FILE TOOLBOX</p>
+        <p class="eyebrow">
+          <span class="eyebrow-dot"></span>{{ isZh ? '私密 · 本地 · 免费' : 'PRIVATE · LOCAL · FREE' }}
+        </p>
         <h1 id="toolbox-title">
           <template v-if="isZh">
             <span>免费的在线</span>
@@ -315,7 +317,7 @@ async function selectCategory(category: ToolCategory | 'all') {
     <section id="why" class="trust-section toolbox-principles" aria-labelledby="toolbox-principles-title">
       <div class="section-heading trust-heading">
         <div>
-          <p class="eyebrow">PIXELFORGE PRINCIPLES</p>
+          <p class="eyebrow">{{ isZh ? 'FILETOOLS 使用原则' : 'FILETOOLS PRINCIPLES' }}</p>
           <h2 id="toolbox-principles-title">{{ t('trust.title') }}</h2>
         </div>
         <p>

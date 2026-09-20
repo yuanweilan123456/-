@@ -30,7 +30,7 @@ const seoContent = computed(() => {
 function applyTheme(dark: boolean) {
   isDark.value = dark
   document.documentElement.dataset.theme = dark ? 'dark' : 'light'
-  window.localStorage.setItem('pixelforge-theme', dark ? 'dark' : 'light')
+  window.localStorage.setItem('filetools-theme', dark ? 'dark' : 'light')
 }
 
 function toggleTheme() {
@@ -39,7 +39,7 @@ function toggleTheme() {
 
 function toggleLocale() {
   locale.value = locale.value === 'zh' ? 'en' : 'zh'
-  window.localStorage.setItem('pixelforge-locale', locale.value)
+  window.localStorage.setItem('filetools-locale', locale.value)
   document.documentElement.lang = locale.value === 'zh' ? 'zh-CN' : 'en'
 }
 
@@ -48,7 +48,7 @@ function focusMainContent() {
 }
 
 onMounted(() => {
-  const savedTheme = window.localStorage.getItem('pixelforge-theme')
+  const savedTheme = window.localStorage.getItem('filetools-theme')
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   applyTheme(savedTheme === 'dark' || (savedTheme === null && prefersDark))
   document.documentElement.lang = locale.value === 'zh' ? 'zh-CN' : 'en'
@@ -78,13 +78,15 @@ watch(
         <RouterLink class="brand" to="/" :aria-label="t('a11y.home')">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 32 32">
-              <path d="M8 8.5h10.5a5.5 5.5 0 0 1 0 11H13v5H8v-16Z" />
-              <path d="M13 13h5.2a1.5 1.5 0 1 1 0 3H13v-3Z" />
+              <path class="brand-file" d="M9 5.5h9l5 5v15H9z" />
+              <path class="brand-fold" d="M18 5.5v5h5" />
+              <path class="brand-line" d="M12.5 16h7M12.5 20h5" />
+              <path class="brand-spark" d="M6 8v4M4 10h4" />
             </svg>
           </span>
           <span class="brand-copy">
-            <span class="brand-name">PixelForge</span>
-            <span class="brand-tagline">File Tools</span>
+            <span class="brand-name">File<span>Tools</span></span>
+            <span class="brand-tagline">Local · Private</span>
           </span>
         </RouterLink>
 
@@ -165,7 +167,17 @@ watch(
     <footer class="site-footer">
       <div class="footer-inner">
         <div>
-          <div class="footer-brand">PixelForge</div>
+          <div class="footer-brand">
+            <span class="footer-brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path class="brand-file" d="M9 5.5h9l5 5v15H9z" />
+                <path class="brand-fold" d="M18 5.5v5h5" />
+                <path class="brand-line" d="M12.5 16h7M12.5 20h5" />
+                <path class="brand-spark" d="M6 8v4M4 10h4" />
+              </svg>
+            </span>
+            <span>File<span class="footer-brand-accent">Tools</span></span>
+          </div>
           <p>{{ t('footer.tagline') }}</p>
         </div>
         <nav class="footer-links" :aria-label="t('footer.linksLabel')">

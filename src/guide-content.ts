@@ -29,7 +29,7 @@ export const guides: Guide[] = [
       description: '了解浏览器本地压缩 JPG、PNG 和 WebP 的方法、适用场景和常见限制。',
       toolLabel: '立即压缩图片',
       intro:
-        '图片太大时，上传表单、发送邮件或发布网页都会变慢。PixelForge 在浏览器中完成压缩，图片文件不会上传到服务器，适合处理不希望离开设备的素材。',
+        '图片太大时，上传表单、发送邮件或发布网页都会变慢。FileTools 在浏览器中完成压缩，图片文件不会上传到服务器，适合处理不希望离开设备的素材。',
       steps: ['打开图片压缩工具，选择或拖入图片。', '选择输出格式、质量和目标宽度。', '开始处理，完成后下载压缩结果。'],
       sections: [
         {
@@ -53,7 +53,7 @@ export const guides: Guide[] = [
       description: 'Learn when to compress JPG, PNG, and WebP images locally in your browser and what to expect.',
       toolLabel: 'Compress images now',
       intro:
-        'Large images slow down forms, email attachments, and websites. PixelForge compresses images in your browser, so the files stay on your device instead of being uploaded to a server.',
+        'Large images slow down forms, email attachments, and websites. FileTools compresses images in your browser, so the files stay on your device instead of being uploaded to a server.',
       steps: [
         'Open the image compressor and choose or drop your images.',
         'Select an output format, quality, and target width.',
@@ -149,7 +149,7 @@ export const guides: Guide[] = [
       description: '将 JPG、PNG 和 WebP 图片整理成 PDF，适合扫描资料、照片和提交材料。',
       toolLabel: '图片转 PDF',
       intro:
-        '把多张图片整理成 PDF，常用于提交扫描件、整理课堂笔记或发送照片合集。PixelForge 在浏览器内生成 PDF，原始图片不会上传。',
+        '把多张图片整理成 PDF，常用于提交扫描件、整理课堂笔记或发送照片合集。FileTools 在浏览器内生成 PDF，原始图片不会上传。',
       steps: ['选择需要放进 PDF 的图片。', '按照页面顺序选择文件。', '生成并下载 PDF，打开后检查页面方向和清晰度。'],
       sections: [
         {
@@ -173,7 +173,7 @@ export const guides: Guide[] = [
       description: 'Create a PDF from JPG, PNG, and WebP images for scans, photos, notes, and submissions.',
       toolLabel: 'Images to PDF',
       intro:
-        'Turning several images into one PDF is useful for scans, class notes, and photo collections. PixelForge creates the PDF in your browser, so the source images are not uploaded.',
+        'Turning several images into one PDF is useful for scans, class notes, and photo collections. FileTools creates the PDF in your browser, so the source images are not uploaded.',
       steps: [
         'Choose the images you want to include.',
         'Select them in the order you want the pages to appear.',
@@ -269,7 +269,7 @@ export const guides: Guide[] = [
       description: '把每张图片生成一页宽屏 PPTX，适合照片展示、作品集和简单汇报。',
       toolLabel: '图片生成 PPT',
       intro:
-        '当每张图片都需要占据一页时，批量生成 PPTX 比手动插入更快。PixelForge 会按选择顺序生成宽屏幻灯片，并在浏览器中完成处理。',
+        '当每张图片都需要占据一页时，批量生成 PPTX 比手动插入更快。FileTools 会按选择顺序生成宽屏幻灯片，并在浏览器中完成处理。',
       steps: [
         '选择需要放入演示文稿的图片。',
         '按幻灯片顺序选择文件。',
@@ -298,7 +298,7 @@ export const guides: Guide[] = [
         'Turn each image into a widescreen PPTX slide for photo decks, portfolios, and simple presentations.',
       toolLabel: 'Create a PPT from images',
       intro:
-        'When every image should fill one slide, creating a PPTX in bulk is faster than inserting files one by one. PixelForge creates widescreen slides in the order you select the images and processes them in your browser.',
+        'When every image should fill one slide, creating a PPTX in bulk is faster than inserting files one by one. FileTools creates widescreen slides in the order you select the images and processes them in your browser.',
       steps: [
         'Choose the images for your presentation.',
         'Select them in slide order.',
@@ -332,7 +332,7 @@ export const guides: Guide[] = [
       description: '在浏览器中把 PDF 每一页拆成独立文件，适合提取表单、扫描件和指定页面。',
       toolLabel: '立即拆分 PDF',
       intro:
-        '当一份 PDF 包含多张表单、收据或扫描页时，逐页拆分能让提交和归档更简单。PixelForge 直接在浏览器中读取并生成单页 PDF，不需要上传原文件。',
+        '当一份 PDF 包含多张表单、收据或扫描页时，逐页拆分能让提交和归档更简单。FileTools 直接在浏览器中读取并生成单页 PDF，不需要上传原文件。',
       steps: [
         '打开 PDF 拆分工具并选择文件。',
         '等待浏览器读取页面数量。',
@@ -361,7 +361,7 @@ export const guides: Guide[] = [
         'Split every PDF page into a separate file in your browser for forms, scans, and page-by-page filing.',
       toolLabel: 'Split a PDF now',
       intro:
-        'When a PDF contains several forms, receipts, or scanned pages, separating every page makes submission and filing easier. PixelForge reads the document and creates single-page PDFs in your browser without uploading the source file.',
+        'When a PDF contains several forms, receipts, or scanned pages, separating every page makes submission and filing easier. FileTools reads the document and creates single-page PDFs in your browser without uploading the source file.',
       steps: [
         'Open the PDF splitter and choose your file.',
         'Wait for the browser to read the page count.',
@@ -458,7 +458,7 @@ export const guides: Guide[] = [
       description: '把多个文件在浏览器中打包成 ZIP，了解适用场景、压缩效果和文件命名建议。',
       toolLabel: '创建 ZIP 文件',
       intro:
-        'ZIP 可以把多个文件整理成一个下载或发送包。PixelForge 在浏览器本地完成打包，适合整理附件、作业、图片和小型项目文件。',
+        'ZIP 可以把多个文件整理成一个下载或发送包。FileTools 在浏览器本地完成打包，适合整理附件、作业、图片和小型项目文件。',
       steps: [
         '打开 ZIP 创建工具并选择多个文件。',
         '检查文件名和数量，避免加入不需要的内容。',
@@ -476,7 +476,7 @@ export const guides: Guide[] = [
           heading: '怎样让压缩包更容易使用？',
           paragraphs: [
             '使用简短、可读的文件名，避免同名文件，并在文件名中保留扩展名。发送前可以给 ZIP 使用项目名和日期命名。',
-            '本地工具不会把文件上传到 PixelForge，但下载后的 ZIP 仍需要你自行保管和安全传输。',
+            '本地工具不会把文件上传到 FileTools，但下载后的 ZIP 仍需要你自行保管和安全传输。',
           ],
         },
       ],
@@ -487,7 +487,7 @@ export const guides: Guide[] = [
         'Package multiple files into a ZIP locally and learn when compression helps and how to name the archive.',
       toolLabel: 'Create a ZIP file',
       intro:
-        'ZIP files organize several items into one package for downloading or sharing. PixelForge builds the archive locally in your browser, which works well for attachments, assignments, images, and small project files.',
+        'ZIP files organize several items into one package for downloading or sharing. FileTools builds the archive locally in your browser, which works well for attachments, assignments, images, and small project files.',
       steps: [
         'Open the ZIP creator and choose multiple files.',
         'Check filenames and the file count before processing.',
@@ -505,7 +505,7 @@ export const guides: Guide[] = [
           heading: 'How to make an archive easy to use',
           paragraphs: [
             'Use short readable filenames, avoid duplicates, and keep file extensions. Name the final ZIP with a project name and date when it will be shared with others.',
-            'The local tool does not upload files to PixelForge, but you are still responsible for storing and sending the downloaded archive securely.',
+            'The local tool does not upload files to FileTools, but you are still responsible for storing and sending the downloaded archive securely.',
           ],
         },
       ],

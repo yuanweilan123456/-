@@ -1,4 +1,4 @@
-# Contributing to PixelForge
+# Contributing to FileTools
 
 ## 开发环境
 

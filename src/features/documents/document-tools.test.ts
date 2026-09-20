@@ -10,14 +10,14 @@ function asFile(blob: Blob, name: string) {
 
 describe('document tools', () => {
   it('creates a valid DOCX from text', async () => {
-    const result = await textToDocx('PixelForge\nLocal tools')
+    const result = await textToDocx('FileTools\nLocal tools')
     const zip = await JSZip.loadAsync(await result.blob!.arrayBuffer())
-    expect(await zip.file('word/document.xml')?.async('string')).toContain('PixelForge')
+    expect(await zip.file('word/document.xml')?.async('string')).toContain('FileTools')
   })
   it('round-trips simple DOCX text into HTML and plain text', async () => {
-    const created = await textToDocx('PixelForge test')
+    const created = await textToDocx('FileTools test')
     const file = asFile(created.blob!, 'sample.docx')
-    expect((await docxToHtml(file)).text).toContain('PixelForge test')
-    expect((await docxToText(file)).text).toContain('PixelForge test')
+    expect((await docxToHtml(file)).text).toContain('FileTools test')
+    expect((await docxToText(file)).text).toContain('FileTools test')
   })
 })

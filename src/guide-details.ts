@@ -28,7 +28,7 @@ export const guideDetails: Record<string, GuideDetails> = {
         {
           question: 'Why did a PNG become larger after compression?',
           answer:
-            'PNG is lossless and works best for graphics, screenshots, and transparency. A detailed photo may be much smaller as JPG or WebP, while re-encoding a well-optimized PNG can add bytes instead of removing them. PixelForge keeps the original when the generated result is not smaller.',
+            'PNG is lossless and works best for graphics, screenshots, and transparency. A detailed photo may be much smaller as JPG or WebP, while re-encoding a well-optimized PNG can add bytes instead of removing them. FileTools keeps the original when the generated result is not smaller.',
         },
         {
           question: 'What quality setting should I start with?',
@@ -50,7 +50,7 @@ export const guideDetails: Record<string, GuideDetails> = {
         {
           question: '为什么 PNG 压缩后反而更大？',
           answer:
-            'PNG 是无损格式，更适合图形、截图和透明背景。细节丰富的照片改用 JPG 或 WebP 往往更小，而已经优化过的 PNG 重新编码后可能增加体积。PixelForge 在生成文件没有变小时会保留原文件。',
+            'PNG 是无损格式，更适合图形、截图和透明背景。细节丰富的照片改用 JPG 或 WebP 往往更小，而已经优化过的 PNG 重新编码后可能增加体积。FileTools 在生成文件没有变小时会保留原文件。',
         },
         {
           question: '图片质量应该从多少开始？',
@@ -310,7 +310,7 @@ export const guideDetails: Record<string, GuideDetails> = {
         {
           question: 'Why do leading zeros disappear in another application?',
           answer:
-            'Values such as postal codes and account identifiers should remain strings. PixelForge preserves CSV values as text, but a later application may automatically convert them to numbers. Define a schema or explicitly cast those fields as strings when importing the JSON.',
+            'Values such as postal codes and account identifiers should remain strings. FileTools preserves CSV values as text, but a later application may automatically convert them to numbers. Define a schema or explicitly cast those fields as strings when importing the JSON.',
         },
         {
           question: 'What happens when a row has fewer columns?',
@@ -332,7 +332,7 @@ export const guideDetails: Record<string, GuideDetails> = {
         {
           question: '为什么前导零在其他应用中消失了？',
           answer:
-            '邮政编码、账号等值应当作为字符串。PixelForge 会把 CSV 值保留为文本，但后续应用可能自动转成数字。导入 JSON 时应定义数据结构，或明确把这些字段转换为字符串。',
+            '邮政编码、账号等值应当作为字符串。FileTools 会把 CSV 值保留为文本，但后续应用可能自动转成数字。导入 JSON 时应定义数据结构，或明确把这些字段转换为字符串。',
         },
         {
           question: '某一行列数不足时会怎样？',

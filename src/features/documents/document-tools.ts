@@ -44,7 +44,7 @@ export async function textToDocx(text: string): Promise<ToolResult> {
       type: 'blob',
       mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     }),
-    filename: 'pixelforge-document.docx',
+    filename: 'filetools-document.docx',
     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   }
 }

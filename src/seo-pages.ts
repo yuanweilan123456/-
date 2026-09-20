@@ -33,14 +33,14 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/',
     pageType: 'home',
     en: {
-      title: 'Free File Tools – PDF, Images, DOCX & More – PixelForge',
+      title: 'Free File Tools – PDF, Images, DOCX & More – FileTools',
       description:
         'Use 24 free online tools for images, PDF, Word, PowerPoint, ZIP, JSON, and CSV. Process files locally with no uploads or sign-up.',
       heading: 'Free online file tools, private by design.',
       lead: 'Convert, compress, and organize PDFs, images, Word, PowerPoint, ZIP, and data files right in your browser. No uploads. No account.',
     },
     zh: {
-      title: '免费在线文件工具｜PDF、图片、Word 与更多｜PixelForge',
+      title: '免费在线文件工具｜PDF、图片、Word 与更多｜FileTools',
       description:
         '24 个免费在线文件工具，支持图片、PDF、Word、PPT、ZIP、JSON 和 CSV。浏览器本地处理，无需上传或注册。',
       heading: '免费的在线文件工具，私密完成每个任务。',
@@ -51,13 +51,13 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/tools/image/studio',
     pageType: 'tool',
     en: {
-      title: 'Image tools – PixelForge',
+      title: 'Image tools – FileTools',
       description: 'Compress, convert, and resize images locally in your browser with no sign-up or uploads.',
       heading: 'Private image processing in your browser',
       lead: 'Compress, convert, resize, rotate, and flip JPG, PNG, and WebP images without uploading them.',
     },
     zh: {
-      title: '图片处理工具｜PixelForge',
+      title: '图片处理工具｜FileTools',
       description: '在浏览器本地压缩、转换和调整图片，无需注册，不上传图片。',
       heading: '在浏览器本地处理图片',
       lead: '无需上传即可压缩、转换、调整、旋转和翻转 JPG、PNG 与 WebP 图片。',
@@ -67,13 +67,13 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/guides',
     pageType: 'page',
     en: {
-      title: 'File processing guides – PixelForge',
+      title: 'File processing guides – FileTools',
       description: 'Practical steps, format limits, and privacy advice for common image, PDF, Word, and PPT tasks.',
       heading: 'Understand the task, then choose the tool',
       lead: 'Practical guides for common file tasks, browser limitations, and private local processing.',
     },
     zh: {
-      title: '文件处理指南｜PixelForge',
+      title: '文件处理指南｜FileTools',
       description: '了解图片、PDF、Word 和 PPT 常见任务的处理步骤、格式限制和隐私建议。',
       heading: '先理解方法，再选择工具',
       lead: '了解常见文件任务、浏览器限制和本地处理方式。',
@@ -83,16 +83,16 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/faq',
     pageType: 'page',
     en: {
-      title: 'FAQ – PixelForge',
+      title: 'FAQ – FileTools',
       description:
-        'Learn how PixelForge local processing works, what files are supported, and which browser limits apply.',
+        'Learn how FileTools local processing works, what files are supported, and which browser limits apply.',
       heading: 'Common questions, answered clearly',
       lead: 'Learn how local processing works, what browsers support, and when to use each tool.',
       sections: [
         {
           heading: 'Are my files uploaded to a server?',
           paragraphs: [
-            'No. Current tools read and process files in your browser and do not send them to a PixelForge server.',
+            'No. Current tools read and process files in your browser and do not send them to a FileTools server.',
           ],
         },
         {
@@ -108,7 +108,7 @@ const staticPages: LocalizedStaticPage[] = [
           ],
         },
         {
-          heading: 'Can I use PixelForge on a phone?',
+          heading: 'Can I use FileTools on a phone?',
           paragraphs: [
             'Yes, but large files depend on device memory, browser capabilities, and available battery. A current browser is recommended.',
           ],
@@ -138,14 +138,14 @@ const staticPages: LocalizedStaticPage[] = [
       ],
     },
     zh: {
-      title: '常见问题｜PixelForge',
-      description: '了解 PixelForge 的本地处理方式、文件支持范围和浏览器限制。',
+      title: '常见问题｜FileTools',
+      description: '了解 FileTools 的本地处理方式、文件支持范围和浏览器限制。',
       heading: '开始之前，先解决常见问题',
       lead: '了解文件处理方式、浏览器限制和各工具的适用范围。',
       sections: [
         {
           heading: '我的文件会上传到服务器吗？',
-          paragraphs: ['不会。当前工具在浏览器中读取和处理文件，不会发送到 PixelForge 服务器。'],
+          paragraphs: ['不会。当前工具在浏览器中读取和处理文件，不会发送到 FileTools 服务器。'],
         },
         {
           heading: '支持哪些文件类型？',
@@ -186,10 +186,10 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/about',
     pageType: 'page',
     en: {
-      title: 'About PixelForge | Local file toolbox',
-      description: 'Learn how PixelForge uses browser-local processing to provide lightweight, private file tools.',
+      title: 'About FileTools | Local file toolbox',
+      description: 'Learn how FileTools uses browser-local processing to provide lightweight, private file tools.',
       heading: 'A small, dependable local file toolbox',
-      lead: 'PixelForge focuses on useful everyday file tasks with clear steps and browser-local processing.',
+      lead: 'FileTools focuses on useful everyday file tasks with clear steps and browser-local processing.',
       links: [
         { name: 'How we test', path: '/how-we-test' },
         { name: 'Contact and feedback', path: '/contact' },
@@ -198,14 +198,14 @@ const staticPages: LocalizedStaticPage[] = [
         {
           heading: 'Why this project exists',
           paragraphs: [
-            'Many temporary file tasks do not require an account or remote server. PixelForge makes those workflows direct and understandable while explaining format and device limits.',
+            'Many temporary file tasks do not require an account or remote server. FileTools makes those workflows direct and understandable while explaining format and device limits.',
             'This independently maintained project keeps its implementation and issue history in a public repository. Releases pass automated checks and important workflows are reviewed in a real browser.',
           ],
         },
         {
           heading: 'Files stay on your device',
           paragraphs: [
-            'Current tools process files in the browser without creating a PixelForge account or storing file contents on a PixelForge server.',
+            'Current tools process files in the browser without creating a FileTools account or storing file contents on a FileTools server.',
           ],
         },
         {
@@ -217,10 +217,10 @@ const staticPages: LocalizedStaticPage[] = [
       ],
     },
     zh: {
-      title: '关于 PixelForge｜本地文件工具箱',
-      description: '了解 PixelForge 如何用浏览器本地能力提供轻量、私密的文件处理工具。',
+      title: '关于 FileTools｜本地文件工具箱',
+      description: '了解 FileTools 如何用浏览器本地能力提供轻量、私密的文件处理工具。',
       heading: '小而可靠的本地文件工具箱',
-      lead: 'PixelForge 专注于高频文件任务、清晰步骤和浏览器本地处理。',
+      lead: 'FileTools 专注于高频文件任务、清晰步骤和浏览器本地处理。',
       links: [
         { name: '质量与测试', path: '/how-we-test' },
         { name: '联系与反馈', path: '/contact' },
@@ -229,13 +229,13 @@ const staticPages: LocalizedStaticPage[] = [
         {
           heading: '这个项目为什么存在',
           paragraphs: [
-            '许多临时文件任务不需要账号或远程服务器。PixelForge 让这些流程直接、易懂，同时说明格式和设备限制。',
+            '许多临时文件任务不需要账号或远程服务器。FileTools 让这些流程直接、易懂，同时说明格式和设备限制。',
             '这是一个持续维护的独立项目，实现代码和问题记录保存在公开仓库；每次发布都通过自动化检查，重要流程还会在真实浏览器中复核。',
           ],
         },
         {
           heading: '文件留在你的设备',
-          paragraphs: ['当前工具在浏览器中处理文件，不建立 PixelForge 账号，也不在 PixelForge 服务器保存文件内容。'],
+          paragraphs: ['当前工具在浏览器中处理文件，不建立 FileTools 账号，也不在 FileTools 服务器保存文件内容。'],
         },
         {
           heading: '任务优先，限制透明',
@@ -248,9 +248,9 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/how-we-test',
     pageType: 'page',
     en: {
-      title: 'How PixelForge builds and tests browser file tools',
+      title: 'How FileTools builds and tests browser file tools',
       description:
-        'Read how PixelForge verifies browser-local file processing, tests common failures, documents limitations, and checks every release.',
+        'Read how FileTools verifies browser-local file processing, tests common failures, documents limitations, and checks every release.',
       heading: 'How we build and test file tools',
       lead: 'A transparent explanation of local processing, automated checks, browser testing, known limits, and result review.',
       links: [
@@ -268,7 +268,7 @@ const staticPages: LocalizedStaticPage[] = [
         {
           heading: 'Where processing happens',
           paragraphs: [
-            'The current tools use browser capabilities and front-end libraries. Selected files are not sent to a PixelForge server.',
+            'The current tools use browser capabilities and front-end libraries. Selected files are not sent to a FileTools server.',
             'Local processing depends on device memory and browser support, so damaged, encrypted, or unusually large files may not work.',
           ],
         },
@@ -288,8 +288,8 @@ const staticPages: LocalizedStaticPage[] = [
       ],
     },
     zh: {
-      title: 'PixelForge 如何构建和测试浏览器文件工具',
-      description: '了解 PixelForge 如何验证浏览器本地文件处理、测试常见失败、记录限制并检查每次发布。',
+      title: 'FileTools 如何构建和测试浏览器文件工具',
+      description: '了解 FileTools 如何验证浏览器本地文件处理、测试常见失败、记录限制并检查每次发布。',
       heading: '我们如何构建和测试文件工具',
       lead: '公开说明本地处理、自动化检查、浏览器测试、已知限制和结果复核方法。',
       links: [
@@ -307,7 +307,7 @@ const staticPages: LocalizedStaticPage[] = [
         {
           heading: '文件处理发生在哪里',
           paragraphs: [
-            '当前工具使用浏览器能力和前端库处理，所选文件不会发送到 PixelForge 服务器。',
+            '当前工具使用浏览器能力和前端库处理，所选文件不会发送到 FileTools 服务器。',
             '本地处理取决于设备内存和浏览器支持，损坏、加密或异常大的文件可能无法处理。',
           ],
         },
@@ -329,11 +329,11 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/contact',
     pageType: 'page',
     en: {
-      title: 'Contact PixelForge | Bug reports and feedback',
+      title: 'Contact FileTools | Bug reports and feedback',
       description:
-        'Report a PixelForge tool problem, suggest a browser-local feature, or send privacy and content feedback through public GitHub Issues.',
+        'Report a FileTools tool problem, suggest a browser-local feature, or send privacy and content feedback through public GitHub Issues.',
       heading: 'Make a problem visible, reproducible, and fixable',
-      lead: 'PixelForge accepts bug reports, feature requests, and website feedback through public GitHub Issues.',
+      lead: 'FileTools accepts bug reports, feature requests, and website feedback through public GitHub Issues.',
       links: [
         { name: 'Privacy policy', path: '/privacy' },
         { name: 'How we test', path: '/how-we-test' },
@@ -361,10 +361,10 @@ const staticPages: LocalizedStaticPage[] = [
       ],
     },
     zh: {
-      title: '联系 PixelForge｜错误报告与建议',
-      description: '通过公开 GitHub Issues 报告 PixelForge 工具问题、建议浏览器本地功能，或反馈隐私和内容问题。',
+      title: '联系 FileTools｜错误报告与建议',
+      description: '通过公开 GitHub Issues 报告 FileTools 工具问题、建议浏览器本地功能，或反馈隐私和内容问题。',
       heading: '让问题可以被看见、复现和修复',
-      lead: 'PixelForge 通过公开 GitHub Issues 接收错误报告、功能建议和网站反馈。',
+      lead: 'FileTools 通过公开 GitHub Issues 接收错误报告、功能建议和网站反馈。',
       links: [
         { name: '隐私政策', path: '/privacy' },
         { name: '质量与测试', path: '/how-we-test' },
@@ -390,10 +390,10 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/privacy',
     pageType: 'page',
     en: {
-      title: 'Privacy policy – PixelForge',
-      description: 'Learn how PixelForge handles files, privacy preferences, and Google AdSense advertising.',
+      title: 'Privacy policy – FileTools',
+      description: 'Learn how FileTools handles files, privacy preferences, and Google AdSense advertising.',
       heading: 'Privacy policy',
-      lead: 'PixelForge is designed to process files on your device and does not upload or store user file contents.',
+      lead: 'FileTools is designed to process files on your device and does not upload or store user file contents.',
       links: [
         { name: 'Contact and feedback', path: '/contact' },
         { name: 'Google Ads Settings', path: 'https://adssettings.google.com/' },
@@ -406,35 +406,35 @@ const staticPages: LocalizedStaticPage[] = [
         {
           heading: 'File processing',
           paragraphs: [
-            'Images, PDFs, DOCX, and PPTX files are processed in the browser. PixelForge does not upload file contents or create cloud copies.',
+            'Images, PDFs, DOCX, and PPTX files are processed in the browser. FileTools does not upload file contents or create cloud copies.',
           ],
         },
         {
           heading: 'Local preferences',
           paragraphs: [
-            'Theme and language preferences are stored on the device and can be cleared through browser settings. PixelForge currently has no user accounts.',
+            'Theme and language preferences are stored on the device and can be cleared through browser settings. FileTools currently has no user accounts.',
           ],
         },
         {
           heading: 'Google advertising cookies',
           paragraphs: [
             'Third-party vendors, including Google, use cookies to serve ads based on a user’s prior visits to this website or other websites. Google advertising cookies enable Google and its partners to serve ads based on visits to sites on the Internet.',
-            'Users can visit Google Ads Settings to opt out of personalized advertising. PixelForge does not send selected file contents to Google.',
+            'Users can visit Google Ads Settings to opt out of personalized advertising. FileTools does not send selected file contents to Google.',
           ],
         },
         {
           heading: 'Retention and policy changes',
           paragraphs: [
-            'PixelForge does not retain source files or processed results on a server. Material policy changes will be documented on this page.',
+            'FileTools does not retain source files or processed results on a server. Material policy changes will be documented on this page.',
           ],
         },
       ],
     },
     zh: {
-      title: '隐私政策｜PixelForge',
-      description: '了解 PixelForge 如何处理文件、隐私偏好和 Google AdSense 广告服务。',
+      title: '隐私政策｜FileTools',
+      description: '了解 FileTools 如何处理文件、隐私偏好和 Google AdSense 广告服务。',
       heading: '隐私政策',
-      lead: 'PixelForge 旨在让文件留在你的设备上处理，不上传或保存用户文件内容。',
+      lead: 'FileTools 旨在让文件留在你的设备上处理，不上传或保存用户文件内容。',
       links: [
         { name: '联系与反馈', path: '/contact' },
         { name: 'Google 广告设置', path: 'https://adssettings.google.com/' },
@@ -443,22 +443,22 @@ const staticPages: LocalizedStaticPage[] = [
       sections: [
         {
           heading: '文件处理',
-          paragraphs: ['图片、PDF、DOCX 和 PPTX 文件在浏览器中处理，PixelForge 不上传文件内容，也不创建云端副本。'],
+          paragraphs: ['图片、PDF、DOCX 和 PPTX 文件在浏览器中处理，FileTools 不上传文件内容，也不创建云端副本。'],
         },
         {
           heading: '本地偏好',
-          paragraphs: ['主题和语言偏好保存在设备上，可以通过浏览器设置清除。PixelForge 当前不提供用户账号。'],
+          paragraphs: ['主题和语言偏好保存在设备上，可以通过浏览器设置清除。FileTools 当前不提供用户账号。'],
         },
         {
           heading: 'Google 广告 Cookie',
           paragraphs: [
             '包括 Google 在内的第三方供应商会使用 Cookie，根据用户此前访问本网站或其他网站的情况投放广告。Google 广告 Cookie 使 Google 及其合作伙伴能够根据用户对互联网站点的访问投放广告。',
-            '用户可以访问 Google 广告设置退出个性化广告。PixelForge 不会把所选文件内容发送给 Google。',
+            '用户可以访问 Google 广告设置退出个性化广告。FileTools 不会把所选文件内容发送给 Google。',
           ],
         },
         {
           heading: '保留与政策变更',
-          paragraphs: ['PixelForge 不在服务器保留源文件或处理结果。若政策发生实质变化，会在本页记录。'],
+          paragraphs: ['FileTools 不在服务器保留源文件或处理结果。若政策发生实质变化，会在本页记录。'],
         },
       ],
     },
@@ -467,8 +467,8 @@ const staticPages: LocalizedStaticPage[] = [
     path: '/terms',
     pageType: 'page',
     en: {
-      title: 'Terms of use – PixelForge',
-      description: 'Usage scope, responsibility boundaries, and browser compatibility for PixelForge file tools.',
+      title: 'Terms of use – FileTools',
+      description: 'Usage scope, responsibility boundaries, and browser compatibility for FileTools.',
       heading: 'Terms of use',
       lead: 'Only process files that you have the right to use. Results and compatibility may vary by file and device.',
       links: [{ name: 'Contact and feedback', path: '/contact' }],
@@ -494,8 +494,8 @@ const staticPages: LocalizedStaticPage[] = [
       ],
     },
     zh: {
-      title: '使用条款｜PixelForge',
-      description: 'PixelForge 文件工具的使用范围、责任边界和浏览器兼容性说明。',
+      title: '使用条款｜FileTools',
+      description: 'FileTools 文件工具的使用范围、责任边界和浏览器兼容性说明。',
       heading: '使用条款',
       lead: '请仅处理你有权使用的文件。处理结果和浏览器兼容性可能因文件和设备而异。',
       links: [{ name: '联系与反馈', path: '/contact' }],
@@ -603,7 +603,7 @@ export function getSeoPage(path: string, language: SeoLanguage = 'en'): SeoPageD
     const localizedDetails = details?.[language]
     return {
       path: pathname,
-      title: `${content.title} | PixelForge`,
+      title: `${content.title} | FileTools`,
       description: content.description,
       heading: content.title,
       lead: content.intro,
@@ -666,7 +666,7 @@ export function getSeoPage(path: string, language: SeoLanguage = 'en'): SeoPageD
       })),
       { name: language === 'zh' ? '实用使用指南' : 'Practical guides', path: '/guides' },
       { name: language === 'zh' ? '质量与测试' : 'Quality and testing', path: '/how-we-test' },
-      { name: language === 'zh' ? '关于 PixelForge' : 'About PixelForge', path: '/about' },
+      { name: language === 'zh' ? '关于 FileTools' : 'About FileTools', path: '/about' },
       { name: language === 'zh' ? '联系与反馈' : 'Contact and feedback', path: '/contact' },
     ]
   } else if (pathname === '/tools/image/studio') {

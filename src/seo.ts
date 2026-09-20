@@ -55,8 +55,13 @@ export function buildStructuredData(content: SeoContent, canonical: string, lang
   }
   if (content.pageType === 'article') {
     webPage.headline = content.title.replace(/\s*[|｜].*$/, '')
-    webPage.author = { '@type': 'Organization', name: 'PixelForge', url: `${SITE_URL}/about` }
-    webPage.publisher = { '@type': 'Organization', name: 'PixelForge', url: `${SITE_URL}/` }
+    webPage.author = { '@type': 'Organization', name: 'FileTools', url: `${SITE_URL}/about` }
+    webPage.publisher = {
+      '@type': 'Organization',
+      name: 'FileTools',
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/favicon.svg`,
+    }
     if (content.dateModified) webPage.dateModified = content.dateModified
   }
 
@@ -65,8 +70,9 @@ export function buildStructuredData(content: SeoContent, canonical: string, lang
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
-      name: 'PixelForge',
-      alternateName: 'PixelForge File Toolbox',
+      name: 'FileTools',
+      alternateName: 'Private browser file tools',
+      image: `${SITE_URL}/favicon.svg`,
       description: content.description,
       inLanguage: ['en', 'zh-CN'],
     })
@@ -119,10 +125,10 @@ export function buildStructuredData(content: SeoContent, canonical: string, lang
 }
 
 function setStructuredData(data: ReturnType<typeof buildStructuredData>) {
-  let element = document.head.querySelector<HTMLScriptElement>('#pixelforge-structured-data')
+  let element = document.head.querySelector<HTMLScriptElement>('#filetools-structured-data')
   if (!element) {
     element = document.createElement('script')
-    element.id = 'pixelforge-structured-data'
+    element.id = 'filetools-structured-data'
     element.type = 'application/ld+json'
     document.head.appendChild(element)
   }
@@ -142,7 +148,7 @@ export function updateSeo(content: SeoContent) {
   setProperty('og:title', content.title)
   setProperty('og:description', content.description)
   setProperty('og:type', content.pageType === 'article' ? 'article' : 'website')
-  setProperty('og:site_name', 'PixelForge')
+  setProperty('og:site_name', 'FileTools')
   setProperty('og:locale', locale)
   setProperty('og:url', canonical)
 

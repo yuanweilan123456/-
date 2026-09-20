@@ -1,10 +1,10 @@
-# PixelForge Image Tools 项目章程
+# FileTools Image Tools 项目章程
 
 ## 1. 项目概述
 
-PixelForge Image Tools 是一个浏览器端文件工具箱，帮助用户快速完成图片、PDF、DOCX 和 PPTX 的常用处理。默认在用户设备本地处理文件，不上传文件，主收入来源为合规展示广告。
+FileTools Image Tools 是一个浏览器端文件工具箱，帮助用户快速完成图片、PDF、DOCX 和 PPTX 的常用处理。默认在用户设备本地处理文件，不上传文件，主收入来源为合规展示广告。
 
-项目名称确定为 PixelForge Image Tools。
+项目名称确定为 FileTools Image Tools。
 
 ## 2. 项目目标
 

@@ -67,13 +67,13 @@ function renderSections(page: SeoPageDefinition) {
 
 function renderStaticShell(page: SeoPageDefinition) {
   return `<div id="app"><div class="prerender-shell" data-prerendered-route="${escapeHtml(page.path)}">
-    <header><a class="prerender-brand" href="/">PixelForge</a><nav aria-label="Main navigation"><a href="/">All tools</a><a href="/guides">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a><a href="/how-we-test">How we test</a><a href="/contact">Contact</a></nav></header>
+    <header><a class="prerender-brand" href="/">FileTools</a><nav aria-label="Main navigation"><a href="/">All tools</a><a href="/guides">Guides</a><a href="/faq">FAQ</a><a href="/about">About</a><a href="/how-we-test">How we test</a><a href="/contact">Contact</a></nav></header>
     <main>${renderBreadcrumbs(page)}<h1>${escapeHtml(page.heading)}</h1><p class="prerender-lead">${escapeHtml(page.lead)}</p>${renderSections(page)}${renderLinks(page.links)}</main>
-    <footer><a href="/about">About</a><a href="/how-we-test">How we test</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><p>Free browser-local file tools from PixelForge.</p></footer>
+    <footer><a href="/about">About</a><a href="/how-we-test">How we test</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><p>Free browser-local file tools from FileTools.</p></footer>
   </div></div>`
 }
 
-const PRERENDER_STYLE = `<style id="pixelforge-prerender-style">
+const PRERENDER_STYLE = `<style id="filetools-prerender-style">
   .prerender-shell{max-width:1120px;margin:auto;padding:0 24px;color:#172033;font:16px/1.65 Inter,ui-sans-serif,system-ui,sans-serif}
   .prerender-shell header,.prerender-shell footer{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0}
   .prerender-shell nav,.prerender-shell footer{display:flex;flex-wrap:wrap;gap:16px}.prerender-brand{font-size:1.25rem;font-weight:800}
@@ -104,8 +104,8 @@ function renderPage(baseHtml: string, page: SeoPageDefinition) {
   )
   html = replaceRequired(
     html,
-    /<script\s+[^>]*id=["']pixelforge-structured-data["'][^>]*>[\s\S]*?<\/script>/i,
-    `<script id="pixelforge-structured-data" type="application/ld+json">${structuredData}</script>`,
+    /<script\s+[^>]*id=["']filetools-structured-data["'][^>]*>[\s\S]*?<\/script>/i,
+    `<script id="filetools-structured-data" type="application/ld+json">${structuredData}</script>`,
     'structured data',
   )
   html = replaceRequired(html, /<\/head>/i, `${PRERENDER_STYLE}</head>`, 'closing head tag')

@@ -194,7 +194,7 @@ async function downloadAll() {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
-  link.download = 'pixelforge-images.zip'
+  link.download = 'filetools-images.zip'
   link.click()
   window.setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
@@ -386,7 +386,7 @@ onBeforeUnmount(clearImages)
 
     <section id="why" class="trust-section" aria-labelledby="trust-title">
       <div class="section-heading">
-        <p class="eyebrow">PIXELFORGE PRINCIPLES</p>
+        <p class="eyebrow">FILETOOLS PRINCIPLES</p>
         <h2 id="trust-title">{{ t('trust.title') }}</h2>
       </div>
       <div class="trust-grid">

@@ -8,10 +8,10 @@ const isZh = computed(() => locale.value === 'zh')
 const content = computed(() =>
   isZh.value
     ? {
-        eyebrow: '关于 PIXELFORGE',
+        eyebrow: '关于 FILETOOLS',
         title: '小而可靠的本地文件工具箱。',
         description:
-          'PixelForge 面向需要快速处理文件、又不希望上传到陌生服务器的人。我们把常用操作放回浏览器，让隐私和效率同时成为默认设置。',
+          'FileTools 面向需要快速处理文件、又不希望上传到陌生服务器的人。我们把常用操作放回浏览器，让隐私和效率同时成为默认设置。',
         cards: [
           {
             label: '01 / 隐私',
@@ -31,7 +31,7 @@ const content = computed(() =>
         ],
         storyTitle: '这个项目为什么存在',
         story: [
-          '很多临时文件任务并不需要注册账号或把材料交给远程服务器。PixelForge 希望把这些高频操作做成可以直接打开、看懂并完成的浏览器工具，同时诚实说明格式兼容和设备性能边界。',
+          '很多临时文件任务并不需要注册账号或把材料交给远程服务器。FileTools 希望把这些高频操作做成可以直接打开、看懂并完成的浏览器工具，同时诚实说明格式兼容和设备性能边界。',
           '这是一个持续维护的独立工具项目。网站内容、工具实现和问题记录保存在公开代码仓库中；每次发布都经过自动化检查，重要流程还会在真实浏览器中复核。',
         ],
         standardsTitle: '我们的内容与产品原则',
@@ -47,10 +47,10 @@ const content = computed(() =>
         source: '查看公开源代码与更新记录',
       }
     : {
-        eyebrow: 'ABOUT PIXELFORGE',
+        eyebrow: 'ABOUT FILETOOLS',
         title: 'A small, dependable local file toolbox.',
         description:
-          'PixelForge is for people who need quick file tasks without sending documents to an unfamiliar server. We keep common operations in the browser, making privacy and speed the default.',
+          'FileTools is for people who need quick file tasks without sending documents to an unfamiliar server. We keep common operations in the browser, making privacy and speed the default.',
         cards: [
           {
             label: '01 / PRIVACY',
@@ -70,7 +70,7 @@ const content = computed(() =>
         ],
         storyTitle: 'Why this project exists',
         story: [
-          'Many temporary file tasks do not require an account or a remote server. PixelForge turns frequent workflows into browser tools that people can open, understand, and complete directly, while being honest about format compatibility and device limits.',
+          'Many temporary file tasks do not require an account or a remote server. FileTools turns frequent workflows into browser tools that people can open, understand, and complete directly, while being honest about format compatibility and device limits.',
           'This is an independently maintained tools project. Site content, tool implementation, and issue history live in a public code repository. Every release passes automated checks, and important workflows are reviewed in a real browser.',
         ],
         standardsTitle: 'Our content and product principles',

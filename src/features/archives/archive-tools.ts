@@ -28,7 +28,7 @@ export async function createZip(files: File[]): Promise<ToolResult> {
   }
   return {
     blob: await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } }),
-    filename: 'pixelforge-files.zip',
+    filename: 'filetools-files.zip',
     mimeType: 'application/zip',
   }
 }

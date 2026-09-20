@@ -16,7 +16,7 @@ const content = computed(() =>
           {
             question: '我的文件会上传到服务器吗？',
             answer:
-              '不会。当前工具在浏览器本地读取和处理文件，文件不会发送到 PixelForge 服务器。刷新或关闭页面后，当前任务也不会保留。',
+              '不会。当前工具在浏览器本地读取和处理文件，文件不会发送到 FileTools 服务器。刷新或关闭页面后，当前任务也不会保留。',
           },
           {
             question: '支持哪些文件类型？',
@@ -39,7 +39,7 @@ const content = computed(() =>
               '不一定。PDF 页面外观通常能够保留，但交互表单、签名、书签和批注可能变化；DOCX 的复杂分页、浮动对象和字体也不保证完全还原。请保留原文件并打开下载结果检查。',
           },
           {
-            question: 'PixelForge 如何测试这些工具？',
+            question: 'FileTools 如何测试这些工具？',
             answer:
               '每次发布会运行类型检查、代码规范、单元测试、生产构建和可抓取页面校验。重要页面还会在桌面、移动端、深色和浅色模式中进行真实浏览器检查。完整方法可以在“质量与测试”页面查看。',
           },
@@ -59,7 +59,7 @@ const content = computed(() =>
           {
             question: 'Are my files uploaded to a server?',
             answer:
-              'No. The current tools read and process files in your browser. Files are not sent to PixelForge servers. Refreshing or closing the page also clears the current task.',
+              'No. The current tools read and process files in your browser. Files are not sent to FileTools servers. Refreshing or closing the page also clears the current task.',
           },
           {
             question: 'Which file types are supported?',
@@ -72,7 +72,7 @@ const content = computed(() =>
               'DOCX to HTML extracts headings, paragraphs, lists, and images. Complex fonts, headers, footers, floating objects, and pagination are not guaranteed to match exactly.',
           },
           {
-            question: 'Can I use PixelForge on a phone?',
+            question: 'Can I use FileTools on a phone?',
             answer:
               'Yes. The layout is mobile-friendly, but large files depend on device memory, browser capabilities, and battery. Use the latest Chrome, Edge, Safari, or Firefox.',
           },
@@ -82,7 +82,7 @@ const content = computed(() =>
               'Not always. PDF page appearance is usually preserved, but interactive forms, signatures, bookmarks, and annotations may change. Complex DOCX pagination, floating objects, and fonts are also not guaranteed. Keep the original and open every downloaded result.',
           },
           {
-            question: 'How does PixelForge test the tools?',
+            question: 'How does FileTools test the tools?',
             answer:
               'Every release runs type checks, code-quality rules, unit tests, a production build, and crawlable-page verification. Important pages are also checked in a real browser on desktop and mobile, in light and dark themes. The full method is documented on the Quality & testing page.',
           },

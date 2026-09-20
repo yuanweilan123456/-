@@ -60,7 +60,7 @@ const textPlaceholder = computed(() => {
       en: 'Slide title\nFirst point\nSecond point\n\nNext slide\nAnother point',
       zh: '幻灯片标题\n第一条内容\n第二条内容\n\n下一页标题\n另一条内容',
     },
-    'json-format': { en: '{\n  "name": "PixelForge"\n}', zh: '{\n  "name": "PixelForge"\n}' },
+    'json-format': { en: '{\n  "name": "FileTools"\n}', zh: '{\n  "name": "FileTools"\n}' },
     'json-to-csv': { en: '[{"name":"Ada","score":98}]', zh: '[{"name":"小明","score":98}]' },
     'base64-to-file': { en: 'Paste Base64 or a data URL…', zh: '粘贴 Base64 或 Data URL…' },
   }
@@ -143,7 +143,7 @@ async function downloadBatch() {
   })
   download({
     blob: await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' }),
-    filename: 'pixelforge-results.zip',
+    filename: 'filetools-results.zip',
     mimeType: 'application/zip',
   })
 }

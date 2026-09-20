@@ -12,7 +12,7 @@
 
 ## 开始写代码前仍需确认
 
-- [x] 最终产品名：PixelForge Image Tools；域名待定。
+- [x] 最终产品名：FileTools Image Tools；域名待定。
 - [x] 首发语言：中文/英文双语。
 - [ ] 首发受众地区及可用广告平台。
 - [x] 首期采用纯前端本地处理，不做后端账号和云存储；见 `08-processing-model-comparison.md`。

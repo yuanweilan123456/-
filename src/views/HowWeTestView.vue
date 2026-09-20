@@ -11,7 +11,7 @@ const content = computed(() =>
         eyebrow: '质量与透明度',
         title: '我们如何构建和测试文件工具',
         intro:
-          'PixelForge 是一个浏览器本地文件工具项目。这里公开说明工具使用的处理方式、测试流程、已知边界和问题反馈渠道，帮助你在使用前判断它是否适合自己的文件。',
+          'FileTools 是一个浏览器本地文件工具项目。这里公开说明工具使用的处理方式、测试流程、已知边界和问题反馈渠道，帮助你在使用前判断它是否适合自己的文件。',
         updated: '最后复核：2026 年 9 月 9 日',
         sections: [
           {
@@ -26,7 +26,7 @@ const content = computed(() =>
             number: '02',
             title: '文件处理发生在哪里',
             paragraphs: [
-              '当前工具使用浏览器 File API、Canvas、Web Crypto，以及 pdf-lib、Mammoth 和 JSZip 等前端库完成处理。你选择的文件不会发送到 PixelForge 服务器，也不会建立账号或云端任务记录。',
+              '当前工具使用浏览器 File API、Canvas、Web Crypto，以及 pdf-lib、Mammoth 和 JSZip 等前端库完成处理。你选择的文件不会发送到 FileTools 服务器，也不会建立账号或云端任务记录。',
               '本地处理也有代价：大文件会使用设备内存，旧浏览器可能缺少必要能力，受密码保护或结构损坏的文件可能无法读取。因此我们不会承诺所有文件都能完美转换。',
             ],
           },
@@ -57,7 +57,7 @@ const content = computed(() =>
         eyebrow: 'QUALITY & TRANSPARENCY',
         title: 'How we build and test file tools',
         intro:
-          'PixelForge is a browser-local file tools project. This page explains how the tools process files, how releases are checked, where the limits are, and how to report a problem so you can decide whether a tool fits your task.',
+          'FileTools is a browser-local file tools project. This page explains how the tools process files, how releases are checked, where the limits are, and how to report a problem so you can decide whether a tool fits your task.',
         updated: 'Last reviewed: September 9, 2026',
         sections: [
           {
@@ -72,7 +72,7 @@ const content = computed(() =>
             number: '02',
             title: 'Where file processing happens',
             paragraphs: [
-              'The current tools use browser capabilities such as the File API, Canvas, and Web Crypto, together with front-end libraries including pdf-lib, Mammoth, and JSZip. Selected files are not sent to a PixelForge server, and no account or cloud job record is created.',
+              'The current tools use browser capabilities such as the File API, Canvas, and Web Crypto, together with front-end libraries including pdf-lib, Mammoth, and JSZip. Selected files are not sent to a FileTools server, and no account or cloud job record is created.',
               'Local processing has practical limits. Large files consume device memory, older browsers can lack required capabilities, and password-protected or damaged files may not open. We therefore do not claim that every file can be converted perfectly.',
             ],
           },

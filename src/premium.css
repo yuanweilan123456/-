@@ -1,4 +1,4 @@
-/* PixelForge premium visual layer
+/* FileTools premium visual layer
    Kept separate from the structural stylesheet so the product system stays auditable. */
 
 :root {
@@ -140,6 +140,33 @@ body::before {
 .brand-name {
   font-size: 19px;
   letter-spacing: -0.045em;
+}
+
+.brand-name > span,
+.footer-brand-accent {
+  color: #6651ef;
+}
+
+:root[data-theme='dark'] .brand-name > span,
+:root[data-theme='dark'] .footer-brand-accent {
+  color: #a99cff;
+}
+
+.brand-mark svg,
+.footer-brand-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brand-mark svg {
+  stroke-width: 2.15;
+}
+
+.brand-mark .brand-spark,
+.footer-brand-icon .brand-spark {
+  color: #8ff7d3;
 }
 
 .site-nav {
@@ -1162,8 +1189,28 @@ html[lang='zh-CN'] .toolbox-heading h1 {
 }
 
 .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 23px;
   letter-spacing: -0.045em;
+}
+
+.footer-brand-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: #fff;
+  background: linear-gradient(145deg, #846fff 0%, #5b45ec 58%, #3e2dbc 100%);
+  box-shadow: 0 10px 24px rgba(91, 69, 236, 0.26);
+}
+
+.footer-brand-icon svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 2.15;
 }
 
 .footer-inner p,

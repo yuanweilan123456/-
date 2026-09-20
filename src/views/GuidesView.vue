@@ -18,7 +18,7 @@ const visibleGuides = computed(() =>
 
 <template>
   <div class="page-wrap content-page guides-page">
-    <p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'PIXELFORGE 使用指南' : 'PIXELFORGE GUIDES' }}</p>
+    <p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'FILETOOLS 使用指南' : 'FILETOOLS GUIDES' }}</p>
     <h1>{{ isZh ? '先理解方法，再选择工具。' : 'Understand the task, then choose the tool.' }}</h1>
     <p class="content-lead">
       {{

@@ -21,8 +21,8 @@ export type CategoryPageContent = {
 export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
   image: {
     seoTitle: {
-      en: 'Free online image tools – private & local | PixelForge',
-      zh: '免费在线图片工具｜本地处理｜PixelForge',
+      en: 'Free online image tools – private & local | FileTools',
+      zh: '免费在线图片工具｜本地处理｜FileTools',
     },
     seoDescription: {
       en: 'Compress, convert, resize, rotate, and flip JPG, PNG, and WebP images free in your browser. No uploads or sign-up.',
@@ -33,7 +33,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
       lead: 'Compress, convert, resize, rotate, and flip JPG, PNG, and WebP images without waiting for an upload.',
       overviewTitle: 'Finish everyday image tasks in one private workspace',
       overview:
-        'PixelForge uses browser image APIs to process files on your device. Choose a focused tool for a quick task or open the image studio when you need format, quality, size, rotation, and flip controls together.',
+        'FileTools uses browser image APIs to process files on your device. Choose a focused tool for a quick task or open the image studio when you need format, quality, size, rotation, and flip controls together.',
       useCasesTitle: 'Useful for websites, forms, and everyday sharing',
       useCases: [
         'Reduce photos before adding them to a website or email.',
@@ -57,7 +57,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
       lead: '无需等待上传，即可压缩、转换、调整、旋转和翻转 JPG、PNG 与 WebP 图片。',
       overviewTitle: '在一个私密工作台完成日常图片任务',
       overview:
-        'PixelForge 使用浏览器图片能力在设备上处理文件。简单任务可以直接打开对应工具，需要同时调整格式、质量、尺寸和方向时可使用图片工作台。',
+        'FileTools 使用浏览器图片能力在设备上处理文件。简单任务可以直接打开对应工具，需要同时调整格式、质量、尺寸和方向时可使用图片工作台。',
       useCasesTitle: '适合网站、表单和日常分享',
       useCases: [
         '在上传网站或发送邮件前减小照片体积。',
@@ -72,8 +72,8 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
   },
   pdf: {
     seoTitle: {
-      en: 'Free online PDF tools – merge, split & edit | PixelForge',
-      zh: '免费在线 PDF 工具｜合并、拆分与整理｜PixelForge',
+      en: 'Free online PDF tools – merge, split & edit | FileTools',
+      zh: '免费在线 PDF 工具｜合并、拆分与整理｜FileTools',
     },
     seoDescription: {
       en: 'Merge, split, extract, remove, and rotate PDF pages or turn images into PDF. Free browser-local tools with no file uploads.',
@@ -93,7 +93,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
       ],
       faq: [
         {
-          question: 'Can PixelForge open password-protected PDFs?',
+          question: 'Can FileTools open password-protected PDFs?',
           answer:
             'Encrypted or damaged PDFs may not be readable. Save an unlocked copy in a trusted PDF reader before using the tool.',
         },
@@ -125,7 +125,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
     },
   },
   document: {
-    seoTitle: { en: 'Free DOCX and text tools online | PixelForge', zh: '免费 Word 与文本转换工具｜PixelForge' },
+    seoTitle: { en: 'Free DOCX and text tools online | FileTools', zh: '免费 Word 与文本转换工具｜FileTools' },
     seoDescription: {
       en: 'Convert DOCX to HTML or plain text, and create editable Word documents from text. Free local processing with no uploads.',
       zh: '免费将 DOCX 转为 HTML 或纯文本，也可从文本创建可编辑 Word 文档。浏览器本地处理，不上传文件。',
@@ -181,8 +181,8 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
   },
   presentation: {
     seoTitle: {
-      en: 'Free PowerPoint maker tools online | PixelForge',
-      zh: '免费 PPT 制作工具｜图片与文本生成 PPT｜PixelForge',
+      en: 'Free PowerPoint maker tools online | FileTools',
+      zh: '免费 PPT 制作工具｜图片与文本生成 PPT｜FileTools',
     },
     seoDescription: {
       en: 'Create editable PPTX presentations from images or structured text in your browser. Free, private, and no upload required.',
@@ -232,8 +232,8 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
   },
   archive: {
     seoTitle: {
-      en: 'Free ZIP tools online – create and extract | PixelForge',
-      zh: '免费在线 ZIP 工具｜创建与解压｜PixelForge',
+      en: 'Free ZIP tools online – create and extract | FileTools',
+      zh: '免费在线 ZIP 工具｜创建与解压｜FileTools',
     },
     seoDescription: {
       en: 'Create ZIP archives from multiple files or inspect and extract a ZIP locally in your browser. Free with no uploads.',
@@ -277,7 +277,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
     },
   },
   data: {
-    seoTitle: { en: 'Free JSON and CSV tools online | PixelForge', zh: '免费 JSON 与 CSV 转换工具｜PixelForge' },
+    seoTitle: { en: 'Free JSON and CSV tools online | FileTools', zh: '免费 JSON 与 CSV 转换工具｜FileTools' },
     seoDescription: {
       en: 'Format and validate JSON, convert CSV to JSON, or turn JSON arrays into CSV. Fast browser-local data tools with no uploads.',
       zh: '格式化与校验 JSON、CSV 转 JSON、JSON 数组转 CSV。快速浏览器本地数据工具，无需上传。',
@@ -328,8 +328,8 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
   },
   utility: {
     seoTitle: {
-      en: 'Free file utilities – checksum and Base64 | PixelForge',
-      zh: '免费文件实用工具｜校验值与 Base64｜PixelForge',
+      en: 'Free file utilities – checksum and Base64 | FileTools',
+      zh: '免费文件实用工具｜校验值与 Base64｜FileTools',
     },
     seoDescription: {
       en: 'Calculate SHA checksums, encode files as Base64, or decode Base64 into a file. Free browser-local utilities with no upload.',
@@ -392,9 +392,7 @@ export function getToolPageContent(tool: ToolDefinition, language: 'en' | 'zh') 
         : 'Choose or drop your files'
 
   return {
-    seoTitle: isZh
-      ? `${tool.title.zh}在线免费使用｜PixelForge`
-      : `${tool.title.en} online – free & private | PixelForge`,
+    seoTitle: isZh ? `${tool.title.zh}在线免费使用｜FileTools` : `${tool.title.en} online – free & private | FileTools`,
     seoDescription: isZh
       ? `${tool.description.zh}免费在浏览器本地完成，无需注册或上传文件。`
       : `${tool.description.en} Free browser-local processing with no uploads or sign-up.`,
@@ -406,8 +404,8 @@ export function getToolPageContent(tool: ToolDefinition, language: 'en' | 'zh') 
           'Review the result and download it to your device',
         ],
     whyTitle: isZh
-      ? `为什么使用 PixelForge ${tool.title.zh}？`
-      : `Why use PixelForge for ${tool.title.en.toLowerCase()}?`,
+      ? `为什么使用 FileTools ${tool.title.zh}？`
+      : `Why use FileTools for ${tool.title.en.toLowerCase()}?`,
     whyText: editorial.overview,
     categoryLead: category.lead,
     editorial,

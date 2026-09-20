@@ -42,12 +42,12 @@ const relatedGuides = computed(() => {
       <span aria-current="page">{{ content.title }}</span>
     </nav>
     <article>
-      <p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'PIXELFORGE 使用指南' : 'PIXELFORGE GUIDE' }}</p>
+      <p class="eyebrow"><span class="eyebrow-dot"></span>{{ isZh ? 'FILETOOLS 使用指南' : 'FILETOOLS GUIDE' }}</p>
       <h1>{{ content.title }}</h1>
       <p class="guide-lead">{{ content.intro }}</p>
       <div class="guide-byline">
         <span>{{ isZh ? '由' : 'Written and reviewed by' }}</span>
-        <RouterLink to="/about">{{ isZh ? 'PixelForge 项目团队' : 'the PixelForge project team' }}</RouterLink>
+        <RouterLink to="/about">{{ isZh ? 'FileTools 项目团队' : 'the FileTools project team' }}</RouterLink>
         <span aria-hidden="true">·</span>
         <span>{{ isZh ? `更新于 ${reviewedDate}` : `Updated ${reviewedDate}` }}</span>
       </div>

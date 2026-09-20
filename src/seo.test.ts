@@ -6,7 +6,7 @@ describe('SEO structured data', () => {
     const canonical = `${SITE_URL}/tools/pdf/merge`
     const data = buildStructuredData(
       {
-        title: 'Merge PDFs online – free & private | PixelForge',
+        title: 'Merge PDFs online – free & private | FileTools',
         description: 'Merge PDF files locally.',
         pageType: 'tool',
         breadcrumbs: [
@@ -26,7 +26,7 @@ describe('SEO structured data', () => {
   it('lists every supplied tool on the home page', () => {
     const data = buildStructuredData(
       {
-        title: 'Free online file tools – PixelForge',
+        title: 'Free online file tools – FileTools',
         description: 'Private browser-local file tools.',
         pageType: 'home',
         items: [
@@ -45,7 +45,7 @@ describe('SEO structured data', () => {
     const canonical = `${SITE_URL}/guides/merge-pdf-files`
     const data = buildStructuredData(
       {
-        title: 'How to merge PDF files | PixelForge',
+        title: 'How to merge PDF files | FileTools',
         description: 'A practical PDF merging guide.',
         pageType: 'article',
         dateModified: '2026-09-09',

@@ -76,7 +76,7 @@ describe('SEO page manifest', () => {
       getSeoPage(routePath, 'en'),
     )
     const overviews = toolPages.map((page) =>
-      page?.sections?.find((section) => section.heading.startsWith('Why use PixelForge'))?.paragraphs?.join(' '),
+      page?.sections?.find((section) => section.heading.startsWith('Why use FileTools'))?.paragraphs?.join(' '),
     )
 
     expect(toolPages).toHaveLength(tools.length)
