@@ -74,6 +74,30 @@ test.beforeEach(async ({ page }) => {
   })
 })
 
+test('new local PDF tools reorder, watermark, and number pages', async ({ page }) => {
+  const pdf = await PDFDocument.create()
+  pdf.addPage([200, 300])
+  pdf.addPage([300, 400])
+  const source = Buffer.from(await pdf.save())
+  for (const [route, option] of [
+    ['/tools/pdf/reorder-pages', '2,1'],
+    ['/tools/pdf/watermark', 'DRAFT'],
+    ['/tools/pdf/page-numbers', ''],
+  ]) {
+    await select(page, route, source, 'sample.pdf', 'application/pdf')
+    if (route.endsWith('reorder-pages')) await page.getByLabel('New page order').fill(option)
+    if (route.endsWith('watermark')) await page.getByLabel('Watermark text (English)').fill(option)
+    await page.locator('.process-button').click()
+    await expect(page.locator('.file-tool-result')).toBeVisible()
+    const downloading = page.waitForEvent('download')
+    await page.getByRole('button', { name: 'Download result' }).click()
+    const download = await downloading
+    const output = await PDFDocument.load(await readFile((await download.path())!))
+    expect(output.getPageCount()).toBe(2)
+    if (route.endsWith('reorder-pages')) expect(output.getPage(0).getWidth()).toBe(300)
+  }
+})
+
 async function select(page: Page, route: string, buffer: Buffer, name: string, mimeType: string) {
   await page.goto(route)
   await page.locator('input[type=file]').setInputFiles({ name, mimeType, buffer })
@@ -127,6 +151,8 @@ test('PDF → editable DOCX preserves selected page text and resets stale output
   const xml = await zip.file('word/document.xml')!.async('string')
   expect(xml).toContain('Second page editable text')
   expect(xml).not.toContain('page one')
+  expect(xml).toMatch(/<w:sz w:val="\d+"\/>/)
+  expect(xml).toContain('<w:ind')
   await page.getByPlaceholder('All pages, or 1,3-5').fill('1')
   await expect(page.locator('.converter-result')).toHaveCount(0)
 })

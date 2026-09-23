@@ -10,9 +10,12 @@ import {
   extractPdfPages,
   imagesToPdf,
   mergePdfs,
+  numberPdfPages,
+  reorderPdfPages,
   removePdfPages,
   rotatePdfPages,
   splitPdf,
+  watermarkPdf,
 } from '../features/pdf/pdf-tools'
 import { imagesToPptx, textToPptx } from '../features/presentations/presentation-tools'
 import { categoryCopy, getTool, tools } from '../features/tools/catalog'
@@ -33,6 +36,8 @@ const result = ref<ToolResult | null>(null)
 const batchResults = ref<ToolResult[]>([])
 const pageSelection = ref('all')
 const pageRotation = ref<90 | 180 | 270>(90)
+const pageOrder = ref('')
+const watermarkText = ref('DRAFT')
 const hashAlgorithm = ref<HashAlgorithm>('SHA-256')
 const minifyJson = ref(false)
 const decodedFilename = ref('decoded-file.bin')
@@ -69,6 +74,14 @@ const textPlaceholder = computed(() => {
 
 const errorMessages: Record<string, { en: string; zh: string }> = {
   invalid_page_range: { en: 'Enter valid page numbers within the PDF range.', zh: '请输入 PDF 页数范围内的有效页码。' },
+  invalid_page_order: {
+    en: 'List every page once, separated by commas (for example 3,1,2).',
+    zh: '用逗号列出每一页且不重复，例如 3,1,2。',
+  },
+  latin_watermark_only: {
+    en: 'Text watermarks currently support English letters and basic symbols only.',
+    zh: '文字水印目前只支持英文字母和基本符号。',
+  },
   cannot_remove_all_pages: { en: 'A PDF must keep at least one page.', zh: 'PDF 至少需要保留一页。' },
   empty_pdf: { en: 'The selected PDF has no pages.', zh: '所选 PDF 没有页面。' },
   empty_archive: { en: 'The ZIP contains no downloadable files.', zh: 'ZIP 压缩包中没有可下载文件。' },
@@ -118,6 +131,7 @@ function clear() {
   files.value = []
   textInput.value = ''
   pageSelection.value = 'all'
+  pageOrder.value = ''
   resetResults()
 }
 function fileSize(size: number) {
@@ -183,6 +197,15 @@ async function run() {
         break
       case 'pdf-rotate-pages':
         result.value = await rotatePdfPages(file, pageSelection.value, pageRotation.value)
+        break
+      case 'pdf-reorder-pages':
+        result.value = await reorderPdfPages(file, pageOrder.value)
+        break
+      case 'pdf-watermark':
+        result.value = await watermarkPdf(file, watermarkText.value)
+        break
+      case 'pdf-page-numbers':
+        result.value = await numberPdfPages(file)
         break
       case 'images-to-pdf':
         result.value = await imagesToPdf(files.value)
@@ -326,6 +349,8 @@ async function run() {
         v-if="
           needsPages ||
           props.type === 'file-checksum' ||
+          props.type === 'pdf-reorder-pages' ||
+          props.type === 'pdf-watermark' ||
           props.type === 'json-format' ||
           props.type === 'base64-to-file'
         "
@@ -345,6 +370,26 @@ async function run() {
             <option :value="180">180°</option>
             <option :value="270">270°</option>
           </select></label
+        >
+        <label v-if="props.type === 'pdf-reorder-pages'"
+          ><span>{{ isZh ? '新的页码顺序' : 'New page order' }}</span
+          ><input
+            v-model="pageOrder"
+            type="text"
+            inputmode="numeric"
+            placeholder="3,1,2"
+            @input="resetResults"
+          /><small>{{
+            isZh ? '按原 PDF 页码填写，每页恰好一次。' : 'Use original PDF page numbers, each exactly once.'
+          }}</small></label
+        >
+        <label v-if="props.type === 'pdf-watermark'"
+          ><span>{{ isZh ? '水印文字（英文）' : 'Watermark text (English)' }}</span
+          ><input v-model="watermarkText" type="text" maxlength="80" @input="resetResults" /><small>{{
+            isZh
+              ? '仅支持英文字母和基本符号，添加后不可在此工具内移除。'
+              : 'English letters and basic symbols only. This tool cannot remove it later.'
+          }}</small></label
         >
         <label v-if="props.type === 'file-checksum'"
           ><span>{{ isZh ? '算法' : 'Algorithm' }}</span

@@ -104,6 +104,79 @@ export async function rotatePdfPages(file: File, selection: string, rotation: 90
   }
 }
 
+export function parsePageOrder(order: string, pageCount: number): number[] {
+  const parts = order.split(',').map((part) => part.trim())
+  if (parts.length !== pageCount || parts.some((part) => !/^\d+$/.test(part))) throw new Error('invalid_page_order')
+  const indices = parts.map((part) => Number(part) - 1)
+  if (new Set(indices).size !== pageCount || indices.some((index) => index < 0 || index >= pageCount))
+    throw new Error('invalid_page_order')
+  return indices
+}
+
+export async function reorderPdfPages(file: File, order: string): Promise<ToolResult> {
+  const { PDFDocument } = await import('pdf-lib')
+  const source = await PDFDocument.load(await file.arrayBuffer())
+  const indices = parsePageOrder(order, source.getPageCount())
+  const output = await PDFDocument.create()
+  const pages = await output.copyPages(source, indices)
+  pages.forEach((page) => output.addPage(page))
+  return {
+    blob: bytesToBlob(await output.save(), 'application/pdf'),
+    filename: downloadName(file.name, 'reordered.pdf'),
+    mimeType: 'application/pdf',
+  }
+}
+
+export async function watermarkPdf(file: File, text: string): Promise<ToolResult> {
+  if (!text.trim()) throw new Error('text_required')
+  if (!/^[\x20-\x7e]+$/.test(text)) throw new Error('latin_watermark_only')
+  const { PDFDocument, StandardFonts, degrees, rgb } = await import('pdf-lib')
+  const document = await PDFDocument.load(await file.arrayBuffer())
+  const font = await document.embedFont(StandardFonts.HelveticaBold)
+  for (const page of document.getPages()) {
+    const { width, height } = page.getSize()
+    const size = Math.min(56, Math.max(18, width / Math.max(text.length * 0.65, 7)))
+    const textWidth = font.widthOfTextAtSize(text, size)
+    page.drawText(text, {
+      x: Math.max(16, (width - textWidth * 0.75) / 2),
+      y: height / 2,
+      size,
+      font,
+      rotate: degrees(35),
+      color: rgb(0.3, 0.38, 0.5),
+      opacity: 0.22,
+    })
+  }
+  return {
+    blob: bytesToBlob(await document.save(), 'application/pdf'),
+    filename: downloadName(file.name, 'watermarked.pdf'),
+    mimeType: 'application/pdf',
+  }
+}
+
+export async function numberPdfPages(file: File): Promise<ToolResult> {
+  const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib')
+  const document = await PDFDocument.load(await file.arrayBuffer())
+  const font = await document.embedFont(StandardFonts.Helvetica)
+  const pages = document.getPages()
+  pages.forEach((page, index) => {
+    const { width } = page.getSize()
+    const label = `${index + 1} / ${pages.length}`
+    page.drawText(label, {
+      x: Math.max(12, (width - font.widthOfTextAtSize(label, 10)) / 2),
+      y: 18,
+      size: 10,
+      font,
+      color: rgb(0.25, 0.3, 0.38),
+    })
+  })
+  return {
+    blob: bytesToBlob(await document.save(), 'application/pdf'),
+    filename: downloadName(file.name, 'numbered.pdf'),
+    mimeType: 'application/pdf',
+  }
+}
+
 function loadImage(file: File): Promise<{ image: HTMLImageElement; url: string }> {
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file)

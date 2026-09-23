@@ -56,8 +56,8 @@ const notice = computed(() => {
   if (props.type === 'pdf-to-word')
     return options.value.mode === 'text'
       ? zh.value
-        ? '提取文字为可编辑段落，不还原表格或图片。纯扫描页面将保留为图片；不含 OCR。'
-        : 'Extracts editable paragraphs, not table layouts or pictures. Image-only pages are kept as pictures; no OCR.'
+        ? '提取文字为可编辑段落，并尽量保留行缩进、字号和行距；不还原表格或图片。纯扫描页面保留为图片，不含 OCR。'
+        : 'Extracts editable paragraphs with approximate indents, text sizes and line spacing. Tables and pictures are not reconstructed. Scans become pictures; no OCR.'
       : zh.value
         ? '每页保存为 Word 中的图片，保留外观，但文字不可编辑。'
         : 'Each page becomes a picture in Word. Appearance is preserved; text is not editable.'

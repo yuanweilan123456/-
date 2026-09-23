@@ -275,6 +275,81 @@ export const toolEditorial: Record<ToolId, ToolEditorial> = {
       tips: ['只有插页或扫描页方向错误时，请输入具体页码范围。', '用于纸质打印的文档旋转后应检查打印预览。'],
     },
   },
+  'pdf-reorder-pages': {
+    reviewed,
+    en: {
+      overview:
+        'Create a fresh PDF whose pages follow the exact order you specify. The page content remains native PDF content rather than screenshots.',
+      bestFor: 'Fixing scan order, rearranging chapters, and moving appendices within a report.',
+      input: 'One readable PDF and a comma-separated list containing every page number exactly once.',
+      output: 'One newly generated PDF with all original pages in the requested order.',
+      limitation:
+        'This operation does not reliably preserve digital signatures, bookmarks, interactive forms, or document metadata.',
+      tips: [
+        'Check the total page count in a PDF viewer before entering the full order.',
+        'Open the result and verify both the first and last pages after reordering.',
+      ],
+    },
+    zh: {
+      overview: '根据指定顺序生成新的 PDF 副本。页面仍是原有的 PDF 内容，不会变成截图，适合修正扫描后次序错误的文档。',
+      bestFor: '修正扫描顺序，整理报告中的章节和附录。',
+      input: '一个可读取的 PDF，以及包含所有页码且不重复的逗号分隔列表。',
+      output: '一个包含全部原页面、但顺序已调整的新 PDF。',
+      limitation: '此操作不保证保留数字签名、书签、交互表单或文档元数据。',
+      tips: ['填写顺序前先在 PDF 阅读器中确认原文档的总页数。', '打开结果，检查首尾页面以及被移动的关键页面。'],
+    },
+  },
+  'pdf-watermark': {
+    reviewed,
+    en: {
+      overview:
+        'Place a translucent text mark across every page of a new PDF copy while keeping the original source file unchanged.',
+      bestFor: 'Draft labels, internal review copies, and documents shared for comments.',
+      input: 'One readable PDF and a short line of English text with basic punctuation symbols.',
+      output: 'One newly generated PDF with the same text watermark on every page.',
+      limitation:
+        'Only basic Latin text is supported. This is not secure redaction, copyright enforcement, or tamper-proof protection.',
+      tips: [
+        'Keep the original unmarked file so you can make changes later.',
+        'Inspect pages with dense content to ensure the watermark remains readable.',
+      ],
+    },
+    zh: {
+      overview: '在新 PDF 的每一页叠加半透明文字标记，适合给草稿或内部审阅版加上明显提示，同时保留原始文件。',
+      bestFor: '给草稿、内部审阅副本和待评论文件添加提示。',
+      input: '一个可读取的 PDF，以及英文文字和基本标点符号。',
+      output: '每一页都带有同样半透明水印的新 PDF 文件。',
+      limitation: '仅支持基本拉丁文字。它不能用于安全脱敏、版权强制保护或防篡改。',
+      tips: [
+        '保留无水印的原件，以便之后重新编辑或制作新版本。',
+        '检查内容密集的页面，确认水印可见且不会遮住重要信息。',
+      ],
+    },
+  },
+  'pdf-page-numbers': {
+    reviewed,
+    en: {
+      overview:
+        'Add a centered “current / total” label near the bottom edge of every page, making a multi-page PDF easier to reference.',
+      bestFor: 'Printed handouts, review packets, forms, and simple reports.',
+      input: 'One readable PDF with at least one page.',
+      output: 'One newly generated PDF with sequential page numbers on each page.',
+      limitation:
+        'Existing content at the bottom edge may overlap the label. Previously printed page numbers are not removed.',
+      tips: [
+        'Check the bottom margin on every page before sharing the output.',
+        'Use a copy without existing printed page numbers where possible.',
+      ],
+    },
+    zh: {
+      overview: '在每页底部居中添加“当前页 / 总页数”，帮助打印后的讲义或审阅材料保持正确的阅读顺序。',
+      bestFor: '打印讲义、审阅材料、表单和简单报告。',
+      input: '一个可读取且至少有一页内容的 PDF 文件。',
+      output: '一个每一页都带有连续页码的新 PDF 文件。',
+      limitation: '原有内容靠近页底时可能和新增页码重叠；已有的印刷页码不会被删除。',
+      tips: ['分享结果之前，检查每一页的底部留白和新增页码。', '尽量使用尚未印制页码的副本，避免出现重复编号。'],
+    },
+  },
   'images-to-pdf': {
     reviewed,
     en: {

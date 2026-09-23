@@ -39,7 +39,7 @@ export const conversionEditorial = {
       input: 'One PDF up to 50 MB and 100 selected pages; an opening password can be supplied locally.',
       output: 'A .docx file containing editable paragraphs or page-sized images, depending on your chosen mode.',
       limitation:
-        'Text mode does not reconstruct tables, columns, or embedded pictures. Image-only pages are included as pictures and are not editable. OCR is not included. Appearance mode preserves pixels, not editable layout.',
+        'Text mode approximates indents, font sizes, and line spacing but does not reconstruct tables, columns, or embedded pictures. Image-only pages are included as pictures and are not editable. OCR is not included. Appearance mode preserves pixels, not editable layout.',
       tips: [
         'Use editable text for PDFs with selectable text; choose appearance for scans or complex layouts.',
         'Check reading order and special characters in Word, especially when the source has several columns.',
@@ -52,7 +52,7 @@ export const conversionEditorial = {
       input: '单个不超过 50 MB 的 PDF，最多选择 100 页；打开密码仅在本地使用。',
       output: '按所选模式生成包含可编辑段落或整页图片的 DOCX 文件。',
       limitation:
-        '文字模式不还原表格、分栏和内嵌图片。纯扫描页面以不可编辑的图片保留；不包含 OCR。外观模式保留画面，而非可编辑的排版结构。',
+        '文字模式会近似保留缩进、字号和行距，但不还原表格、分栏和内嵌图片。纯扫描页面以不可编辑的图片保留；不包含 OCR。外观模式保留画面，而非可编辑的排版结构。',
       tips: [
         '可选择文字的 PDF 适合文字模式，扫描件或复杂排版适合保留外观。',
         '请在 Word 中检查阅读顺序和特殊字符，多栏文档尤其需要复核。',

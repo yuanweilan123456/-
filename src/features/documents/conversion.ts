@@ -63,6 +63,28 @@ export function textLines(items: TextFragment[]): string[] {
   return lines
 }
 
+export type EditableLine = { x: number; y: number; runs: Array<{ text: string; size: number }> }
+
+/** Preserve approximate line positions and font sizes when extracting editable Word text. */
+export function editablePdfLines(items: TextFragment[]): EditableLine[] {
+  const lines: EditableLine[] = []
+  let previous: TextFragment | undefined
+  for (const item of items) {
+    if (!item.str) continue
+    const newLine =
+      !previous ||
+      previous.hasEOL ||
+      Math.abs(item.transform[5] - previous.transform[5]) > Math.max(2, item.height * 0.5)
+    if (newLine) lines.push({ x: item.transform[4], y: item.transform[5], runs: [] })
+    const line = lines[lines.length - 1]
+    const gap = previous ? item.transform[4] - (previous.transform[4] + previous.width) : 0
+    const space = !newLine && gap > Math.max(1, item.height * 0.15) && !/^\s/.test(item.str) ? ' ' : ''
+    line.runs.push({ text: space + item.str, size: Math.min(96, Math.max(6, item.height || 11)) })
+    previous = item
+  }
+  return lines.filter((line) => line.runs.some((run) => run.text.trim()))
+}
+
 async function convertPdf(
   file: File,
   type: ConversionId,
@@ -108,13 +130,12 @@ async function convertPdf(
       const viewport = page.getViewport({ scale: 1 })
       const needText = type === 'pdf-to-text' || (type === 'pdf-to-word' && options.mode === 'text')
       const content = needText ? await page.getTextContent() : undefined
-      const lines = content
-        ? textLines(
-            content.items.filter(
-              (item): item is TextFragment & { dir: string; fontName: string; hasEOL: boolean } => 'str' in item,
-            ),
+      const fragments = content
+        ? content.items.filter(
+            (item): item is TextFragment & { dir: string; fontName: string; hasEOL: boolean } => 'str' in item,
           )
         : []
+      const lines = content ? textLines(fragments) : []
       if (lines.length) hasText = true
       const scanned = needText && !lines.length
       if (scanned) warnings.push(`scan:${index + 1}`)
@@ -169,13 +190,24 @@ async function convertPdf(
             }),
           )
         } else {
-          for (const line of lines)
+          const editableLines = editablePdfLines(fragments)
+          let lastY: number | undefined
+          for (const line of editableLines) {
+            const gap =
+              lastY === undefined
+                ? Math.max(0, viewport.height - line.y - Math.max(...line.runs.map((run) => run.size)) - 36)
+                : Math.max(0, lastY - line.y - Math.max(...line.runs.map((run) => run.size)))
             children.push(
               new docx.Paragraph({
-                spacing: { after: 80 },
-                children: [new docx.TextRun({ text: line, size: 22, font: 'Arial' })],
+                indent: { left: Math.max(0, Math.round((line.x - 36) * 20)) },
+                spacing: { before: Math.min(3000, Math.round(gap * 20)), after: 0 },
+                children: line.runs.map(
+                  (run) => new docx.TextRun({ text: run.text, size: Math.round(run.size * 2), font: 'Arial' }),
+                ),
               }),
             )
+            lastY = line.y
+          }
         }
         sections.push({
           properties: {

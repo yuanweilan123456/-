@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   convertDocument,
+  editablePdfLines,
   MAX_FILE_BYTES,
   pageSlices,
   textLines,
@@ -56,6 +57,21 @@ describe('PDF text extraction', () => {
   })
   it('handles scans without inventing text', () => {
     expect(textLines([])).toEqual([])
+  })
+  it('preserves approximate line positions and text sizes for editable Word output', () => {
+    const items = [fragment('Hello', 36, 100), fragment('world', 71, 100), fragment('Heading', 72, 70)]
+    items[2].height = 18
+    expect(editablePdfLines(items)).toEqual([
+      {
+        x: 36,
+        y: 100,
+        runs: [
+          { text: 'Hello', size: 12 },
+          { text: ' world', size: 12 },
+        ],
+      },
+      { x: 72, y: 70, runs: [{ text: 'Heading', size: 18 }] },
+    ])
   })
 })
 

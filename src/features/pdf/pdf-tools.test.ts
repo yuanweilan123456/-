@@ -1,6 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import { PDFDocument } from 'pdf-lib'
-import { extractPdfPages, mergePdfs, parsePageSelection, removePdfPages, rotatePdfPages, splitPdf } from './pdf-tools'
+import {
+  extractPdfPages,
+  mergePdfs,
+  numberPdfPages,
+  parsePageOrder,
+  parsePageSelection,
+  removePdfPages,
+  reorderPdfPages,
+  rotatePdfPages,
+  splitPdf,
+  watermarkPdf,
+} from './pdf-tools'
 
 function asFile(bytes: Uint8Array, name: string) {
   const blob = new Blob([bytes.buffer as ArrayBuffer], { type: 'application/pdf' }) as Blob & { name: string }
@@ -37,5 +48,25 @@ describe('PDF tools', () => {
     const loaded = await PDFDocument.load(await result.blob!.arrayBuffer())
     expect(loaded.getPage(0).getRotation().angle).toBe(0)
     expect(loaded.getPage(1).getRotation().angle).toBe(90)
+  })
+  it('requires a full unique page order and reorders page dimensions', async () => {
+    expect(parsePageOrder('3,1,2', 3)).toEqual([2, 0, 1])
+    expect(() => parsePageOrder('1,1,2', 3)).toThrow('invalid_page_order')
+    expect(() => parsePageOrder('1,2', 3)).toThrow('invalid_page_order')
+    const original = await PDFDocument.create()
+    original.addPage([100, 200])
+    original.addPage([200, 300])
+    original.addPage([300, 400])
+    const result = await reorderPdfPages(asFile(await original.save(), 'ordered.pdf'), '3,1,2')
+    const output = await PDFDocument.load(await result.blob!.arrayBuffer())
+    expect(output.getPages().map((page) => page.getWidth())).toEqual([300, 100, 200])
+  })
+  it('adds watermark and page numbers without changing page count', async () => {
+    const input = asFile(await createPdf(2), 'report.pdf')
+    const watermarked = await watermarkPdf(input, 'DRAFT')
+    const numbered = await numberPdfPages(input)
+    expect((await PDFDocument.load(await watermarked.blob!.arrayBuffer())).getPageCount()).toBe(2)
+    expect((await PDFDocument.load(await numbered.blob!.arrayBuffer())).getPageCount()).toBe(2)
+    await expect(watermarkPdf(input, '草稿')).rejects.toThrow('latin_watermark_only')
   })
 })

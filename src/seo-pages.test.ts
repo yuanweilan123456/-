@@ -4,7 +4,7 @@ import { getSeoPage, PRERENDER_PATHS } from './seo-pages'
 
 describe('SEO page manifest', () => {
   it('contains unique canonical routes with resolvable English content', () => {
-    expect(PRERENDER_PATHS).toHaveLength(52)
+    expect(PRERENDER_PATHS).toHaveLength(55)
     expect(new Set(PRERENDER_PATHS).size).toBe(PRERENDER_PATHS.length)
     expect(PRERENDER_PATHS).not.toContain('/about')
 
