@@ -69,6 +69,8 @@ describe('SEO page manifest', () => {
         expect.objectContaining({ path: '/contact' }),
       ]),
     )
+    expect(home?.sections?.length).toBeGreaterThanOrEqual(3)
+    expect(home?.sections?.some((section) => section.heading === 'Choose the right tool for the file')).toBe(true)
   })
 
   it('publishes substantial, distinct editorial content for every tool page', () => {

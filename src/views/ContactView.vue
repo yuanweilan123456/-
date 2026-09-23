@@ -35,6 +35,8 @@ const content = computed(() =>
         open: '前往 GitHub Issues',
         privacy: '查看隐私政策',
         note: 'GitHub 是第三方服务，打开后将适用 GitHub 自身的账号和隐私规则。',
+        repository: '查看项目更新记录',
+        repositoryNote: '项目仓库公开展示更新与问题处理记录；请勿在公开反馈中附上私密文件。',
       }
     : {
         eyebrow: 'CONTACT & FEEDBACK',
@@ -64,6 +66,9 @@ const content = computed(() =>
         open: 'Open GitHub Issues',
         privacy: 'Read the privacy policy',
         note: 'GitHub is a third-party service. Its own account and privacy terms apply after you open it.',
+        repository: 'View project updates',
+        repositoryNote:
+          'The public repository shows updates and issue history. Do not attach private files to public feedback.',
       },
 )
 </script>
@@ -101,6 +106,10 @@ const content = computed(() =>
         </a>
         <RouterLink class="secondary-button" to="/privacy">{{ content.privacy }}</RouterLink>
         <p>{{ content.note }}</p>
+        <a class="text-link" href="https://github.com/yuanweilan123456/-" target="_blank" rel="noopener noreferrer">{{
+          content.repository
+        }}</a>
+        <p>{{ content.repositoryNote }}</p>
       </div>
     </section>
   </div>

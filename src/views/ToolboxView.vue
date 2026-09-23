@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { RouterLink, useRouter } from 'vue-router'
 import { categoryCopy, categoryOrder, tools } from '../features/tools/catalog'
 import type { ToolCategory, ToolDefinition } from '../features/tools/types'
+import { getSeoPage } from '../seo-pages'
 
 const { locale, t } = useI18n()
 const router = useRouter()
@@ -11,6 +12,7 @@ const query = ref('')
 const activeCategory = ref<ToolCategory | 'all'>('all')
 const isZh = computed(() => locale.value === 'zh')
 const language = computed(() => (isZh.value ? 'zh' : 'en'))
+const homeSections = computed(() => getSeoPage('/', language.value)?.sections ?? [])
 const popularToolIds = ['word-to-pdf', 'pdf-to-word', 'pdf-merge', 'image-compress', 'pdf-to-images', 'images-to-pdf']
 const popularTools = computed(() =>
   popularToolIds
@@ -353,6 +355,16 @@ async function selectCategory(category: ToolCategory | 'all') {
           <p>{{ t('trust.fastText') }}</p>
         </article>
       </div>
+    </section>
+
+    <section class="home-explainer" :aria-label="isZh ? '文件工具使用说明' : 'How to use FileTools'">
+      <article v-for="section in homeSections" :key="section.heading" class="home-explainer-card">
+        <h2>{{ section.heading }}</h2>
+        <p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p>
+        <ul v-if="section.items?.length">
+          <li v-for="item in section.items" :key="item">{{ item }}</li>
+        </ul>
+      </article>
     </section>
 
     <section class="home-resources" aria-labelledby="home-resources-title">

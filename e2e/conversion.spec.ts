@@ -74,6 +74,20 @@ test.beforeEach(async ({ page }) => {
   })
 })
 
+test('homepage guidance and contact information remain usable', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByRole('heading', { name: 'Choose the right tool for the file' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Check the result before using it' })).toBeVisible()
+  await page.goto('/contact')
+  await expect(page.getByRole('link', { name: 'View project updates' })).toHaveAttribute(
+    'href',
+    'https://github.com/yuanweilan123456/-',
+  )
+  await page.goto('/this-is-not-a-real-tool')
+  await expect(page.getByRole('heading', { name: 'This page could not be found.' })).toBeVisible()
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,follow')
+})
+
 test('new local PDF tools reorder, watermark, and number pages', async ({ page }) => {
   const pdf = await PDFDocument.create()
   pdf.addPage([200, 300])

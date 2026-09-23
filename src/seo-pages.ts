@@ -37,12 +37,62 @@ const staticPages: LocalizedStaticPage[] = [
       description: `Use ${tools.length} free online tools for images, PDF, Word, PowerPoint, ZIP, JSON, and CSV. Process files locally with no uploads or sign-up.`,
       heading: 'Free online file tools, private by design.',
       lead: 'Convert, compress, and organize PDFs, images, Word, PowerPoint, ZIP, and data files right in your browser. No uploads. No account.',
+      sections: [
+        {
+          heading: 'Choose the right tool for the file',
+          paragraphs: [
+            'Start with the outcome you need. Merge several PDFs into one file, split a long PDF into selected pages, or reorder pages before sharing. For images, compress a photo before sending it, resize it for a form, or convert between JPG, PNG, and WebP. Document, presentation, archive, and data tools have separate pages so you can check the supported input before selecting a file.',
+          ],
+          items: [
+            'Working with pages? Browse PDF tools and check whether the PDF is text-based, scanned, or encrypted.',
+            'Preparing an image? Choose a target size or format, then compare the exported file with the original.',
+            'Handling office files? Keep a copy of the source because complex fonts, tables, and page layouts may change.',
+          ],
+        },
+        {
+          heading: 'What browser-local processing means',
+          paragraphs: [
+            'The current tools read the files you select in your browser and create results on your device. File contents are not uploaded to a FileTools conversion server, and you do not need an account to begin. This is useful for everyday private tasks, but it does not remove the need to review a result before sending it elsewhere. Available memory and browser support can limit very large or damaged files.',
+          ],
+        },
+        {
+          heading: 'Check the result before using it',
+          paragraphs: [
+            'Open the downloaded file and inspect the pages, text, images, and file size. Browser conversion can change complex Word or PowerPoint formatting; PDF-to-Word may need manual cleanup, especially for scans or multi-column layouts. If you only need a faithful visual copy, a page-image workflow may be more suitable than editable text. Each tool page explains its specific input, output, and known limitations.',
+          ],
+        },
+      ],
     },
     zh: {
       title: '免费在线文件工具｜PDF、图片、Word 与更多｜FileTools',
       description: `${tools.length} 个免费在线文件工具，支持图片、PDF、Word、PPT、ZIP、JSON 和 CSV。浏览器本地处理，无需上传或注册。`,
       heading: '免费的在线文件工具，私密完成每个任务。',
       lead: '直接在浏览器中处理 PDF、图片、Word、PPT、ZIP 和数据文件。无需上传，无需注册。',
+      sections: [
+        {
+          heading: '先根据文件和目标选择工具',
+          paragraphs: [
+            '需要合并、拆分或重新排序页面时，选择 PDF 工具；需要发送更小的照片时，选择图片压缩；表单限制尺寸时，使用图片缩放。文档、演示文稿、压缩包与数据文件也有单独的工具页，可以先看清支持的输入格式和输出结果。',
+          ],
+          items: [
+            '处理 PDF 时，先确认文件是普通文本、扫描件还是加密文件。',
+            '处理图片时，设定目标尺寸或格式，并与原图比较质量和体积。',
+            '处理 Office 文件时保留原件，复杂字体、表格和分页可能变化。',
+          ],
+        },
+        {
+          heading: '浏览器本地处理意味着什么',
+          paragraphs: [
+            '当前工具在浏览器里读取所选文件，并在你的设备上生成结果。文件内容不会上传到 FileTools 的转换服务器，也无需注册账号。设备内存、浏览器支持和损坏的源文件仍可能限制处理效果。',
+          ],
+        },
+        {
+          heading: '使用前检查下载结果',
+          paragraphs: [
+            '请打开输出文件，检查页码、文字、图片方向和文件体积。复杂 Word 或 PPT 排版以及 PDF 转 Word 可能需要人工修正，扫描件和多栏排版尤其如此。如果只需保持视觉外观，按页导出图片可能比可编辑文字更合适。各工具页面都会说明具体限制。',
+          ],
+        },
+      ],
     },
   },
   {
@@ -292,6 +342,7 @@ const staticPages: LocalizedStaticPage[] = [
           heading: 'Protect your information',
           paragraphs: [
             'Remove names, account details, and file contents from screenshots or examples before creating a public issue.',
+            'The project repository at github.com/yuanweilan123456/- provides a public record of changes and issue reports. GitHub is a third-party service with its own privacy terms.',
           ],
         },
       ],
@@ -317,7 +368,10 @@ const staticPages: LocalizedStaticPage[] = [
         },
         {
           heading: '保护你的信息',
-          paragraphs: ['创建公开问题前，请删除截图和示例中的姓名、账号及文件内容。'],
+          paragraphs: [
+            '创建公开问题前，请删除截图和示例中的姓名、账号及文件内容。',
+            '项目仓库 github.com/yuanweilan123456/- 提供公开的更新和问题记录。GitHub 是第三方服务，有自己的隐私条款。',
+          ],
         },
       ],
     },

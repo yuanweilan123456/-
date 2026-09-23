@@ -114,6 +114,31 @@ function renderPage(baseHtml: string, page: SeoPageDefinition) {
   return html
 }
 
+function renderNotFound(baseHtml: string) {
+  const page: SeoPageDefinition = {
+    path: '/404',
+    title: 'Page not found – FileTools',
+    description: 'The requested FileTools page does not exist. Browse the tool directory or return home.',
+    heading: 'Page not found',
+    lead: 'The link may be outdated or the address may be incorrect. Browse the available tools or return home.',
+    links: [
+      { name: 'All file tools', path: '/' },
+      { name: 'PDF tools', path: '/tools/pdf' },
+      { name: 'Contact and feedback', path: '/contact' },
+    ],
+  }
+  let html = renderPage(baseHtml, page)
+  html = replaceMeta(html, 'name', 'robots', 'noindex,follow')
+  html = replaceRequired(html, /<link\s+[^>]*rel=["']canonical["'][^>]*>/i, '', '404 canonical link')
+  html = replaceRequired(
+    html,
+    /<script\s+[^>]*id=["']filetools-structured-data["'][^>]*>[\s\S]*?<\/script>/i,
+    '',
+    '404 structured data',
+  )
+  return html
+}
+
 function lastModifiedDate() {
   try {
     const value = execFileSync('git', ['log', '-1', '--format=%cI'], {
@@ -150,6 +175,7 @@ async function main() {
     await writeFile(outputFile, renderPage(baseHtml, page), 'utf8')
   }
 
+  await writeFile(path.join(DIST_DIR, '404.html'), renderNotFound(baseHtml), 'utf8')
   await writeFile(path.join(DIST_DIR, 'sitemap.xml'), renderSitemap(resolvedPages), 'utf8')
   console.log(`Prerendered ${resolvedPages.length} canonical routes and refreshed sitemap.xml.`)
 }

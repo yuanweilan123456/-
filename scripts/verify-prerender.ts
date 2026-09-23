@@ -46,6 +46,18 @@ for (const routePath of PRERENDER_PATHS) {
   }
 }
 
+const homeHtml = await readFile(path.join(DIST_DIR, 'index.html'), 'utf8')
+for (const text of ['Choose the right tool for the file', 'Check the result before using it']) {
+  if (!homeHtml.includes(text)) throw new Error(`Homepage is missing useful static guidance: ${text}`)
+}
+
+const notFoundHtml = await readFile(path.join(DIST_DIR, '404.html'), 'utf8')
+if (!notFoundHtml.includes('<h1>Page not found</h1>')) throw new Error('Missing real 404 page content')
+if (!notFoundHtml.includes('name="robots" content="noindex,follow"')) {
+  throw new Error('404 page must be noindex')
+}
+if (notFoundHtml.includes('rel="canonical"')) throw new Error('404 page must not canonicalize to the homepage')
+
 const sitemap = await readFile(path.join(DIST_DIR, 'sitemap.xml'), 'utf8')
 const sitemapUrls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1])
 if (sitemapUrls.length !== PRERENDER_PATHS.length) {
