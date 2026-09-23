@@ -3,6 +3,10 @@ export type ToolCategory = 'image' | 'pdf' | 'document' | 'presentation' | 'arch
 export type ImageToolId = 'image-compress' | 'image-convert' | 'image-resize' | 'image-rotate' | 'image-flip'
 
 export type FileToolId =
+  | 'word-to-pdf'
+  | 'pdf-to-word'
+  | 'pdf-to-images'
+  | 'pdf-to-text'
   | 'pdf-merge'
   | 'pdf-split'
   | 'pdf-extract-pages'

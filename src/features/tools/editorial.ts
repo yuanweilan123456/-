@@ -1,4 +1,5 @@
 import type { ToolId } from './types'
+import { conversionEditorial } from '../documents/conversion-content'
 
 export type ToolEditorialLocale = {
   overview: string
@@ -18,6 +19,7 @@ export type ToolEditorial = {
 const reviewed = '2026-09-19'
 
 export const toolEditorial: Record<ToolId, ToolEditorial> = {
+  ...conversionEditorial,
   'image-compress': {
     reviewed,
     en: {

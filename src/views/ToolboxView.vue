@@ -11,7 +11,7 @@ const query = ref('')
 const activeCategory = ref<ToolCategory | 'all'>('all')
 const isZh = computed(() => locale.value === 'zh')
 const language = computed(() => (isZh.value ? 'zh' : 'en'))
-const popularToolIds = ['pdf-merge', 'image-compress', 'images-to-pdf', 'docx-to-html', 'zip-create', 'json-format']
+const popularToolIds = ['word-to-pdf', 'pdf-to-word', 'pdf-merge', 'image-compress', 'pdf-to-images', 'images-to-pdf']
 const popularTools = computed(() =>
   popularToolIds
     .map((id) => tools.find((tool) => tool.id === id))

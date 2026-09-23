@@ -47,6 +47,62 @@ export const categoryCopy: Record<
 
 export const tools: ToolDefinition[] = [
   {
+    id: 'word-to-pdf',
+    category: 'pdf',
+    path: '/tools/pdf/word-to-pdf',
+    badge: 'DOCX → PDF',
+    input: 'files',
+    accept: '.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    title: { en: 'Word to PDF', zh: 'Word 转 PDF' },
+    description: {
+      en: 'Render DOCX pages into a downloadable PDF, privately.',
+      zh: '本地渲染 DOCX 页面，生成可下载的 PDF。',
+    },
+    action: { en: 'Convert to PDF', zh: '转换为 PDF' },
+  },
+  {
+    id: 'pdf-to-word',
+    category: 'pdf',
+    path: '/tools/pdf/to-word',
+    badge: 'PDF → DOCX',
+    input: 'files',
+    accept: '.pdf,application/pdf',
+    title: { en: 'PDF to Word', zh: 'PDF 转 Word' },
+    description: {
+      en: 'Export editable text or preserve page appearance in DOCX.',
+      zh: '导出可编辑文字，或以页面图片保留外观，生成 DOCX。',
+    },
+    action: { en: 'Convert to Word', zh: '转换为 Word' },
+  },
+  {
+    id: 'pdf-to-images',
+    category: 'pdf',
+    path: '/tools/pdf/to-images',
+    badge: 'PDF → JPG',
+    input: 'files',
+    accept: '.pdf,application/pdf',
+    title: { en: 'PDF to JPG', zh: 'PDF 转图片' },
+    description: {
+      en: 'Save selected PDF pages as JPG images in a ZIP file.',
+      zh: '将选定的 PDF 页面转为 JPG 图片，打包下载。',
+    },
+    action: { en: 'Convert to images', zh: '转换为图片' },
+  },
+  {
+    id: 'pdf-to-text',
+    category: 'pdf',
+    path: '/tools/pdf/to-text',
+    badge: 'PDF → TXT',
+    input: 'files',
+    accept: '.pdf,application/pdf',
+    title: { en: 'PDF to text', zh: 'PDF 转文本' },
+    description: {
+      en: 'Extract selectable PDF text into a UTF-8 text file.',
+      zh: '提取 PDF 中可选择的文字，保存为 UTF-8 文本文件。',
+    },
+    action: { en: 'Extract text', zh: '提取文字' },
+  },
+  {
     id: 'image-compress',
     category: 'image',
     path: '/tools/image/compress',

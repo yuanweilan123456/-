@@ -101,7 +101,7 @@ const messages = {
     seo: {
       homeTitle: '免费在线文件工具｜PDF、图片、Word 与更多｜FileTools',
       homeDescription:
-        '24 个免费在线文件工具，支持图片、PDF、Word、PPT、ZIP、JSON 和 CSV。浏览器本地处理，无需上传或注册。',
+        '28 个免费在线文件工具，支持图片、PDF、Word、PPT、ZIP、JSON 和 CSV。浏览器本地处理，无需上传或注册。',
       toolboxTitle: '文件工具箱｜FileTools',
       toolboxDescription: '在浏览器中处理图片、PDF、Word 和 PPT 文件，快速、私密、无需上传。',
       faqTitle: '常见问题｜FileTools',
@@ -234,7 +234,7 @@ const messages = {
     seo: {
       homeTitle: 'Free File Tools – PDF, Images, DOCX & More – FileTools',
       homeDescription:
-        'Use 24 free online tools for images, PDF, Word, PowerPoint, ZIP, JSON, and CSV. Process files locally with no uploads or sign-up.',
+        'Use 28 free online tools for images, PDF, Word, PowerPoint, ZIP, JSON, and CSV. Process files locally with no uploads or sign-up.',
       toolboxTitle: 'File toolbox – FileTools',
       toolboxDescription:
         'Process images, PDFs, Word documents, and PPT files in your browser. Fast, private, and upload-free.',

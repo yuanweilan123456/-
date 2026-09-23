@@ -37,7 +37,9 @@ const imageRoutes: RouteRecordRaw[] = [
 const fileToolRoutes: RouteRecordRaw[] = fileTools.map((tool) => ({
   path: tool.path,
   name: tool.id,
-  component: () => import('../views/FileToolView.vue'),
+  component: ['word-to-pdf', 'pdf-to-word', 'pdf-to-images', 'pdf-to-text'].includes(tool.id)
+    ? () => import('../views/DocumentConvertView.vue')
+    : () => import('../views/FileToolView.vue'),
   props: { type: tool.id },
 }))
 

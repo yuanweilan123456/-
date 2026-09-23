@@ -72,16 +72,16 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
   },
   pdf: {
     seoTitle: {
-      en: 'Free online PDF tools – merge, split & edit | FileTools',
-      zh: '免费在线 PDF 工具｜合并、拆分与整理｜FileTools',
+      en: 'Free PDF tools – Word to PDF, PDF to Word & more | FileTools',
+      zh: '免费 PDF 工具｜Word 与 PDF 互转、合并与拆分｜FileTools',
     },
     seoDescription: {
-      en: 'Merge, split, extract, remove, and rotate PDF pages or turn images into PDF. Free browser-local tools with no file uploads.',
-      zh: '免费合并、拆分、提取、删除和旋转 PDF 页面，或将图片生成 PDF。浏览器本地处理，不上传文件。',
+      en: 'Convert Word to PDF, export PDF to Word, JPG or text, and merge, split or organize pages. Free local processing with no uploads.',
+      zh: 'Word 转 PDF、PDF 转 Word、图片和文本，以及合并、拆分和整理页面。免费本地处理，不上传文件。',
     },
     en: {
       heading: 'Organize PDF files online without uploading them',
-      lead: 'Merge documents, split pages, extract a range, remove unwanted pages, rotate scans, or create a PDF from images.',
+      lead: 'Convert Word and PDF, export page images or text, merge documents, split pages, and organize files locally.',
       overviewTitle: 'Practical PDF tools for real document workflows',
       overview:
         'Choose only the operation you need and download a fresh PDF when it is ready. Processing happens in browser memory, making these tools a good fit for routine forms, scans, notes, and attachments.',
@@ -106,7 +106,7 @@ export const categoryPageContent: Record<ToolCategory, CategoryPageContent> = {
     },
     zh: {
       heading: '无需上传即可在线整理 PDF 文件',
-      lead: '合并文档、拆分页面、提取范围、删除页面、旋转扫描件，或从图片生成 PDF。',
+      lead: 'Word 与 PDF 互转，导出页面图片和文字，以及本地合并文档、拆分和整理页面。',
       overviewTitle: '面向真实文档流程的实用 PDF 工具',
       overview:
         '只选择当前需要的操作，处理完成后下载新的 PDF。整个过程在浏览器内存中完成，适合处理表单、扫描件、笔记和附件。',
