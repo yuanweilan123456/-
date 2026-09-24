@@ -74,11 +74,12 @@ function renderStaticShell(page: SeoPageDefinition) {
 }
 
 const PRERENDER_STYLE = `<style id="filetools-prerender-style">
-  .prerender-shell{max-width:1120px;margin:auto;padding:0 24px;color:#172033;font:16px/1.65 Inter,ui-sans-serif,system-ui,sans-serif}
-  .prerender-shell header,.prerender-shell footer{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0}
+  .prerender-shell{max-width:1160px;min-height:100vh;margin:auto;padding:0 24px;background:#f6f5ef;color:#1e2b2b;font:16px/1.65 ui-sans-serif,system-ui,sans-serif}
+  .prerender-shell header,.prerender-shell footer{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;border-bottom:1px solid #d8ded7}
+  .prerender-shell footer{border-top:1px solid #d8ded7;border-bottom:0}
   .prerender-shell nav,.prerender-shell footer{display:flex;flex-wrap:wrap;gap:16px}.prerender-brand{font-size:1.25rem;font-weight:800}
-  .prerender-shell a{color:#3157d5;text-decoration:none}.prerender-shell main{padding:56px 0}.prerender-shell h1{max-width:820px;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.04em}
-  .prerender-lead{max-width:760px;font-size:1.2rem}.prerender-shell section{max-width:820px;margin-top:40px}.prerender-shell li{margin:8px 0}
+  .prerender-shell a{color:#17645b;text-decoration:none}.prerender-shell main{padding:56px 0}.prerender-shell h1{max-width:820px;font:600 clamp(2.2rem,6vw,4.5rem)/1.05 Georgia,serif;letter-spacing:-.04em}
+  .prerender-lead{max-width:760px;font-size:1.2rem}.prerender-shell section{max-width:820px;margin-top:40px;padding-top:20px;border-top:1px solid #d8ded7}.prerender-shell li{margin:8px 0}
   @media(max-width:640px){.prerender-shell header{align-items:flex-start;flex-direction:column}.prerender-shell main{padding:32px 0}}
 </style>`
 

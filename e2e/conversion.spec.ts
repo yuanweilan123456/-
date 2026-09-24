@@ -76,8 +76,12 @@ test.beforeEach(async ({ page }) => {
 
 test('homepage guidance and contact information remain usable', async ({ page }) => {
   await page.goto('/')
+  await expect(page.getByRole('heading', { name: 'Make short work of your files.' })).toBeVisible()
+  await expect(page.locator('.particle-backdrop')).toHaveCount(0)
   await expect(page.getByRole('heading', { name: 'Choose the right tool for the file' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Check the result before using it' })).toBeVisible()
+  await page.setViewportSize({ width: 390, height: 844 })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
   await page.goto('/contact')
   await expect(page.getByRole('link', { name: 'View project updates' })).toHaveAttribute(
     'href',

@@ -13,6 +13,15 @@ const activeCategory = ref<ToolCategory | 'all'>('all')
 const isZh = computed(() => locale.value === 'zh')
 const language = computed(() => (isZh.value ? 'zh' : 'en'))
 const homeSections = computed(() => getSeoPage('/', language.value)?.sections ?? [])
+const categoryMarks: Record<ToolCategory, string> = {
+  image: 'IMG',
+  pdf: 'PDF',
+  document: 'DOC',
+  presentation: 'PPT',
+  archive: 'ZIP',
+  data: 'DATA',
+  utility: 'FILE',
+}
 const popularToolIds = ['word-to-pdf', 'pdf-to-word', 'pdf-merge', 'image-compress', 'pdf-to-images', 'images-to-pdf']
 const popularTools = computed(() =>
   popularToolIds
@@ -62,24 +71,18 @@ async function selectCategory(category: ToolCategory | 'all') {
 <template>
   <div class="page-wrap toolbox-page">
     <section class="toolbox-heading" aria-labelledby="toolbox-title">
-      <div class="hero-ambient" aria-hidden="true">
-        <span class="hero-aurora hero-aurora-one"></span>
-        <span class="hero-aurora hero-aurora-two"></span>
-        <span class="hero-mesh"></span>
-      </div>
       <div class="toolbox-hero-copy">
         <p class="eyebrow">
-          <span class="eyebrow-dot"></span>{{ isZh ? '私密 · 本地 · 免费' : 'PRIVATE · LOCAL · FREE' }}
+          {{ isZh ? '文件留在你的设备' : 'A SMALLER WAY TO GET FILES DONE' }}
         </p>
         <h1 id="toolbox-title">
           <template v-if="isZh">
-            <span>免费的在线</span>
-            <span>文件工具，</span>
-            <span class="hero-title-accent">私密完成每个任务。</span>
+            <span>文件处理，</span>
+            <span class="hero-title-accent">简单一点。</span>
           </template>
           <template v-else>
-            <span>Free online file tools,</span>
-            <span class="hero-title-accent">private by design.</span>
+            <span>Make short work</span>
+            <span class="hero-title-accent">of your files.</span>
           </template>
         </h1>
         <p class="toolbox-lead">
@@ -101,7 +104,7 @@ async function selectCategory(category: ToolCategory | 'all') {
             v-model="query"
             type="search"
             autocomplete="off"
-            :placeholder="isZh ? '你想处理什么？例如：合并 PDF' : 'What do you need? Try “merge PDF”'"
+            :placeholder="isZh ? '试试“合并 PDF”' : 'Try “merge PDF”'"
           />
           <button type="submit" :disabled="!quickTools.length">
             {{ isZh ? '打开' : 'Open' }}
@@ -135,7 +138,7 @@ async function selectCategory(category: ToolCategory | 'all') {
       <aside class="quick-start-panel" :aria-label="isZh ? '快速开始' : 'Quick start'">
         <div class="quick-live-status">
           <span aria-hidden="true"></span>
-          {{ isZh ? '在你的浏览器中实时运行' : 'Live in your browser' }}
+          {{ isZh ? '从这里开始' : 'START HERE' }}
         </div>
         <header>
           <div class="quick-start-icon" aria-hidden="true">
@@ -147,7 +150,6 @@ async function selectCategory(category: ToolCategory | 'all') {
             </svg>
           </div>
           <div>
-            <p>{{ query.trim() ? (isZh ? '搜索结果' : 'SEARCH RESULTS') : isZh ? '快速开始' : 'QUICK START' }}</p>
             <h2>
               {{
                 query.trim()
@@ -169,7 +171,7 @@ async function selectCategory(category: ToolCategory | 'all') {
             :class="`tool-${tool.category}`"
             :style="{ '--card-index': index }"
           >
-            <span class="quick-tool-badge">{{ tool.badge }}</span>
+            <span class="quick-tool-badge">{{ categoryMarks[tool.category] }}</span>
             <span
               ><strong>{{ tool.title[language] }}</strong
               ><small>{{ tool.description[language] }}</small></span
@@ -192,11 +194,11 @@ async function selectCategory(category: ToolCategory | 'all') {
     <section class="popular-tools" aria-labelledby="popular-tools-title">
       <div class="section-heading compact-heading">
         <div>
-          <p class="section-kicker">{{ isZh ? '热门工作流' : 'POPULAR WORKFLOWS' }}</p>
-          <h2 id="popular-tools-title">{{ isZh ? '更快完成常见任务' : 'Finish common tasks faster' }}</h2>
+          <p class="section-kicker">{{ isZh ? '常用工具' : 'MOST REQUESTED' }}</p>
+          <h2 id="popular-tools-title">{{ isZh ? '直接开始常见任务' : 'Get straight to it' }}</h2>
         </div>
         <p>
-          {{ isZh ? '无需学习复杂软件，选择任务即可开始。' : 'Skip complex software—choose a task and get it done.' }}
+          {{ isZh ? '选一个工具，完成手头的事。' : 'Pick a tool, work on your file, and review the result.' }}
         </p>
       </div>
       <div class="popular-tool-grid">
@@ -208,7 +210,7 @@ async function selectCategory(category: ToolCategory | 'all') {
           :class="`tool-${tool.category}`"
           :style="{ '--card-index': index }"
         >
-          <span class="popular-tool-icon">{{ tool.badge }}</span>
+          <span class="popular-tool-icon">{{ categoryMarks[tool.category] }}</span>
           <span class="popular-tool-copy"
             ><strong>{{ tool.title[language] }}</strong
             ><small>{{ tool.description[language] }}</small></span

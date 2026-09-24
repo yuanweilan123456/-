@@ -108,6 +108,10 @@ function clearOutput() {
   downloadUrl.value = ''
   output.value = undefined
 }
+function cancelConversion() {
+  controller?.abort()
+  clearOutput()
+}
 function reset() {
   controller?.abort()
   controller = undefined
@@ -335,7 +339,7 @@ onBeforeUnmount(reset)
           class="primary-button converter-submit"
           type="button"
           :disabled="!file"
-          @click="busy ? controller?.abort() : convert()"
+          @click="busy ? cancelConversion() : convert()"
         >
           {{ busy ? (zh ? '取消转换' : 'Cancel conversion') : tool.action[language] }}
           <span aria-hidden="true">{{ busy ? '×' : '→' }}</span>

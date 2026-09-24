@@ -35,7 +35,7 @@ const staticPages: LocalizedStaticPage[] = [
     en: {
       title: 'Free File Tools – PDF, Images, DOCX & More – FileTools',
       description: `Use ${tools.length} free online tools for images, PDF, Word, PowerPoint, ZIP, JSON, and CSV. Process files locally with no uploads or sign-up.`,
-      heading: 'Free online file tools, private by design.',
+      heading: 'Make short work of your files.',
       lead: 'Convert, compress, and organize PDFs, images, Word, PowerPoint, ZIP, and data files right in your browser. No uploads. No account.',
       sections: [
         {
@@ -66,7 +66,7 @@ const staticPages: LocalizedStaticPage[] = [
     zh: {
       title: '免费在线文件工具｜PDF、图片、Word 与更多｜FileTools',
       description: `${tools.length} 个免费在线文件工具，支持图片、PDF、Word、PPT、ZIP、JSON 和 CSV。浏览器本地处理，无需上传或注册。`,
-      heading: '免费的在线文件工具，私密完成每个任务。',
+      heading: '文件处理，简单一点。',
       lead: '直接在浏览器中处理 PDF、图片、Word、PPT、ZIP 和数据文件。无需上传，无需注册。',
       sections: [
         {

@@ -5,7 +5,6 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { updateSeo, type SeoContent } from './seo'
 import { getSeoPage } from './seo-pages'
 import { categoryCopy, categoryOrder } from './features/tools/catalog'
-import ParticleBackdrop from './components/ParticleBackdrop.vue'
 
 const { locale, t } = useI18n()
 const route = useRoute()
@@ -73,7 +72,6 @@ watch(
 
 <template>
   <div class="app-shell">
-    <ParticleBackdrop />
     <a class="skip-link" href="#main-content" @click="focusMainContent">{{ t('a11y.skipToContent') }}</a>
     <div class="header-bar">
       <header class="site-header">
